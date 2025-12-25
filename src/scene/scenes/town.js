@@ -10,6 +10,8 @@ import { loadModels } from '../../utils/load.js';
 import { setupEnemies } from '../../character/enemy.js';
 import { Health } from '../../character/health.js';
 import addSword from '../../character/equips/held.js';
+import { globalUI } from '../../ui/GlobalUI.js';
+import { SceneEditor } from '../../utils/sceneEditor.js';
 
 export async function createTown(engine) {
     const scene = new BABYLON.Scene(engine);
@@ -71,6 +73,13 @@ export async function createTown(engine) {
     addTownMap(scene, models);
     addMountains(scene, models);
 
+    // Initialize MMO-style UI
+    globalUI.initForScene(scene, character, { playerName: 'Hero', playerLevel: 1 });
+
+    // Initialize scene editor (press E to toggle edit mode)
+    const sceneEditor = new SceneEditor(scene);
+    scene.sceneEditor = sceneEditor;
+
     return scene;
 }
 
@@ -113,17 +122,7 @@ function addMountains(scene, models) {
         new BABYLON.Vector3(93.495, 307.9000, 40.352),
         new BABYLON.Vector3(170, 120.614, 120));
 
-
-
-    const gizmoManager = new BABYLON.GizmoManager(scene);
-
-    // Enable position, rotation, and scale gizmos
-    gizmoManager.positionGizmoEnabled = true;
-    gizmoManager.rotationGizmoEnabled = true;
-    gizmoManager.scaleGizmoEnabled = true;
-
-    // Attach the gizmo to the trail
-    gizmoManager.attachToMesh(mountainRight);
+    // Note: Use SceneEditor (press E) for move/resize tools instead of hardcoded gizmo
 }
 
 

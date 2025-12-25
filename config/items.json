@@ -1,0 +1,329 @@
+{
+  "items": {
+    "iron_ingot": {
+      "id": "iron_ingot",
+      "name": "Iron Ingot",
+      "description": "A bar of refined iron, essential for basic metalworking",
+      "category": "material",
+      "rarity": 0,
+      "maxStack": 100,
+      "weight": 2,
+      "sellValue": 10,
+      "buyValue": 25,
+      "icon": "ingot_iron.png"
+    },
+    "steel_ingot": {
+      "id": "steel_ingot",
+      "name": "Steel Ingot",
+      "description": "High-quality steel bar, stronger than iron",
+      "category": "material",
+      "rarity": 1,
+      "maxStack": 100,
+      "weight": 2.5,
+      "sellValue": 25,
+      "buyValue": 60,
+      "icon": "ingot_steel.png"
+    },
+    "gold_ingot": {
+      "id": "gold_ingot",
+      "name": "Gold Ingot",
+      "description": "Precious gold bar, used in jewelry and enchanting",
+      "category": "material",
+      "rarity": 2,
+      "maxStack": 100,
+      "weight": 3,
+      "sellValue": 100,
+      "buyValue": 250,
+      "icon": "ingot_gold.png"
+    },
+    "mithril_ingot": {
+      "id": "mithril_ingot",
+      "name": "Mithril Ingot",
+      "description": "Legendary lightweight metal, incredibly strong",
+      "category": "material",
+      "rarity": 3,
+      "maxStack": 100,
+      "weight": 1.5,
+      "sellValue": 500,
+      "buyValue": 1200,
+      "icon": "ingot_mithril.png"
+    },
+    "iron_sword": {
+      "id": "iron_sword",
+      "name": "Iron Sword",
+      "description": "A sturdy iron blade, reliable in combat",
+      "category": "weapon",
+      "rarity": 0,
+      "maxStack": 1,
+      "weight": 5,
+      "sellValue": 50,
+      "buyValue": 120,
+      "icon": "sword_iron.png",
+      "stats": {
+        "damage": 15,
+        "attackSpeed": 1.0,
+        "durability": 100,
+        "critChance": 0.05
+      },
+      "equipSlot": "mainHand",
+      "requiredLevel": 1
+    },
+    "steel_sword": {
+      "id": "steel_sword",
+      "name": "Steel Sword",
+      "description": "A finely crafted steel blade with superior edge",
+      "category": "weapon",
+      "rarity": 1,
+      "maxStack": 1,
+      "weight": 5.5,
+      "sellValue": 150,
+      "buyValue": 350,
+      "icon": "sword_steel.png",
+      "stats": {
+        "damage": 28,
+        "attackSpeed": 1.1,
+        "durability": 150,
+        "critChance": 0.08
+      },
+      "equipSlot": "mainHand",
+      "requiredLevel": 10
+    },
+    "iron_helmet": {
+      "id": "iron_helmet",
+      "name": "Iron Helmet",
+      "description": "Protective iron headgear",
+      "category": "armor",
+      "rarity": 0,
+      "maxStack": 1,
+      "weight": 4,
+      "sellValue": 40,
+      "buyValue": 100,
+      "icon": "helmet_iron.png",
+      "stats": {
+        "defense": 8,
+        "durability": 80,
+        "weight": 4
+      },
+      "equipSlot": "head",
+      "requiredLevel": 5
+    },
+    "iron_chestplate": {
+      "id": "iron_chestplate",
+      "name": "Iron Chestplate",
+      "description": "Heavy iron armor protecting the torso",
+      "category": "armor",
+      "rarity": 0,
+      "maxStack": 1,
+      "weight": 12,
+      "sellValue": 80,
+      "buyValue": 200,
+      "icon": "armor_chest_iron.png",
+      "stats": {
+        "defense": 15,
+        "durability": 120,
+        "weight": 12
+      },
+      "equipSlot": "chest",
+      "requiredLevel": 8
+    },
+    "health_potion": {
+      "id": "health_potion",
+      "name": "Health Potion",
+      "description": "Restores 50 HP instantly",
+      "category": "consumable",
+      "rarity": 0,
+      "maxStack": 20,
+      "weight": 0.5,
+      "sellValue": 15,
+      "buyValue": 35,
+      "icon": "potion_health.png",
+      "stats": {
+        "healing": 50,
+        "duration": 0
+      },
+      "consumable": true,
+      "cooldown": 30
+    },
+    "mana_potion": {
+      "id": "mana_potion",
+      "name": "Mana Potion",
+      "description": "Restores 50 MP instantly",
+      "category": "consumable",
+      "rarity": 0,
+      "maxStack": 20,
+      "weight": 0.5,
+      "sellValue": 15,
+      "buyValue": 35,
+      "icon": "potion_mana.png",
+      "stats": {
+        "manaRestore": 50,
+        "duration": 0
+      },
+      "consumable": true,
+      "cooldown": 30
+    },
+    "wood": {
+      "id": "wood",
+      "name": "Wood",
+      "description": "Basic wood logs, useful for crafting",
+      "category": "material",
+      "rarity": 0,
+      "maxStack": 100,
+      "weight": 1,
+      "sellValue": 2,
+      "buyValue": 5,
+      "icon": "material_wood.png"
+    },
+    "oak_wood": {
+      "id": "oak_wood",
+      "name": "Oak Wood",
+      "description": "Strong oak logs, better than regular wood",
+      "category": "material",
+      "rarity": 1,
+      "maxStack": 100,
+      "weight": 1.5,
+      "sellValue": 5,
+      "buyValue": 12,
+      "icon": "material_oak.png"
+    },
+    "leather": {
+      "id": "leather",
+      "name": "Leather",
+      "description": "Tanned animal hide, used in armor crafting",
+      "category": "material",
+      "rarity": 0,
+      "maxStack": 100,
+      "weight": 0.5,
+      "sellValue": 3,
+      "buyValue": 8,
+      "icon": "material_leather.png"
+    },
+    "red_herb": {
+      "id": "red_herb",
+      "name": "Red Herb",
+      "description": "Medicinal herb with healing properties",
+      "category": "ingredient",
+      "rarity": 0,
+      "maxStack": 100,
+      "weight": 0.1,
+      "sellValue": 5,
+      "buyValue": 12,
+      "icon": "herb_red.png"
+    },
+    "blue_herb": {
+      "id": "blue_herb",
+      "name": "Blue Herb",
+      "description": "Magical herb that restores mana",
+      "category": "ingredient",
+      "rarity": 0,
+      "maxStack": 100,
+      "weight": 0.1,
+      "sellValue": 5,
+      "buyValue": 12,
+      "icon": "herb_blue.png"
+    },
+    "green_herb": {
+      "id": "green_herb",
+      "name": "Green Herb",
+      "description": "Energizing herb that boosts stamina",
+      "category": "ingredient",
+      "rarity": 0,
+      "maxStack": 100,
+      "weight": 0.1,
+      "sellValue": 5,
+      "buyValue": 12,
+      "icon": "herb_green.png"
+    },
+    "raw_fish": {
+      "id": "raw_fish",
+      "name": "Raw Fish",
+      "description": "Freshly caught fish, needs cooking",
+      "category": "ingredient",
+      "rarity": 0,
+      "maxStack": 50,
+      "weight": 0.5,
+      "sellValue": 3,
+      "buyValue": 7,
+      "icon": "food_raw_fish.png"
+    },
+    "grilled_fish": {
+      "id": "grilled_fish",
+      "name": "Grilled Fish",
+      "description": "Delicious grilled fish, restores 30 HP",
+      "category": "consumable",
+      "rarity": 0,
+      "maxStack": 20,
+      "weight": 0.5,
+      "sellValue": 8,
+      "buyValue": 18,
+      "icon": "food_fish_grilled.png",
+      "stats": {
+        "healing": 30,
+        "duration": 0
+      },
+      "consumable": true,
+      "cooldown": 20
+    },
+    "cooked_meat": {
+      "id": "cooked_meat",
+      "name": "Cooked Meat",
+      "description": "Hearty cooked meat, restores 40 HP",
+      "category": "consumable",
+      "rarity": 0,
+      "maxStack": 20,
+      "weight": 0.8,
+      "sellValue": 10,
+      "buyValue": 22,
+      "icon": "food_meat.png",
+      "stats": {
+        "healing": 40,
+        "duration": 0
+      },
+      "consumable": true,
+      "cooldown": 20
+    },
+    "bread": {
+      "id": "bread",
+      "name": "Bread",
+      "description": "Fresh baked bread, restores 25 HP",
+      "category": "consumable",
+      "rarity": 0,
+      "maxStack": 30,
+      "weight": 0.3,
+      "sellValue": 5,
+      "buyValue": 12,
+      "icon": "food_bread.png",
+      "stats": {
+        "healing": 25,
+        "duration": 0
+      },
+      "consumable": true,
+      "cooldown": 15
+    },
+    "iron_ore": {
+      "id": "iron_ore",
+      "name": "Iron Ore",
+      "description": "Raw iron ore, needs smelting",
+      "category": "material",
+      "rarity": 0,
+      "maxStack": 100,
+      "weight": 2,
+      "sellValue": 5,
+      "buyValue": 12,
+      "icon": "ore_iron.png"
+    },
+    "gold_ore": {
+      "id": "gold_ore",
+      "name": "Gold Ore",
+      "description": "Precious gold ore, needs smelting",
+      "category": "material",
+      "rarity": 2,
+      "maxStack": 100,
+      "weight": 3,
+      "sellValue": 50,
+      "buyValue": 120,
+      "icon": "ore_gold.png"
+    }
+  }
+}
+

@@ -1,0 +1,153 @@
+{
+  "skins": {
+    "human": {
+      "id": "human",
+      "name": "Human",
+      "icon": "👤",
+      "category": "Playable Races",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "human.glb",
+      "scale": 3.7,
+      "positionY": -11,
+      "isDefault": true
+    },
+    "elf": {
+      "id": "elf",
+      "name": "Elf",
+      "icon": "🧝",
+      "category": "Playable Races",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "elf.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "dwarf": {
+      "id": "dwarf",
+      "name": "Dwarf",
+      "icon": "🧔",
+      "category": "Playable Races",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "dwarf.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "orc": {
+      "id": "orc",
+      "name": "Orc",
+      "icon": "👹",
+      "category": "Playable Races",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "orc.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "barbarian": {
+      "id": "barbarian",
+      "name": "Barbarian",
+      "icon": "⚔️",
+      "category": "Playable Races",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "barbarian.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "skeleton": {
+      "id": "skeleton",
+      "name": "Undead",
+      "icon": "💀",
+      "category": "Playable Races",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "skeleton_worges - Vaeloth The Phantom.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "human_worges": {
+      "id": "human_worges",
+      "name": "Human Worges",
+      "icon": "🐺",
+      "category": "Worges Forms",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "human_worges - Theron Wildkin.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "elf_worges": {
+      "id": "elf_worges",
+      "name": "Elf Worges",
+      "icon": "🐺",
+      "category": "Worges Forms",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "elf_worges - Sylveth Moonbond.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "dwarf_worges": {
+      "id": "dwarf_worges",
+      "name": "Dwarf Worges",
+      "icon": "🐺",
+      "category": "Worges Forms",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "dwarf_worges - Drakmir Stonebond.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "orc_worges": {
+      "id": "orc_worges",
+      "name": "Orc Worges",
+      "icon": "🐺",
+      "category": "Worges Forms",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "orc_worges - Thrak Beastmaster.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "barbarian_worges": {
+      "id": "barbarian_worges",
+      "name": "Barbarian Worges",
+      "icon": "🐺",
+      "category": "Worges Forms",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "barbarian_worges - Kael the Fang.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "skeleton_worges": {
+      "id": "skeleton_worges",
+      "name": "Undead Worges",
+      "icon": "💀",
+      "category": "Worges Forms",
+      "modelPath": "./assets/characters/playable/",
+      "fileName": "skeleton_worges - Vaeloth The Phantom.glb",
+      "scale": 3.7,
+      "positionY": -11
+    },
+    "human_basemesh": {
+      "id": "human_basemesh",
+      "name": "Human Base (Legacy)",
+      "icon": "👤",
+      "category": "Legacy",
+      "modelPath": "./assets/characters/human_basemesh/",
+      "fileName": "HumanBaseMesh_WithEquips.glb",
+      "scale": 3.7,
+      "positionY": -11
+    }
+  },
+  "categories": [
+    {
+      "id": "playable_races",
+      "name": "Playable Races",
+      "description": "Main playable character races"
+    },
+    {
+      "id": "worges_forms",
+      "name": "Worges Forms",
+      "description": "Shapeshifter variants for Worg class"
+    },
+    {
+      "id": "legacy",
+      "name": "Legacy",
+      "description": "Legacy character models"
+    }
+  ]
+}
+

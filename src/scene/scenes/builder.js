@@ -16,6 +16,7 @@ import { setupMainPlayerMenu } from '../../character/interact/builderMenu.js';
 import { createMobileControls } from '../../utils/mobile/joystick.js';
 import { addGrass } from '../../utils/plants/plants.js';
 import { gridTest } from '../gen/procedural/grid/grids.js';
+import { globalUI } from '../../ui/GlobalUI.js';
 
 
 export async function createBuilder(engine) {
@@ -107,6 +108,9 @@ export async function createBuilder(engine) {
 
 
         addZReset(scene, dummyAggregate, spawnPoint);
+
+        // Initialize MMO-style UI
+        globalUI.initForScene(scene, character, { playerName: 'Builder', playerLevel: 1 });
     } else {
 
     }

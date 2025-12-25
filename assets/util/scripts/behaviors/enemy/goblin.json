@@ -1,0 +1,71 @@
+{
+    "name": "Goblin AI Behavior",
+    "description": "Basic goblin enemy behavior tree",
+    "version": "1.0",
+    "behaviorTree": {
+        "type": "selector",
+        "children": [
+            {
+                "type": "sequence",
+                "name": "Combat Behavior",
+                "children": [
+                    {
+                        "type": "condition",
+                        "check": "isPlayerInAttackRange",
+                        "params": { "range": 3.0 }
+                    },
+                    {
+                        "type": "action",
+                        "do": "attack",
+                        "params": { "damage": 15, "cooldown": 2000 }
+                    }
+                ]
+            },
+            {
+                "type": "sequence",
+                "name": "Chase Behavior",
+                "children": [
+                    {
+                        "type": "condition",
+                        "check": "isPlayerInAggroRange",
+                        "params": { "range": 20.0 }
+                    },
+                    {
+                        "type": "action",
+                        "do": "moveToPlayer",
+                        "params": { "speed": 4.0 }
+                    }
+                ]
+            },
+            {
+                "type": "sequence",
+                "name": "Patrol Behavior",
+                "children": [
+                    {
+                        "type": "action",
+                        "do": "patrol",
+                        "params": { 
+                            "radius": 10.0,
+                            "speed": 2.0,
+                            "waitTime": 3000
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "stats": {
+        "health": 80,
+        "damage": 15,
+        "speed": 4.0,
+        "attackRange": 3.0,
+        "aggroRange": 20.0,
+        "patrolRadius": 10.0
+    },
+    "loot": [
+        { "item": "gold", "amount": [5, 15], "chance": 1.0 },
+        { "item": "goblin_ear", "amount": 1, "chance": 0.5 },
+        { "item": "rusty_dagger", "amount": 1, "chance": 0.1 }
+    ]
+}
+

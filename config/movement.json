@@ -1,0 +1,41 @@
+{
+  "keyboard": {
+    "forward": "w",
+    "backward": "s",
+    "strafeLeft": "q",
+    "strafeRight": "e",
+    "sprint": "f",
+    "roll": " ",
+    "jump": "v",
+    "attack": "4",
+    "heavyAttack": "5",
+    "spell": "c"
+  },
+  "gamepad": {
+    "jump": "A",
+    "attack": "X",
+    "heavyAttack": "Y",
+    "spell": "B"
+  },
+  "mobile": {
+    "joystickSize": 100,
+    "joystickAlpha": 0.6,
+    "buttonSize": 60
+  },
+  "movement": {
+    "normalSpeed": 80.0,
+    "sprintSpeed": 1.5,
+    "rollSpeed": 1.6,
+    "attackDistance": 17.0,
+    "jumpHeight": 10.0,
+    "gravity": -9.8
+  },
+  "combo": {
+    "firstAttackDelay": 100,
+    "secondAttackDelay": 100,
+    "thirdAttackDelay": 400,
+    "comboWindow": 500,
+    "comboResetTime": 1000
+  }
+}
+

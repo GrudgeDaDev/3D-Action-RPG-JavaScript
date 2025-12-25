@@ -1,0 +1,441 @@
+{
+  "version": "1.0.0",
+  "description": "RPG Items Database - Part 2: Resources, Currency, Keys, Containers, Props",
+  
+  "resources": {
+    "mineral": {
+      "model": "assets/items/resources/Mineral.glb",
+      "name": "Iron Ore",
+      "type": "resource",
+      "subtype": "ore",
+      "rarity": "common",
+      "stats": {
+        "value": 10,
+        "weight": 2,
+        "stackSize": 100
+      },
+      "uses": ["crafting", "smelting"],
+      "aiTags": ["mining", "crafting_material", "ore"]
+    },
+    "gold_ingots": {
+      "model": "assets/items/resources/Gold Ingots.glb",
+      "name": "Gold Ingots",
+      "type": "resource",
+      "subtype": "ingot",
+      "rarity": "rare",
+      "stats": {
+        "value": 500,
+        "weight": 5,
+        "stackSize": 50
+      },
+      "uses": ["crafting", "trading", "currency"],
+      "aiTags": ["valuable", "refined", "precious_metal"]
+    },
+    "bone": {
+      "model": "assets/items/resources/Bone.glb",
+      "name": "Bone",
+      "type": "resource",
+      "subtype": "organic",
+      "rarity": "common",
+      "stats": {
+        "value": 5,
+        "weight": 0.5,
+        "stackSize": 100
+      },
+      "uses": ["alchemy", "crafting"],
+      "aiTags": ["organic", "alchemy_ingredient", "monster_drop"]
+    },
+    "fish_bone": {
+      "model": "assets/items/resources/Fish Bone.glb",
+      "name": "Fish Bone",
+      "type": "resource",
+      "subtype": "organic",
+      "rarity": "common",
+      "stats": {
+        "value": 2,
+        "weight": 0.2,
+        "stackSize": 100
+      },
+      "uses": ["alchemy", "fertilizer"],
+      "aiTags": ["fishing", "byproduct", "low_value"]
+    },
+    "skull": {
+      "model": "assets/items/resources/Skull.glb",
+      "name": "Skull",
+      "type": "resource",
+      "subtype": "organic",
+      "rarity": "uncommon",
+      "stats": {
+        "value": 25,
+        "weight": 1.5,
+        "stackSize": 50
+      },
+      "uses": ["alchemy", "dark_magic", "decoration"],
+      "aiTags": ["rare_drop", "dark", "alchemy_ingredient"]
+    },
+    "skull_variant": {
+      "model": "assets/items/resources/Skull Variant.glb",
+      "name": "Ancient Skull",
+      "type": "resource",
+      "subtype": "organic",
+      "rarity": "rare",
+      "stats": {
+        "value": 100,
+        "weight": 2,
+        "stackSize": 20
+      },
+      "uses": ["alchemy", "dark_magic", "quest"],
+      "aiTags": ["rare_drop", "ancient", "powerful"]
+    }
+  },
+  
+  "currency": {
+    "coin": {
+      "model": "assets/items/currency/Coin.glb",
+      "name": "Gold Coin",
+      "type": "currency",
+      "subtype": "standard",
+      "rarity": "common",
+      "stats": {
+        "value": 1,
+        "weight": 0.01,
+        "stackSize": 10000
+      },
+      "aiTags": ["currency", "auto_pickup", "standard"]
+    },
+    "coin_pouch": {
+      "model": "assets/items/currency/Coin Pouch.glb",
+      "name": "Coin Pouch",
+      "type": "currency",
+      "subtype": "container",
+      "rarity": "common",
+      "stats": {
+        "value": 100,
+        "weight": 0.5,
+        "stackSize": 100
+      },
+      "aiTags": ["currency", "bulk", "auto_combine"]
+    },
+    "skull_coin": {
+      "model": "assets/items/currency/Skull Coin.glb",
+      "name": "Skull Coin",
+      "type": "currency",
+      "subtype": "dark",
+      "rarity": "uncommon",
+      "stats": {
+        "value": 10,
+        "weight": 0.02,
+        "stackSize": 5000
+      },
+      "uses": ["underworld_trading", "dark_merchants"],
+      "aiTags": ["currency", "dark", "special"]
+    },
+    "star_coin": {
+      "model": "assets/items/currency/Star Coin.glb",
+      "name": "Star Coin",
+      "type": "currency",
+      "subtype": "premium",
+      "rarity": "rare",
+      "stats": {
+        "value": 1000,
+        "weight": 0.01,
+        "stackSize": 1000
+      },
+      "uses": ["premium_shop", "special_purchases"],
+      "aiTags": ["currency", "premium", "rare"]
+    }
+  },
+  
+  "keys": {
+    "key": {
+      "model": "assets/items/keys/Key.glb",
+      "name": "Iron Key",
+      "type": "key",
+      "tier": "common",
+      "rarity": "common",
+      "stats": {
+        "value": 5,
+        "weight": 0.3,
+        "stackSize": 10
+      },
+      "unlocks": ["common_door", "common_chest"],
+      "aiTags": ["key", "quest_item", "dont_sell"]
+    },
+    "key_bronze": {
+      "model": "assets/items/keys/Key Bronze.glb",
+      "name": "Bronze Key",
+      "type": "key",
+      "tier": "uncommon",
+      "rarity": "uncommon",
+      "stats": {
+        "value": 20,
+        "weight": 0.3,
+        "stackSize": 5
+      },
+      "unlocks": ["uncommon_door", "uncommon_chest"],
+      "aiTags": ["key", "quest_item", "dont_sell"]
+    },
+    "key_silver": {
+      "model": "assets/items/keys/Key Silver.glb",
+      "name": "Silver Key",
+      "type": "key",
+      "tier": "rare",
+      "rarity": "rare",
+      "stats": {
+        "value": 100,
+        "weight": 0.3,
+        "stackSize": 3
+      },
+      "unlocks": ["rare_door", "rare_chest", "dungeon_gate"],
+      "aiTags": ["key", "quest_item", "dont_sell", "important"]
+    },
+    "key_gold": {
+      "model": "assets/items/keys/Key Gold.glb",
+      "name": "Golden Key",
+      "type": "key",
+      "tier": "legendary",
+      "rarity": "legendary",
+      "stats": {
+        "value": 500,
+        "weight": 0.3,
+        "stackSize": 1
+      },
+      "unlocks": ["legendary_door", "boss_chest", "vault", "treasure_room"],
+      "aiTags": ["key", "quest_item", "dont_sell", "very_important", "unique"]
+    }
+  },
+
+  "containers": {
+    "chest": {
+      "model": "assets/env/props/containers/Chest.glb",
+      "name": "Treasure Chest",
+      "type": "container",
+      "subtype": "chest",
+      "rarity": "varies",
+      "stats": {
+        "capacity": 20,
+        "weight": 50
+      },
+      "lootTables": ["common_loot", "uncommon_loot", "rare_loot", "epic_loot"],
+      "aiTags": ["loot_container", "interactable", "lockable"]
+    },
+    "backpack": {
+      "model": "assets/env/props/containers/Backpack.glb",
+      "name": "Backpack",
+      "type": "container",
+      "subtype": "inventory_upgrade",
+      "rarity": "uncommon",
+      "stats": {
+        "capacityBonus": 10,
+        "weight": 2
+      },
+      "effects": [
+        { "type": "increase_inventory", "value": 10 }
+      ],
+      "aiTags": ["inventory_expansion", "permanent_upgrade"]
+    },
+    "bag": {
+      "model": "assets/env/props/containers/Bag.glb",
+      "name": "Small Bag",
+      "type": "container",
+      "subtype": "storage",
+      "rarity": "common",
+      "stats": {
+        "capacity": 5,
+        "weight": 1
+      },
+      "aiTags": ["small_storage", "quest_container"]
+    }
+  },
+
+  "accessories": {
+    "crown": {
+      "model": "assets/items/accessories/Crown.glb",
+      "name": "Royal Crown",
+      "type": "accessory",
+      "slot": "head",
+      "rarity": "legendary",
+      "stats": {
+        "defense": 20,
+        "weight": 3,
+        "durability": 1000
+      },
+      "bonuses": {
+        "charisma": 15,
+        "leadership": 10,
+        "goldFind": 0.25
+      },
+      "requirements": { "level": 30, "charisma": 20 },
+      "aiTags": ["legendary", "prestige", "leadership", "royal"]
+    },
+    "necklace": {
+      "model": "assets/items/accessories/Necklace.glb",
+      "name": "Amulet",
+      "type": "accessory",
+      "slot": "neck",
+      "rarity": "uncommon",
+      "stats": {
+        "weight": 0.2,
+        "durability": 500
+      },
+      "bonuses": {
+        "magicResist": 15,
+        "mana": 50
+      },
+      "requirements": { "level": 10 },
+      "aiTags": ["magic", "resistance", "jewelry"]
+    },
+    "necklace_variant": {
+      "model": "assets/items/accessories/Necklace Variant.glb",
+      "name": "Enchanted Amulet",
+      "type": "accessory",
+      "slot": "neck",
+      "rarity": "rare",
+      "stats": {
+        "weight": 0.2,
+        "durability": 700
+      },
+      "bonuses": {
+        "magicResist": 25,
+        "mana": 100,
+        "spellPower": 10
+      },
+      "requirements": { "level": 18, "intelligence": 15 },
+      "aiTags": ["magic", "enchanted", "powerful"]
+    },
+    "chalice": {
+      "model": "assets/items/accessories/Chalice.glb",
+      "name": "Holy Chalice",
+      "type": "accessory",
+      "subtype": "quest_item",
+      "rarity": "epic",
+      "stats": {
+        "weight": 2,
+        "value": 1000
+      },
+      "effects": [
+        { "type": "heal_over_time", "value": 5, "duration": 60 },
+        { "type": "buff_nearby_allies", "radius": 10, "value": 0.1 }
+      ],
+      "aiTags": ["quest_item", "holy", "buff", "ceremonial"]
+    }
+  },
+
+  "interactive_props": {
+    "books": {
+      "book": {
+        "model": "assets/env/props/interactive/Book.glb",
+        "name": "Book",
+        "type": "readable",
+        "subtype": "book",
+        "rarity": "common",
+        "stats": {
+          "weight": 1,
+          "value": 10
+        },
+        "content": "lore",
+        "aiTags": ["readable", "lore", "knowledge"]
+      },
+      "book_red": {
+        "model": "assets/env/props/interactive/Book Red.glb",
+        "name": "Spellbook",
+        "type": "readable",
+        "subtype": "spellbook",
+        "rarity": "rare",
+        "stats": {
+          "weight": 2,
+          "value": 200
+        },
+        "teaches": "spell",
+        "aiTags": ["readable", "magic", "spell_learning"]
+      },
+      "book_blue": {
+        "model": "assets/env/props/interactive/Book Blue.glb",
+        "name": "Tome of Knowledge",
+        "type": "readable",
+        "subtype": "tome",
+        "rarity": "epic",
+        "stats": {
+          "weight": 3,
+          "value": 500
+        },
+        "effects": [
+          { "type": "permanent_stat_boost", "stat": "intelligence", "value": 1 }
+        ],
+        "aiTags": ["readable", "permanent_upgrade", "knowledge"]
+      },
+      "book_open": {
+        "model": "assets/env/props/interactive/Book Open.glb",
+        "name": "Open Book",
+        "type": "prop",
+        "subtype": "decoration",
+        "rarity": "common",
+        "stats": {
+          "weight": 1
+        },
+        "aiTags": ["decoration", "readable_state", "prop"]
+      }
+    },
+    "scrolls": {
+      "scroll": {
+        "model": "assets/env/props/interactive/Scroll.glb",
+        "name": "Magic Scroll",
+        "type": "consumable",
+        "subtype": "scroll",
+        "rarity": "uncommon",
+        "stats": {
+          "weight": 0.2,
+          "stackSize": 10,
+          "value": 50
+        },
+        "effects": [
+          { "type": "cast_spell", "spell": "fireball", "power": 100 }
+        ],
+        "aiTags": ["consumable", "magic", "one_time_use"]
+      },
+      "parchment": {
+        "model": "assets/env/props/interactive/Parchment.glb",
+        "name": "Quest Parchment",
+        "type": "quest_item",
+        "subtype": "document",
+        "rarity": "common",
+        "stats": {
+          "weight": 0.1,
+          "value": 5
+        },
+        "aiTags": ["quest_item", "document", "readable"]
+      }
+    },
+    "security": {
+      "padlock": {
+        "model": "assets/env/props/interactive/Padlock.glb",
+        "name": "Padlock",
+        "type": "lock",
+        "subtype": "security",
+        "rarity": "common",
+        "stats": {
+          "weight": 0.5,
+          "lockpickDifficulty": 3
+        },
+        "requiresKey": true,
+        "aiTags": ["lock", "security", "lockpickable"]
+      }
+    }
+  },
+
+  "decorative": {
+    "snowflake": {
+      "model": "assets/env/props/decorative/Snowflake.glb",
+      "name": "Snowflake",
+      "type": "decoration",
+      "subtype": "particle",
+      "rarity": "common",
+      "stats": {
+        "weight": 0
+      },
+      "uses": ["vfx", "seasonal", "weather"],
+      "aiTags": ["particle", "winter", "decoration", "seasonal"]
+    }
+  }
+}
+

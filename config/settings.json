@@ -1,0 +1,86 @@
+{
+  "audio": {
+    "masterVolume": 1.0,
+    "musicVolume": 0.5,
+    "sfxVolume": 0.7,
+    "ambientVolume": 0.4,
+    "muted": false
+  },
+  "video": {
+    "quality": "high",
+    "resolution": "auto",
+    "msaa": 4,
+    "shadows": true,
+    "bloom": true,
+    "ssao": false,
+    "motionBlur": false,
+    "fov": 75,
+    "renderScale": 1.0,
+    "vsync": true,
+    "maxFPS": 60
+  },
+  "controls": {
+    "mouseSensitivity": 1.0,
+    "invertY": false,
+    "cameraSmoothing": 0.1,
+    "autoRun": false
+  },
+  "hotkeys": {
+    "movement": {
+      "forward": "W",
+      "backward": "S",
+      "left": "A",
+      "right": "D",
+      "jump": "Space",
+      "crouch": "C",
+      "sprint": "Shift"
+    },
+    "combat": {
+      "attack": "Mouse0",
+      "block": "Mouse1",
+      "ability1": "1",
+      "ability2": "2",
+      "ability3": "3",
+      "ability4": "4",
+      "ability5": "5",
+      "ability6": "6",
+      "ultimate": "R"
+    },
+    "ui": {
+      "inventory": "I",
+      "character": "C",
+      "map": "M",
+      "quest": "L",
+      "settings": "Escape",
+      "chat": "Enter",
+      "screenshot": "F12"
+    },
+    "editor": {
+      "positionGizmo": "W",
+      "rotationGizmo": "E",
+      "scaleGizmo": "R",
+      "delete": "Delete",
+      "duplicate": "Ctrl+D",
+      "save": "Ctrl+S",
+      "undo": "Ctrl+Z",
+      "redo": "Ctrl+Y"
+    }
+  },
+  "gameplay": {
+    "showDamageNumbers": true,
+    "showHealthBars": true,
+    "showMinimap": true,
+    "showFPS": false,
+    "autoLoot": true,
+    "questTracking": true,
+    "tutorialHints": true
+  },
+  "accessibility": {
+    "colorBlindMode": "none",
+    "subtitles": true,
+    "screenShake": true,
+    "flashingEffects": true,
+    "textSize": "medium"
+  }
+}
+

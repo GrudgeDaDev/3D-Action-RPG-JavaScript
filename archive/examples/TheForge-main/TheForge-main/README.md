@@ -1,0 +1,152 @@
+# 🎮 GRUDGE NFT Island - Item Catalog
+
+**The ultimate catalog for GRUDGE NFT Island items, crafting recipes, and game data!**
+
+## ✨ Features
+
+- **590+ Items** - Complete item database
+- **559+ Crafting Recipes** - Full crafting system
+- **13 Categories** - Organized browsing
+- **AI Chat Integration** - Claude AI assistance powered by Puter
+- **Steam Login** - Account integration
+- **Beautiful UI** - Professional fantasy-themed design
+
+## 🚀 Quick Start
+
+1. Open `index.html` in a web browser
+2. Browse items by category or search
+3. View crafting recipes and workstations
+4. Use AI chat for game advice
+
+## 🤖 AI Worker Deployment
+
+**NEW! Deploy your own AI worker to Puter cloud:**
+
+1. Open `deploy-worker.html` in your browser
+2. Click "Deploy Worker" button
+3. Test the deployment
+4. Copy config code and update `index.html`
+
+📖 See [QUICK_DEPLOY.md](QUICK_DEPLOY.md) for quick instructions  
+📚 See [DEPLOY_WORKER_GUIDE.md](DEPLOY_WORKER_GUIDE.md) for detailed guide
+
+### AI Features Included
+- 💬 **AI Chat** - Intelligent assistance for items and strategies
+- 🔍 **Item Analysis** - Deep insights into item stats and synergies
+- 🎯 **Crafting Advice** - Optimal crafting paths and resource management
+- 📊 **Smart Search** - Contextual catalog search across 590+ items
+- ☁️ **Cloud Storage** - User preference sync across devices
+
+## 📦 Project Files
+
+### Core Application
+- `index.html` - Main application with AI integration
+- `catalog-styles.css` - Fantasy-themed styling
+- `items_data.json` - Item database (590+ items)
+- `crafting_data.json` - Recipe database (559+ recipes)
+- `icons/` - Game asset icons and images
+
+### AI Worker System
+- `deploy-worker.html` - One-click deployment interface
+- `grudgeworker.js` - AI worker with Claude Sonnet 4 integration
+- `DEPLOY_WORKER_GUIDE.md` - Comprehensive deployment guide
+- `QUICK_DEPLOY.md` - 3-step quick start guide
+
+### Documentation
+- `PUTER_WORKER_GUIDE.md` - Puter integration details
+- `AI_WORKER_INTEGRATION_COMPLETE.md` - Integration documentation
+- `FINAL_FIXES_PUTER_READY.md` - Deployment readiness checklist
+
+## 🌐 Deployment Options
+
+### Option 1: GitHub Pages (Recommended)
+1. Fork this repository
+2. Enable GitHub Pages in settings
+3. Your catalog will be live at `https://yourusername.github.io/TheForge`
+
+### Option 2: Local Hosting
+1. Clone the repository
+2. Open `index.html` in any modern browser
+3. No build process required!
+
+### Option 3: Puter Platform
+1. Upload entire project to Puter
+2. Deploy AI worker using `deploy-worker.html`
+3. Full serverless deployment with AI capabilities
+
+## 🛠️ Technical Details
+
+- **Zero Dependencies** - Pure HTML, CSS, JavaScript
+- **590+ Items** - Comprehensive catalog
+- **559+ Recipes** - Complete crafting system
+- **AI Powered** - Claude Sonnet 4 integration via Puter
+- **Responsive Design** - Works on desktop and mobile
+- **Fantasy Fonts** - Cinzel and Uncial Antiqua
+- **Icon System** - Complete visual mapping for all items
+
+## 🎯 AI Worker Architecture
+
+The GRUDGE AI Worker runs on Puter's serverless platform:
+
+```
+┌─────────────────┐
+│  index.html     │ ← Your main app
+│  (Frontend)     │
+└────────┬────────┘
+         │ REST API
+         ▼
+┌─────────────────┐
+│  grudgeworker.js│ ← Serverless worker
+│  (Puter Cloud)  │
+└────────┬────────┘
+         │ AI API
+         ▼
+┌─────────────────┐
+│  Claude Sonnet 4│ ← AI Model
+│  (via Puter)    │
+└─────────────────┘
+```
+
+## 🔒 Privacy & Security
+
+- All communication over HTTPS
+- Worker runs in isolated sandbox
+- No personal data stored
+- User preferences optional and stored in Puter KV
+- Open source - audit the code yourself
+
+## 📱 Browser Support
+
+- ✅ Chrome/Edge (Recommended)
+- ✅ Firefox
+- ✅ Safari
+- ✅ Opera
+- ✅ Any modern browser with ES6+ support
+
+## 🤝 Contributing
+
+Contributions welcome! Areas to contribute:
+- Additional items and recipes
+- UI/UX improvements
+- AI prompt enhancements
+- Documentation improvements
+- Bug fixes
+
+## 📄 License
+
+This project is open source. See individual files for specific licenses.
+
+## 🎮 About GRUDGE NFT Island
+
+GRUDGE NFT Island is a fantasy RPG with:
+- Multiple playable races (Human, Elf, Dwarf, Orc, Undead, Barbarian)
+- Complex crafting system with ingredient chains
+- Equipment progression (Common → Mythic)
+- Strategic gameplay elements
+- Resource management mechanics
+
+---
+
+**Made with ❤️ for the GRUDGE NFT Island community!**
+
+*For support, see the documentation files or open an issue.*

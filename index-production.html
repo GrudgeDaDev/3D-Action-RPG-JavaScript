@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="description" content="GGE Warlords - 3D Action RPG with AI-powered gameplay">
+  <meta name="keywords" content="RPG, 3D, Action, Babylon.js, Puter, AI, Gaming">
+  <meta name="author" content="GGE Warlords Team">
+  
+  <!-- Puter App Metadata -->
+  <meta name="puter:app-id" content="app-fe416167-31c9-45a9-a552-7ab8b1cdef7a">
+  <meta name="puter:app-name" content="gge">
+  
+  <title>GGE Warlords - 3D Action RPG</title>
+
+  <style>
+    html, body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #renderCanvas {
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      display: block;
+    }
+
+    /* Loading Screen */
+    #loadingScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease;
+    }
+
+    #loadingScreen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-logo {
+      font-size: 72px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ffd700, #ff8c00, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 30px;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .loading-text {
+      color: #ffd700;
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .loading-bar {
+      width: 300px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .loading-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ffd700, #ff8c00);
+      width: 0%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .loading-status {
+      color: rgba(255, 215, 0, 0.7);
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+
+    /* Puter Badge */
+    .puter-badge {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #00d4ff;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      z-index: 9999;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .puter-badge a {
+      color: #00d4ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .puter-badge a:hover {
+      text-decoration: underline;
+    }
+
+    /* Error Screen */
+    #errorScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+      color: #ff4444;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #errorScreen.visible {
+      display: flex;
+    }
+
+    .error-title {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .error-message {
+      font-size: 18px;
+      max-width: 600px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .error-reload-btn {
+      padding: 15px 40px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .error-reload-btn:hover {
+      background: #ff6666;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div id="loadingScreen">
+    <div class="loading-logo">GGE</div>
+    <div class="loading-text">Grudge Warlords</div>
+    <div class="loading-bar">
+      <div class="loading-bar-fill" id="loadingBarFill"></div>
+    </div>
+    <div class="loading-status" id="loadingStatus">Initializing...</div>
+  </div>
+
+  <!-- Error Screen -->
+  <div id="errorScreen">
+    <div class="error-title">⚠️ Error</div>
+    <div class="error-message" id="errorMessage">An error occurred while loading the game.</div>
+    <button class="error-reload-btn" onclick="location.reload()">Reload Game</button>
+  </div>
+
+  <!-- Game Canvas -->
+  <canvas id="renderCanvas" touch-action="none"></canvas>
+
+  <!-- Puter Badge -->
+  <div class="puter-badge">
+    ⚡ Powered by <a href="https://puter.com" target="_blank" rel="noopener">Puter</a>
+  </div>
+
+  <!-- Babylon.js Core -->
+  <script src="./lib/babylon.js"></script>
+  <script src="./lib/babylonjs.loaders.min.js"></script>
+  <script src="./lib/babylon.gui.min.js"></script>
+
+  <!-- Physics Engine -->
+  <script src="./lib/HavokPhysics_umd.js"></script>
+
+  <!-- Terrain Material -->
+  <script src="./lib/babylon.terrainMaterial.js"></script>
+
+  <!-- Pointer Events Polyfill -->
+  <script src="./lib/pep.js"></script>
+
+  <!-- Puter SDK -->
+  <script src="https://js.puter.com/v2/"></script>
+
+  <!-- Loading Manager -->
+  <script>
+    // Environment detection
+    const IS_PUTER = window.location.hostname.includes('puter.site') || window.location.hostname.includes('puter.com');
+    const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const PUTER_APP_ID = 'app-fe416167-31c9-45a9-a552-7ab8b1cdef7a';
+
+    // Loading progress
+    let loadingProgress = 0;
+    const loadingBarFill = document.getElementById('loadingBarFill');
+    const loadingStatus = document.getElementById('loadingStatus');
+
+    function updateLoading(progress, status) {
+      loadingProgress = Math.min(100, progress);
+      loadingBarFill.style.width = loadingProgress + '%';
+      loadingStatus.textContent = status;
+    }
+
+    function hideLoading() {
+      const loadingScreen = document.getElementById('loadingScreen');
+      loadingScreen.classList.add('hidden');
+      setTimeout(() => loadingScreen.style.display = 'none', 500);
+    }
+
+    function showError(message) {
+      const errorScreen = document.getElementById('errorScreen');
+      const errorMessage = document.getElementById('errorMessage');
+      errorMessage.textContent = message;
+      errorScreen.classList.add('visible');
+      document.getElementById('loadingScreen').style.display = 'none';
+    }
+
+    // Initialize Puter if available
+    async function initializePuter() {
+      if (typeof puter !== 'undefined') {
+        try {
+          updateLoading(10, 'Connecting to Puter...');
+          await puter.init();
+          console.log('✅ Puter initialized');
+
+          // Set app context
+          if (IS_PUTER) {
+            window.PUTER_CONTEXT = {
+              appId: PUTER_APP_ID,
+              user: await puter.auth.getUser().catch(() => null),
+              ai: puter.ai,
+              kv: puter.kv,
+              fs: puter.fs
+            };
+            console.log('✅ Puter context set:', window.PUTER_CONTEXT);
+          }
+
+          return true;
+        } catch (error) {
+          console.warn('⚠️ Puter initialization failed:', error);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    // Load game
+    async function loadGame() {
+      try {
+        updateLoading(20, 'Initializing Puter...');
+        await initializePuter();
+
+        updateLoading(40, 'Loading game modules...');
+
+        // Set global flags
+        window.IS_PUTER_DEPLOYMENT = IS_PUTER;
+        window.IS_LOCAL_DEV = IS_LOCAL;
+
+        updateLoading(60, 'Starting game engine...');
+
+        // Load main game script
+        const gameScript = document.createElement('script');
+        gameScript.type = 'module';
+        gameScript.src = './game.js';
+        gameScript.onload = () => {
+          updateLoading(100, 'Ready!');
+          setTimeout(hideLoading, 500);
+        };
+        gameScript.onerror = (error) => {
+          showError('Failed to load game.js. Please check your connection and try again.');
+          console.error('Game loading error:', error);
+        };
+        document.body.appendChild(gameScript);
+
+      } catch (error) {
+        showError('Failed to initialize game: ' + error.message);
+        console.error('Initialization error:', error);
+      }
+    }
+
+    // Start loading when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadGame);
+    } else {
+      loadGame();
+    }
+  </script>
+
+  <!-- Analytics (optional) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBBGRRLHZC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-GBBGRRLHZC');
+  </script>
+</body>
+</html>
+
+

@@ -1,0 +1,70 @@
+{
+  "permissions": [
+    "ai",
+    "storage",
+    "network",
+    "kv"
+  ],
+  "scripts": {
+    "dev": "node server.js",
+    "deploy:check": "puter whoami && puter apps list",
+    "deploy": "puter deploy",
+    "start": "node server.js"
+  },
+  "icon": "assets/icon.png",
+  "main": "index.html",
+  "indexUrl": "https://gge-warlords.puter.site",
+  "build": {
+    "outputDir": ".",
+    "type": "static",
+    "excludes": [
+      "node_modules",
+      ".git",
+      ".venv",
+      "*.md",
+      "package-lock.json",
+      "reference",
+      "docs",
+      "examples/UItools",
+      "examples/TheForge-main"
+    ]
+  },
+  "storage": {
+    "enabled": true,
+    "quota": "100MB"
+  },
+  "network": {
+    "enabled": true,
+    "domains": [
+      "*.puter.com",
+      "*.puter.site",
+      "cdn.babylonjs.com",
+      "localhost:5500"
+    ]
+  },
+  "category": "games",
+  "version": "1.0.0",
+  "ai": {
+    "features": [
+      "chat",
+      "txt2img",
+      "img2txt",
+      "agents"
+    ],
+    "models": [
+      "gemini-2.0-flash-exp",
+      "gpt-5-nano",
+      "claude-sonnet-4"
+    ],
+    "enabled": true
+  },
+  "title": "GGE",
+  "name": "gge",
+  "description": "GGE Warlords - 3D Action RPG with AI-powered gameplay, class selection, and character progression",
+  "env": {
+    "GEMINI_API_KEY": "${GEMINI_API_KEY}",
+    "PUTER_APP_ID": "app-fe416167-31c9-45a9-a552-7ab8b1cdef7a",
+    "NODE_ENV": "production"
+  },
+  "appId": "app-fe416167-31c9-45a9-a552-7ab8b1cdef7a"
+}

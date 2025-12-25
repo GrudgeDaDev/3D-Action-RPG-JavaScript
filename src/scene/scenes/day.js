@@ -14,6 +14,7 @@ import { placeVeg } from "../gen/parts/veg.js";
 
 import { createCastle } from "../gen/LLM.js";
 import { createCastleWFC } from "../gen/WFC.js";
+import { globalUI } from '../../ui/GlobalUI.js';
 
 
 
@@ -191,6 +192,9 @@ export async function createDayDynamicTerrain(engine) {
     setupWater(scene, terrain, engine, hero, -2000, LEVEL_SIZE);
     setupPostProcessing(scene, camera);
     createSkydome(scene, LEVEL_SIZE);
+
+    // Initialize MMO-style UI
+    globalUI.initForScene(scene, character, { playerName: 'Hero', playerLevel: 1 });
 
     return scene;
 }

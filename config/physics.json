@@ -1,0 +1,28 @@
+{
+  "physics": {
+    "engine": "Havok",
+    "gravity": { "x": 0, "y": -9.8, "z": 0 },
+    "timeStep": 0.016666,
+    "character": {
+      "mass": 500,
+      "restitution": 0.0,
+      "friction": 1.0,
+      "shapeType": "CAPSULE",
+      "height": 2.0,
+      "radius": 0.5
+    },
+    "terrain": {
+      "mass": 0,
+      "restitution": 0.0,
+      "friction": 1000000000.8,
+      "shapeType": "MESH"
+    },
+    "enemy": {
+      "mass": 100,
+      "restitution": 0.2,
+      "friction": 0.8,
+      "shapeType": "SPHERE"
+    }
+  }
+}
+

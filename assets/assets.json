@@ -1,14 +1,618 @@
-[
-    {
-        "name": "Tree",
-        "blender_object": "EXP_Tree",
-        "export_path": "assets/trees/tree.glb",
-        "load_script": "loadTree"
-    },
-    {
-        "name": "Rock",
-        "blender_object": "EXP_Rock",
-        "export_path": "assets/rocks/rock.glb",
-        "load_script": "loadRock"
+{
+    "version": "2.0",
+    "lastUpdated": "2024-12-24",
+    "categories": {
+        "animations": {
+            "path": "assets/characters/animations",
+            "assets": [
+                {
+                    "name": "Axe Spin Attack",
+                    "file": "Animation_Axe_Spin_Attack_withSkin.glb",
+                    "type": "combat"
+                },
+                {
+                    "name": "Collect Object",
+                    "file": "Animation_Collect_Object_withSkin.glb",
+                    "type": "interaction"
+                },
+                {
+                    "name": "Dive Down and Land",
+                    "file": "Animation_Dive_Down_and_Land_2_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Hit Reaction",
+                    "file": "Animation_Hit_Reaction_1_withSkin.glb",
+                    "type": "combat"
+                },
+                {
+                    "name": "Idle",
+                    "file": "Animation_Idle_withSkin.glb",
+                    "type": "idle"
+                },
+                {
+                    "name": "Jump Run",
+                    "file": "Animation_Jump_Run_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Limping Walk",
+                    "file": "Animation_Limping_Walk_1_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Roll Dodge",
+                    "file": "Animation_Roll_Dodge_withSkin.glb",
+                    "type": "combat"
+                },
+                {
+                    "name": "Running",
+                    "file": "Animation_Running_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Shot and Fall",
+                    "file": "Animation_Shot_in_the_Back_and_Fall_withSkin.glb",
+                    "type": "death"
+                },
+                {
+                    "name": "Sprint Stop",
+                    "file": "Animation_Sprint_and_Sudden_Stop_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Stand Dodge",
+                    "file": "Animation_Stand_Dodge_withSkin.glb",
+                    "type": "combat"
+                },
+                {
+                    "name": "Stand Up",
+                    "file": "Animation_Stand_Up1_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Drink",
+                    "file": "Animation_Stand_and_Drink_withSkin.glb",
+                    "type": "interaction"
+                },
+                {
+                    "name": "Thrust Slash",
+                    "file": "Animation_Thrust_Slash_withSkin.glb",
+                    "type": "combat"
+                },
+                {
+                    "name": "Walk Backward Shield",
+                    "file": "Animation_Walk_Backward_with_Sword_Shield_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Walking",
+                    "file": "Animation_Walking_withSkin.glb",
+                    "type": "movement"
+                },
+                {
+                    "name": "Weapon Combo",
+                    "file": "Animation_Weapon_Combo_2_withSkin.glb",
+                    "type": "combat"
+                },
+                {
+                    "name": "Mage Spell Cast",
+                    "file": "Animation_mage_soell_cast_7_withSkin.glb",
+                    "type": "magic"
+                },
+                {
+                    "name": "Slide Light",
+                    "file": "Animation_slide_light_withSkin.glb",
+                    "type": "movement"
+                }
+            ]
+        },
+        "playableCharacters": {
+            "path": "assets/characters/playable",
+            "assets": [
+                {
+                    "name": "Human",
+                    "file": "human.glb",
+                    "faction": "human"
+                },
+                {
+                    "name": "Elf",
+                    "file": "elf.glb",
+                    "faction": "elf"
+                },
+                {
+                    "name": "Dwarf",
+                    "file": "dwarf.glb",
+                    "faction": "dwarf"
+                },
+                {
+                    "name": "Orc",
+                    "file": "orc.glb",
+                    "faction": "orc"
+                },
+                {
+                    "name": "Barbarian",
+                    "file": "barbarian.glb",
+                    "faction": "barbarian"
+                },
+                {
+                    "name": "Grudge Avatar",
+                    "file": "GrudgeAvatarGame.glb",
+                    "faction": "player"
+                },
+                {
+                    "name": "Character Output",
+                    "file": "Character_output.glb",
+                    "faction": "player"
+                },
+                {
+                    "name": "Animated Warrior",
+                    "file": "animated_warrior_character.glb",
+                    "faction": "player"
+                },
+                {
+                    "name": "Viking",
+                    "file": "stylized_viking_rigify_rig.glb",
+                    "faction": "viking"
+                }
+            ]
+        },
+        "heroUnits": {
+            "path": "assets/characters/playable",
+            "description": "Special hero characters with unique abilities",
+            "assets": [
+                {
+                    "name": "Kael the Fang",
+                    "file": "barbarian_worges - Kael the Fang.glb",
+                    "faction": "barbarian",
+                    "class": "berserker"
+                },
+                {
+                    "name": "Drakmir Stonebond",
+                    "file": "dwarf_worges - Drakmir Stonebond.glb",
+                    "faction": "dwarf",
+                    "class": "runemaster"
+                },
+                {
+                    "name": "Sylveth Moonbond",
+                    "file": "elf_worges - Sylveth Moonbond.glb",
+                    "faction": "elf",
+                    "class": "ranger"
+                },
+                {
+                    "name": "Theron Wildkin",
+                    "file": "human_worges - Theron Wildkin.glb",
+                    "faction": "human",
+                    "class": "knight"
+                },
+                {
+                    "name": "Thrak Beastmaster",
+                    "file": "orc_worges - Thrak Beastmaster.glb",
+                    "faction": "orc",
+                    "class": "warboss"
+                },
+                {
+                    "name": "Vaeloth The Phantom",
+                    "file": "skeleton_worges - Vaeloth The Phantom.glb",
+                    "faction": "undead",
+                    "class": "deathknight"
+                }
+            ]
+        },
+        "enemies": {
+            "path": "assets/characters/enemy",
+            "assets": [
+                {
+                    "name": "Skeleton Warrior",
+                    "file": "skeleton_warrior.glb",
+                    "type": "undead",
+                    "tier": 1
+                },
+                {
+                    "name": "Undead Acolyte",
+                    "file": "undead_acolyte.glb",
+                    "type": "undead",
+                    "tier": 1
+                },
+                {
+                    "name": "Undead Ghoul",
+                    "file": "undead_ghoul.glb",
+                    "type": "undead",
+                    "tier": 2
+                },
+                {
+                    "name": "Forest Troll",
+                    "file": "forest_troll.glb",
+                    "type": "monster",
+                    "tier": 3
+                },
+                {
+                    "name": "Giant Spider",
+                    "file": "giant_spider.glb",
+                    "type": "beast",
+                    "tier": 2
+                },
+                {
+                    "name": "Gnoll",
+                    "file": "gnoll.glb",
+                    "type": "humanoid",
+                    "tier": 1
+                },
+                {
+                    "name": "Ogre",
+                    "file": "ogre.glb",
+                    "type": "giant",
+                    "tier": 3
+                },
+                {
+                    "name": "Dire Bear",
+                    "file": "dire_bear.glb",
+                    "type": "beast",
+                    "tier": 2
+                },
+                {
+                    "name": "Dragon Whelp",
+                    "file": "dragon_whelp.glb",
+                    "type": "dragon",
+                    "tier": 3
+                },
+                {
+                    "name": "Wolf",
+                    "file": "stylized_wolf.glb",
+                    "type": "beast",
+                    "tier": 1
+                },
+                {
+                    "name": "Treant",
+                    "file": "elf_treant.glb",
+                    "type": "elemental",
+                    "tier": 2
+                },
+                {
+                    "name": "Goblin Merchant",
+                    "file": "goblin_merchant.glb",
+                    "type": "humanoid",
+                    "tier": 1
+                }
+            ]
+        },
+        "factionUnits": {
+            "path": "assets/characters/enemy",
+            "description": "Faction-specific military units",
+            "assets": [
+                {
+                    "name": "Human Footman",
+                    "file": "human_footman.glb",
+                    "faction": "human",
+                    "role": "melee"
+                },
+                {
+                    "name": "Human Knight",
+                    "file": "human_knight.glb",
+                    "faction": "human",
+                    "role": "cavalry"
+                },
+                {
+                    "name": "Human Priest",
+                    "file": "human_priest.glb",
+                    "faction": "human",
+                    "role": "healer"
+                },
+                {
+                    "name": "Human Rifleman",
+                    "file": "human_rifleman.glb",
+                    "faction": "human",
+                    "role": "ranged"
+                },
+                {
+                    "name": "Elf Druid",
+                    "file": "elf_druid.glb",
+                    "faction": "elf",
+                    "role": "caster"
+                },
+                {
+                    "name": "Elf Huntress",
+                    "file": "elf_huntress.glb",
+                    "faction": "elf",
+                    "role": "ranged"
+                },
+                {
+                    "name": "Dwarf Rifleman",
+                    "file": "dwarf_rifleman.glb",
+                    "faction": "dwarf",
+                    "role": "ranged"
+                },
+                {
+                    "name": "Orc Raider",
+                    "file": "orc_raider.glb",
+                    "faction": "orc",
+                    "role": "melee"
+                },
+                {
+                    "name": "Orc Warboss",
+                    "file": "orc_warboss.glb",
+                    "faction": "orc",
+                    "role": "hero"
+                },
+                {
+                    "name": "Barbarian Berserker",
+                    "file": "barbarian_berserker.glb",
+                    "faction": "barbarian",
+                    "role": "melee"
+                }
+            ]
+        },
+        "weapons": {
+            "path": "assets/characters/weapons",
+            "assets": [
+                {
+                    "name": "Sword",
+                    "file": "Sword2.glb",
+                    "type": "melee",
+                    "slot": "mainhand"
+                },
+                {
+                    "name": "Dagger",
+                    "file": "Dagger.glb",
+                    "type": "melee",
+                    "slot": "offhand"
+                },
+                {
+                    "name": "Doublesided Hammer",
+                    "file": "Doublesided Hammer.glb",
+                    "type": "melee",
+                    "slot": "twohand"
+                },
+                {
+                    "name": "Wooden Bow",
+                    "file": "Wooden Bow.glb",
+                    "type": "ranged",
+                    "slot": "twohand"
+                },
+                {
+                    "name": "Skeleton Staff",
+                    "file": "Skeleton Staff.glb",
+                    "type": "magic",
+                    "slot": "twohand"
+                },
+                {
+                    "name": "Fishing Rod",
+                    "file": "Fishing Rod 4.glb",
+                    "type": "tool",
+                    "slot": "mainhand"
+                }
+            ]
+        },
+        "armor": {
+            "path": "assets/characters/armor",
+            "assets": [
+                {
+                    "name": "Golden Armor",
+                    "file": "Armor Golden.glb",
+                    "tier": "legendary",
+                    "type": "heavy"
+                },
+                {
+                    "name": "Leather Armor",
+                    "file": "Armor Leather.glb",
+                    "tier": "common",
+                    "type": "light"
+                },
+                {
+                    "name": "Metal Armor",
+                    "file": "Armor Metal.glb",
+                    "tier": "rare",
+                    "type": "heavy"
+                }
+            ]
+        },
+        "buildings": {
+            "path": "assets/env/buildings",
+            "assets": [
+                {
+                    "name": "Tavern",
+                    "file": "tavern.glb",
+                    "type": "neutral"
+                },
+                {
+                    "name": "Medieval Inn",
+                    "file": "medieval_fantasy_inn.glb",
+                    "type": "neutral"
+                },
+                {
+                    "name": "Medieval Shop",
+                    "file": "medieval_fantasy_shop.glb",
+                    "type": "neutral"
+                },
+                {
+                    "name": "Medieval Town",
+                    "file": "medieval_fantasy_town.glb",
+                    "type": "neutral"
+                },
+                {
+                    "name": "Medieval Arcade",
+                    "file": "medieval_arcade.glb",
+                    "type": "neutral"
+                },
+                {
+                    "name": "Mercenary Camp",
+                    "file": "mercenary_camp.glb",
+                    "type": "neutral"
+                },
+                {
+                    "name": "Market Stand",
+                    "file": "Market Stand 1.glb",
+                    "type": "prop"
+                },
+                {
+                    "name": "Workbench Anvil",
+                    "file": "Workbench Anvil.glb",
+                    "type": "prop"
+                },
+                {
+                    "name": "Guard Tower",
+                    "file": "guard_tower - towers.glb",
+                    "type": "defense"
+                }
+            ]
+        },
+        "factionBuildings": {
+            "path": "assets/env/buildings",
+            "description": "Faction-specific structures",
+            "assets": [
+                {
+                    "name": "Crusader Castle",
+                    "file": "human_castle - crusader castle.glb",
+                    "faction": "human",
+                    "type": "castle"
+                },
+                {
+                    "name": "Crusader Hero Hall",
+                    "file": "human_church - Crusader Hero Hall.glb",
+                    "faction": "human",
+                    "type": "heroHall"
+                },
+                {
+                    "name": "Legion Necropolis",
+                    "file": "undead_necropolis - legion Castle.glb",
+                    "faction": "undead",
+                    "type": "castle"
+                },
+                {
+                    "name": "Legion Crypt",
+                    "file": "Crypt - Legion Hero hall.glb",
+                    "faction": "undead",
+                    "type": "heroHall"
+                },
+                {
+                    "name": "Legion Legends Hall",
+                    "file": "Legends Hall - Legion Hero Hall.glb",
+                    "faction": "undead",
+                    "type": "heroHall"
+                },
+                {
+                    "name": "Tree of Life",
+                    "file": "tree_of_life - level 2 castle Fabled.glb",
+                    "faction": "elf",
+                    "type": "castle"
+                }
+            ]
+        },
+        "environment": {
+            "path": "assets/env/exterior",
+            "assets": [
+                {
+                    "name": "Tree",
+                    "file": "Tree.glb",
+                    "type": "vegetation"
+                },
+                {
+                    "name": "Tree Large",
+                    "file": "Tree Large.glb",
+                    "type": "vegetation"
+                },
+                {
+                    "name": "Oak Tree",
+                    "file": "oak_tree.glb",
+                    "type": "vegetation"
+                },
+                {
+                    "name": "Pine Tree",
+                    "file": "pine_tree.glb",
+                    "type": "vegetation"
+                },
+                {
+                    "name": "Forest Tree",
+                    "file": "forest_tree.glb",
+                    "type": "vegetation"
+                },
+                {
+                    "name": "Dead Tree",
+                    "file": "dead_tree.glb",
+                    "type": "vegetation"
+                },
+                {
+                    "name": "Bush Cluster",
+                    "file": "bush_cluster.glb",
+                    "type": "vegetation"
+                },
+                {
+                    "name": "Rock Small",
+                    "file": "Rock2.glb",
+                    "type": "terrain"
+                },
+                {
+                    "name": "Rock Large",
+                    "file": "Rock 5.glb",
+                    "type": "terrain"
+                },
+                {
+                    "name": "Rock Formation",
+                    "file": "rock_formation.glb",
+                    "type": "terrain"
+                },
+                {
+                    "name": "Crystal Formation",
+                    "file": "crystal_formation.glb",
+                    "type": "terrain"
+                },
+                {
+                    "name": "Stone Bridge",
+                    "file": "stone_bridge.glb",
+                    "type": "structure"
+                }
+            ]
+        },
+        "maps": {
+            "path": "assets/env/exterior",
+            "description": "Large terrain and world pieces",
+            "assets": [
+                {
+                    "name": "Ancient Ruins",
+                    "file": "ancient_ruins.glb",
+                    "type": "dungeon"
+                },
+                {
+                    "name": "Castle Island",
+                    "file": "castle_island.glb",
+                    "type": "world"
+                },
+                {
+                    "name": "Mythical Island",
+                    "file": "mythical_fantasy_island.glb",
+                    "type": "world"
+                },
+                {
+                    "name": "Gold Mine",
+                    "file": "gold_mine.glb",
+                    "type": "resource"
+                },
+                {
+                    "name": "Lumber Pile",
+                    "file": "lumber_pile.glb",
+                    "type": "resource"
+                },
+                {
+                    "name": "Pirate Adventure Map",
+                    "file": "game_pirate_adventure_map.glb",
+                    "type": "world"
+                }
+            ]
+        },
+        "skyboxes": {
+            "path": "assets/env/exterior",
+            "assets": [
+                {
+                    "name": "Fantasy Skybox",
+                    "file": "skybox_fantasy_view_2.glb",
+                    "type": "skybox"
+                },
+                {
+                    "name": "Desert Skybox",
+                    "file": "stylized_desert_skybox_2.glb",
+                    "type": "skybox"
+                }
+            ]
+        }
     }
-]
+}

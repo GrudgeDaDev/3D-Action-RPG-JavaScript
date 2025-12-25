@@ -1,17 +1,19 @@
 import { loadHeroModel } from '../../character/hero.js';
-import { setupCamera } from '../../utils/camera.js'; 
-import { setupPhysics } from '../../utils/physics.js'; 
-import { setupInputHandling } from '../../movement.js'; 
-import { setupAnim } from '../../utils/anim.js'; 
+import { setupCamera } from '../../utils/camera.js';
+import { setupPhysics } from '../../utils/physics.js';
+import { setupInputHandling } from '../../movement.js';
+import { setupAnim } from '../../utils/anim.js';
+import { Health } from '../../character/health.js';
+import { globalUI } from '../../ui/GlobalUI.js';
 
 export async function createRoom(engine) {
   const scene = new BABYLON.Scene(engine);
-  
+
   const terrain = setupGround(scene);
   setupEnvironment(scene);
 //   createSkydome(scene);
 
-  
+
   const {character, dummyAggregate} = await setupPhysics(scene);
   const camera = setupCamera(scene, character);
   const hero = await loadHeroModel(scene, character);
@@ -19,12 +21,18 @@ export async function createRoom(engine) {
   let anim = setupAnim(scene);
   setupInputHandling(scene, character, camera, hero, anim, engine, dummyAggregate);
 
+  // Add health for UI
+  character.health = new Health("Hero", 100, dummyAggregate);
+
   const light = setupLighting(scene);
 //   todo huge performance hit
 //   setupShadows(light, hero);
 // setupPostProcessing(scene,camera);
 
-scene.physicsEnabled = true;
+  scene.physicsEnabled = true;
+
+  // Initialize MMO-style UI
+  globalUI.initForScene(scene, character, { playerName: 'Hero', playerLevel: 1 });
 
   return scene;
 }

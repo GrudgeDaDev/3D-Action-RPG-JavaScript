@@ -1,0 +1,84 @@
+{
+  "spells": {
+    "fireball": {
+      "name": "Fireball",
+      "damage": 8,
+      "range": 200,
+      "cooldown": 1.5,
+      "manaCost": 20,
+      "animation": "fireballAnimation",
+      "vfx": "fireballVFX",
+      "effects": [
+        {
+          "type": "damage",
+          "value": 8,
+          "randomVariance": 3
+        }
+      ]
+    },
+    "quickSwing": {
+      "name": "Quick Swing",
+      "damage": 2,
+      "range": 35,
+      "cooldown": 0.5,
+      "staminaCost": 5,
+      "animation": "fireballAnimation",
+      "vfx": "SlashEffect",
+      "effects": [
+        {
+          "type": "damage",
+          "value": 2,
+          "randomVariance": 1
+        }
+      ]
+    },
+    "heavySwing": {
+      "name": "Heavy Swing",
+      "damage": 10,
+      "range": 45,
+      "cooldown": 2.0,
+      "staminaCost": 15,
+      "animation": "fireballAnimation",
+      "vfx": "SlashEffect",
+      "effects": [
+        {
+          "type": "damage",
+          "value": 10,
+          "randomVariance": 2
+        }
+      ]
+    }
+  },
+  "effects": {
+    "damage": {
+      "type": "damage",
+      "randomVariance": 3,
+      "canCrit": true,
+      "critChance": 0.1,
+      "critMultiplier": 2.0
+    },
+    "heal": {
+      "type": "heal",
+      "randomVariance": 0,
+      "canCrit": false
+    },
+    "slow": {
+      "type": "slow",
+      "duration": 2.0,
+      "slowAmount": 0.5
+    },
+    "stun": {
+      "type": "stun",
+      "duration": 1.0
+    }
+  },
+  "weapons": {
+    "sword": {
+      "name": "Basic Sword",
+      "damage": 5,
+      "attackSpeed": 1.0,
+      "range": 30
+    }
+  }
+}
+

@@ -1,0 +1,70 @@
+{
+  "_comment": "Core asset paths used at runtime. For full asset catalog see assets/assets.json",
+  "assets": {
+    "characters": {
+      "hero": "./assets/characters/human_basemesh/HumanBaseMesh_WithEquips.glb",
+      "slime": "./assets/characters/enemy/slime/Slime1.glb"
+    },
+    "weapons": {
+      "sword2": "./assets/characters/weapons/Sword2.glb"
+    },
+    "environment": {
+      "environmentMap": "./assets/textures/lighting/environment.env"
+    },
+    "terrain": {
+      "heightMap": "./assets/textures/terrain/hieghtMap.png",
+      "mixMap": "./assets/textures/terrain/mixMap.png",
+      "floor": "./assets/textures/terrain/floor.png",
+      "rock": "./assets/textures/terrain/rock.png",
+      "grass": "./assets/textures/terrain/grass.png"
+    },
+    "shaders": {
+      "orb": {
+        "vertex": "../../../shaders/vfx/orb",
+        "fragment": "../../../shaders/vfx/orb"
+      },
+      "trail": {
+        "vertex": "../../../shaders/vfx/trail_sword",
+        "fragment": "../../../shaders/vfx/trail_sword"
+      },
+      "grass": {
+        "vertex": "../../../shaders/env/grass",
+        "fragment": "../../../shaders/env/grass"
+      },
+      "hp": {
+        "vertex": "../../../shaders/hp/hp",
+        "fragment": "../../../shaders/hp/hp"
+      }
+    },
+    "ui": {
+      "icons": {
+        "path": "./assets/util/ui/icons/path.png",
+        "tree": "./assets/util/ui/icons/tree.png",
+        "gear": "./assets/util/ui/icons/gear.png"
+      }
+    },
+    "builder": {
+      "parts": "./assets/env/builder/parts.glb",
+      "grass": "./assets/env/exterior/grass/grass.glb"
+    },
+    "util": {
+      "hpBar": "./assets/util/HPBar.glb"
+    },
+    "scripts": {
+      "basePath": "./assets/util/scripts/",
+      "core": {
+        "utils": "./assets/util/scripts/core/utils.js",
+        "constants": "./assets/util/scripts/core/constants.js"
+      },
+      "behaviors": {
+        "goblin": "./assets/util/scripts/behaviors/enemy/goblin.json"
+      },
+      "abilities": {
+        "slash": "./assets/util/scripts/abilities/warrior/slash.js",
+        "dash": "./assets/util/scripts/abilities/player/DashAbility.js",
+        "chargeAttack": "./assets/util/scripts/abilities/player/ChargeAttack.js"
+      }
+    }
+  }
+}
+

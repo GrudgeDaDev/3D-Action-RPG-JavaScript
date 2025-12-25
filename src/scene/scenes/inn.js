@@ -8,6 +8,7 @@ import { loadingAnim } from '../../utils/loadingAnim.js'
 import { loadModels } from '../../utils/load.js';
 
 import { Health } from '../../character/health.js';
+import { globalUI } from '../../ui/GlobalUI.js';
 
 export async function createInn(engine) {
     const scene = new BABYLON.Scene(engine);
@@ -66,6 +67,10 @@ export async function createInn(engine) {
 
     // setupShadows(light, hero);
     loadingAnim(scene);
+
+    // Initialize MMO-style UI
+    globalUI.initForScene(scene, character, { playerName: 'Hero', playerLevel: 1 });
+
     return scene;
 }
 function setupGI(scene, engine, lights, meshes) {

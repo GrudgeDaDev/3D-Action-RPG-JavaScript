@@ -10,6 +10,7 @@ import { Health } from '../../character/health.js';
 
 
 import { loadModels } from '../../utils/load.js';
+import { globalUI } from '../../ui/GlobalUI.js';
 
 export async function createUnderground(engine) {
     const scene = new BABYLON.Scene(engine);
@@ -45,7 +46,8 @@ export async function createUnderground(engine) {
 
     setupEnemies(scene, character, terrain, 7, slime1);
 
-
+    // Initialize MMO-style UI
+    globalUI.initForScene(scene, character, { playerName: 'Hero', playerLevel: 1 });
 
     return scene;
 }

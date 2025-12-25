@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - 3D Action RPG</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <h1>⚙️ Admin Panel</h1>
+            <div class="header-actions">
+                <div id="serverStatus" class="server-status disconnected">
+                    <span class="status-dot"></span>
+                    <span id="serverStatusText">Checking server...</span>
+                </div>
+                <button id="exportBtn" class="btn btn-primary">📥 Export All</button>
+                <button id="importBtn" class="btn btn-secondary">📤 Import</button>
+                <button id="backToGameBtn" class="btn btn-success">🎮 Back to Game</button>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <!-- Sidebar Navigation -->
+            <nav class="admin-sidebar">
+                <h3>Configuration Categories</h3>
+                <ul class="nav-list">
+                    <li class="nav-item active" data-config="global">
+                        <span class="nav-icon">🌐</span> Global Settings
+                    </li>
+                    <li class="nav-item" data-config="scenes">
+                        <span class="nav-icon">🎬</span> Scenes
+                    </li>
+                    <li class="nav-item" data-config="combat">
+                        <span class="nav-icon">⚔️</span> Combat
+                    </li>
+                    <li class="nav-item" data-config="movement">
+                        <span class="nav-icon">🏃</span> Movement & Controls
+                    </li>
+                    <li class="nav-item" data-config="character">
+                        <span class="nav-icon">👤</span> Character
+                    </li>
+                    <li class="nav-item" data-config="camera">
+                        <span class="nav-icon">📷</span> Camera
+                    </li>
+                    <li class="nav-item" data-config="physics">
+                        <span class="nav-icon">🌍</span> Physics
+                    </li>
+                    <li class="nav-item" data-config="graphics">
+                        <span class="nav-icon">🎨</span> Graphics
+                    </li>
+                    <li class="nav-item" data-config="builder">
+                        <span class="nav-icon">🔨</span> Builder
+                    </li>
+                    <li class="nav-item" data-config="assets">
+                        <span class="nav-icon">📦</span> Assets
+                    </li>
+                    <li class="nav-item" data-config="settings">
+                        <span class="nav-icon">⚙️</span> Game Settings
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main Editor Panel -->
+            <main class="admin-main">
+                <div class="editor-header">
+                    <h2 id="editorTitle">Global Settings</h2>
+                    <div class="editor-actions">
+                        <button id="saveBtn" class="btn btn-info">💾 Save (Memory)</button>
+                        <button id="saveServerBtn" class="btn btn-success">🌐 Save to Server</button>
+                        <button id="saveAllServerBtn" class="btn btn-primary">🌐 Save All to Server</button>
+                        <button id="resetBtn" class="btn btn-warning">🔄 Reset</button>
+                    </div>
+                </div>
+
+                <div class="editor-content">
+                    <div id="editorPanel" class="config-editor">
+                        <!-- Dynamic content will be loaded here -->
+                        <div class="loading">Loading configuration...</div>
+                    </div>
+                </div>
+
+                <div class="editor-footer">
+                    <div id="statusMessage" class="status-message"></div>
+                </div>
+            </main>
+
+            <!-- Preview Panel (Optional) -->
+            <aside class="admin-preview">
+                <h3>JSON Preview</h3>
+                <pre id="jsonPreview" class="json-preview">
+{
+  "loading": true
+}
+                </pre>
+                <button id="copyJsonBtn" class="btn btn-secondary btn-small">📋 Copy JSON</button>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div id="importModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Import Configuration</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label for="importFile">Upload JSON File:</label>
+                <input type="file" id="importFile" accept=".json">
+                
+                <label for="importText">Or Paste JSON:</label>
+                <textarea id="importText" rows="10" placeholder='{"config": "data"}'></textarea>
+                
+                <div class="import-options">
+                    <label>
+                        <input type="radio" name="importMode" value="merge" checked>
+                        Merge with existing
+                    </label>
+                    <label>
+                        <input type="radio" name="importMode" value="replace">
+                        Replace all
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmImportBtn" class="btn btn-primary">Import</button>
+                <button class="modal-close btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/adminApp.js"></script>
+</body>
+</html>
+

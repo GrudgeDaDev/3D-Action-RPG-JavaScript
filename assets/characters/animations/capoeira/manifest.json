@@ -1,0 +1,203 @@
+{
+  "version": "1.0",
+  "description": "Capoeira martial arts animations for unarmed combat",
+  "rig": "mixamorig",
+  "weaponType": "unarmed",
+  "style": "capoeira",
+  "animations": {
+    "ginga_idle": {
+      "file": "ginga variation 1.fbx",
+      "glb": "ginga_idle.glb",
+      "loop": true,
+      "duration": 60,
+      "category": "idle",
+      "description": "Basic Capoeira stance - rhythmic swaying motion"
+    },
+    "ginga_forward": {
+      "file": "ginga forward.fbx",
+      "glb": "ginga_forward.glb",
+      "loop": true,
+      "duration": 45,
+      "category": "movement",
+      "description": "Forward ginga movement"
+    },
+    "ginga_backward": {
+      "file": "ginga backward.fbx",
+      "glb": "ginga_backward.glb",
+      "loop": true,
+      "duration": 45,
+      "category": "movement",
+      "description": "Backward ginga movement"
+    },
+    "armada": {
+      "file": "armada.fbx",
+      "glb": "armada.glb",
+      "loop": false,
+      "duration": 30,
+      "category": "attack",
+      "damage": 15,
+      "staminaCost": 12,
+      "description": "Spinning kick attack"
+    },
+    "armada_to_esquiva": {
+      "file": "armada to esquiva.fbx",
+      "glb": "armada_to_esquiva.glb",
+      "loop": false,
+      "duration": 40,
+      "category": "combo",
+      "description": "Spinning kick transitioning to dodge"
+    },
+    "au": {
+      "file": "au.fbx",
+      "glb": "au.glb",
+      "loop": false,
+      "duration": 35,
+      "category": "evasion",
+      "description": "Cartwheel evasive maneuver"
+    },
+    "au_to_role": {
+      "file": "au to role.fbx",
+      "glb": "au_to_role.glb",
+      "loop": false,
+      "duration": 45,
+      "category": "combo",
+      "description": "Cartwheel to roll combo"
+    },
+    "bencao": {
+      "file": "bencao.fbx",
+      "glb": "bencao.glb",
+      "loop": false,
+      "duration": 25,
+      "category": "attack",
+      "damage": 12,
+      "staminaCost": 10,
+      "description": "Front push kick"
+    },
+    "chapa": {
+      "file": "chapa 2.fbx",
+      "glb": "chapa.glb",
+      "loop": false,
+      "duration": 28,
+      "category": "attack",
+      "damage": 14,
+      "staminaCost": 11,
+      "description": "Side kick"
+    },
+    "chapa_giratoria": {
+      "file": "chapa-giratoria.fbx",
+      "glb": "chapa_giratoria.glb",
+      "loop": false,
+      "duration": 35,
+      "category": "attack",
+      "damage": 18,
+      "staminaCost": 15,
+      "description": "Spinning side kick"
+    },
+    "esquiva_1": {
+      "file": "esquiva 1.fbx",
+      "glb": "esquiva_1.glb",
+      "loop": false,
+      "duration": 20,
+      "category": "dodge",
+      "description": "Basic dodge movement"
+    },
+    "esquiva_2": {
+      "file": "esquiva 2.fbx",
+      "glb": "esquiva_2.glb",
+      "loop": false,
+      "duration": 20,
+      "category": "dodge",
+      "description": "Dodge variation 2"
+    },
+    "martelo": {
+      "file": "martelo 2.fbx",
+      "glb": "martelo.glb",
+      "loop": false,
+      "duration": 30,
+      "category": "attack",
+      "damage": 16,
+      "staminaCost": 13,
+      "description": "Hammer kick"
+    },
+    "martelo_do_chau": {
+      "file": "martelo do chau.fbx",
+      "glb": "martelo_do_chau.glb",
+      "loop": false,
+      "duration": 40,
+      "category": "attack",
+      "damage": 20,
+      "staminaCost": 18,
+      "description": "Ground hammer kick"
+    },
+    "meia_lua_de_compasso": {
+      "file": "meia lua de compasso.fbx",
+      "glb": "meia_lua_de_compasso.glb",
+      "loop": false,
+      "duration": 38,
+      "category": "attack",
+      "damage": 22,
+      "staminaCost": 20,
+      "description": "Crescent kick with compass motion"
+    },
+    "meia_lua_de_frente": {
+      "file": "meia lua de frente.fbx",
+      "glb": "meia_lua_de_frente.glb",
+      "loop": false,
+      "duration": 32,
+      "category": "attack",
+      "damage": 17,
+      "staminaCost": 14,
+      "description": "Front crescent kick"
+    },
+    "rasteira_1": {
+      "file": "rasteira 1.fbx",
+      "glb": "rasteira_1.glb",
+      "loop": false,
+      "duration": 35,
+      "category": "attack",
+      "damage": 10,
+      "staminaCost": 12,
+      "knockdown": true,
+      "description": "Leg sweep - can knock down opponent"
+    },
+    "rasteira_2": {
+      "file": "rasteira 2.fbx",
+      "glb": "rasteira_2.glb",
+      "loop": false,
+      "duration": 35,
+      "category": "attack",
+      "damage": 10,
+      "staminaCost": 12,
+      "knockdown": true,
+      "description": "Leg sweep variation"
+    }
+  },
+  "combos": [
+    {
+      "name": "Basic Combo",
+      "sequence": ["armada", "martelo", "meia_lua_de_frente"],
+      "totalDamage": 49,
+      "description": "Standard three-hit combo"
+    },
+    {
+      "name": "Evasive Strike",
+      "sequence": ["esquiva_1", "armada", "au"],
+      "totalDamage": 15,
+      "description": "Dodge and counter with evasion"
+    },
+    {
+      "name": "Ground Assault",
+      "sequence": ["rasteira_1", "martelo_do_chau"],
+      "totalDamage": 30,
+      "knockdown": true,
+      "description": "Sweep and ground attack"
+    }
+  ],
+  "notes": [
+    "All FBX files need to be converted to GLB format",
+    "Animations are designed for Mixamo rig compatibility",
+    "Damage values are base values, scaled by character agility",
+    "Stamina costs can be reduced with Capoeira mastery skill"
+  ]
+}
+

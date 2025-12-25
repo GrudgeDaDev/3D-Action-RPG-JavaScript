@@ -1,0 +1,573 @@
+{
+  "professions": {
+    "blacksmithing": {
+      "displayName": "Blacksmithing",
+      "description": "Forge weapons and armor from metal. Masters of metalworking.",
+      "icon": "⚒️",
+      "maxLevel": 100,
+      "workstations": ["forge", "anvil"],
+      "perks": [
+        { "level": 10, "name": "Apprentice Smith", "description": "+5% weapon/armor durability" },
+        { "level": 25, "name": "Master Smith", "description": "+10% crafting quality, +2 STR" },
+        { "level": 50, "name": "Legendary Smith", "description": "Unlock legendary recipes, +3 ATK, +3 DEF" },
+        { "level": 75, "name": "Runeforging", "description": "Enchant weapons with runes" },
+        { "level": 100, "name": "Forge of Legends", "description": "Craft mythic tier equipment" }
+      ],
+      "ultimates": [
+        { "id": "hammer_of_titans", "name": "Hammer of Titans", "description": "Summon legendary hammer dealing massive damage" },
+        { "id": "iron_fortress", "name": "Iron Fortress", "description": "+50% DEF and damage reflection for 30s" }
+      ]
+    },
+    "mining": {
+      "displayName": "Mining",
+      "description": "Extract ores and minerals from the earth",
+      "icon": "⛏️",
+      "maxLevel": 100,
+      "workstations": ["forge", "smelter"],
+      "perks": [
+        { "level": 10, "name": "Ore Sense", "description": "+10% chance to find rare ores" },
+        { "level": 25, "name": "Efficient Mining", "description": "+15% mining speed" },
+        { "level": 50, "name": "Master Miner", "description": "+2 ATK, +3 DEF per level" },
+        { "level": 75, "name": "Crystal Mastery", "description": "+3% ore yield per level" },
+        { "level": 100, "name": "Earth Shaker", "description": "Mine entire ore veins instantly" }
+      ],
+      "ultimates": [
+        { "id": "earthquake_strike", "name": "Earthquake Strike", "description": "Slam ground dealing AoE damage" },
+        { "id": "stone_skin", "name": "Stone Skin", "description": "Become immune to physical damage for 10s" }
+      ]
+    },
+    "woodworking": {
+      "displayName": "Woodworking",
+      "description": "Craft wooden items, bows, and furniture",
+      "icon": "🪚",
+      "maxLevel": 100,
+      "workstations": ["sawmill", "workbench"],
+      "perks": [
+        { "level": 10, "name": "Woodsman", "description": "+10% wood gathering speed" },
+        { "level": 25, "name": "Rare Wood Finder", "description": "+15% chance for rare wood" },
+        { "level": 50, "name": "Master Carpenter", "description": "+1 DEX, +2 AGI per level" },
+        { "level": 75, "name": "Ancient Grove", "description": "Access to mythical wood types" },
+        { "level": 100, "name": "Forest Guardian", "description": "Summon treant companion" }
+      ],
+      "ultimates": [
+        { "id": "natures_wrath", "name": "Nature's Wrath", "description": "Summon vines to entangle enemies" },
+        { "id": "forest_blessing", "name": "Forest Blessing", "description": "Heal over time in forest areas" }
+      ]
+    },
+    "alchemy": {
+      "displayName": "Alchemy",
+      "description": "Brew potions, elixirs, and magical concoctions",
+      "icon": "⚗️",
+      "maxLevel": 100,
+      "workstations": ["alchemy_table", "cauldron"],
+      "perks": [
+        { "level": 10, "name": "Herbalist", "description": "+10% potion potency" },
+        { "level": 25, "name": "Transmutation", "description": "Convert basic materials" },
+        { "level": 50, "name": "Master Alchemist", "description": "+3 INT, +2 WIS per level" },
+        { "level": 75, "name": "Philosopher's Stone", "description": "Create gold from lead" },
+        { "level": 100, "name": "Grand Alchemist", "description": "Brew elixir of immortality" }
+      ],
+      "ultimates": [
+        { "id": "transmute_gold", "name": "Transmute Gold", "description": "Convert items to gold" },
+        { "id": "elixir_of_life", "name": "Elixir of Life", "description": "Full heal + invulnerability 5s" }
+      ]
+    },
+    "enchanting": {
+      "displayName": "Enchanting",
+      "description": "Imbue items with magical properties",
+      "icon": "✨",
+      "maxLevel": 100,
+      "workstations": ["enchanting_table"],
+      "perks": [
+        { "level": 10, "name": "Novice Enchanter", "bonus": "Basic enchantments" },
+        { "level": 25, "name": "Expert Enchanter", "bonus": "Advanced enchantments" },
+        { "level": 50, "name": "Archmage", "bonus": "Legendary enchantments" }
+      ]
+    },
+    "cooking": {
+      "displayName": "Cooking",
+      "description": "Prepare food and consumables that provide powerful buffs",
+      "icon": "🍳",
+      "maxLevel": 100,
+      "workstations": ["cooking_fire", "kitchen", "oven"],
+      "perks": [
+        { "level": 10, "name": "Basic Chef", "description": "+10% food buff duration" },
+        { "level": 25, "name": "Gourmet", "description": "+15% buff effectiveness" },
+        { "level": 50, "name": "Master Chef", "description": "+2% HP/MP regen per level" },
+        { "level": 75, "name": "Legendary Cook", "description": "Food prevents death once" },
+        { "level": 100, "name": "Divine Chef", "description": "Create immortality dishes" }
+      ],
+      "ultimates": [
+        { "id": "feast_of_heroes", "name": "Feast of Heroes", "description": "Party-wide +25% all stats" },
+        { "id": "devils_cake", "name": "Devil's Life Cake", "description": "Revive on death with full HP" }
+      ]
+    },
+    "fishing": {
+      "displayName": "Fishing",
+      "description": "Catch fish and aquatic resources",
+      "icon": "🎣",
+      "maxLevel": 100,
+      "workstations": ["cooking_fire", "kitchen"],
+      "perks": [
+        { "level": 10, "name": "Lucky Catch", "description": "+10% rare fish chance" },
+        { "level": 25, "name": "Deep Sea Fisher", "description": "Access to deep water fishing" },
+        { "level": 50, "name": "Master Angler", "description": "+1 LUK, +2 WIS per level" },
+        { "level": 75, "name": "Legendary Bait", "description": "Attract mythical sea creatures" },
+        { "level": 100, "name": "Ocean's Chosen", "description": "Breathe underwater, swim faster" }
+      ],
+      "ultimates": [
+        { "id": "tidal_wave", "name": "Tidal Wave", "description": "Summon wave dealing water damage" },
+        { "id": "aquatic_form", "name": "Aquatic Form", "description": "Transform into water elemental" }
+      ]
+    },
+    "leatherworking": {
+      "displayName": "Leatherworking",
+      "description": "Craft leather armor and goods",
+      "icon": "🧵",
+      "maxLevel": 100,
+      "workstations": ["tanning_rack", "workbench"],
+      "perks": [
+        { "level": 10, "name": "Apprentice Tanner", "bonus": "Better leather quality" },
+        { "level": 25, "name": "Master Leatherworker", "bonus": "Exotic leather recipes" },
+        { "level": 50, "name": "Legendary Artisan", "bonus": "Dragonscale crafting" }
+      ]
+    },
+    "jewelcrafting": {
+      "displayName": "Jewelcrafting",
+      "description": "Create rings, amulets, and gems",
+      "icon": "💎",
+      "maxLevel": 100,
+      "workstations": ["jewelers_bench"],
+      "perks": [
+        { "level": 10, "name": "Apprentice Jeweler", "bonus": "Basic gem cutting" },
+        { "level": 25, "name": "Master Jeweler", "bonus": "Rare gem crafting" },
+        { "level": 50, "name": "Grand Jeweler", "bonus": "Legendary gems" }
+      ]
+    }
+  },
+  "workstations": {
+    "forge": {
+      "displayName": "Forge",
+      "type": "blacksmithing",
+      "emoji": "🔥",
+      "description": "A blazing forge for metalworking"
+    },
+    "anvil": {
+      "displayName": "Anvil",
+      "type": "blacksmithing",
+      "emoji": "⚒️",
+      "description": "Heavy anvil for shaping metal"
+    },
+    "alchemy_table": {
+      "displayName": "Alchemy Table",
+      "type": "alchemy",
+      "emoji": "🧪",
+      "description": "Mystical table for brewing potions"
+    },
+    "enchanting_table": {
+      "displayName": "Enchanting Table",
+      "type": "enchanting",
+      "emoji": "✨",
+      "description": "Arcane table for enchanting items"
+    },
+    "cooking_fire": {
+      "displayName": "Cooking Fire",
+      "type": "cooking",
+      "emoji": "🔥",
+      "description": "Open fire for cooking"
+    },
+    "kitchen": {
+      "displayName": "Kitchen",
+      "type": "cooking",
+      "emoji": "🍳",
+      "description": "Fully equipped kitchen"
+    },
+    "tanning_rack": {
+      "displayName": "Tanning Rack",
+      "type": "leatherworking",
+      "emoji": "🧵",
+      "description": "Rack for tanning hides"
+    },
+    "workbench": {
+      "displayName": "Workbench",
+      "type": "general",
+      "emoji": "🔨",
+      "description": "General purpose workbench"
+    },
+    "jewelers_bench": {
+      "displayName": "Jeweler's Bench",
+      "type": "jewelcrafting",
+      "emoji": "💎",
+      "description": "Precision bench for gem cutting"
+    }
+  },
+  "recipes": {
+    "iron_sword": {
+      "name": "Iron Sword",
+      "profession": "blacksmithing",
+      "workstation": "anvil",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Iron Ingot", "quantity": 3 },
+        { "name": "Wood", "quantity": 1 }
+      ],
+      "result": { "name": "Iron Sword", "quantity": 1 },
+      "craftTime": 2000,
+      "experience": 15,
+      "icon": "sword_iron.png"
+    },
+    "steel_sword": {
+      "name": "Steel Sword",
+      "profession": "blacksmithing",
+      "workstation": "anvil",
+      "unlockLevel": 10,
+      "materials": [
+        { "name": "Steel Ingot", "quantity": 3 },
+        { "name": "Leather", "quantity": 1 }
+      ],
+      "result": { "name": "Steel Sword", "quantity": 1 },
+      "craftTime": 3000,
+      "experience": 30,
+      "icon": "sword_steel.png"
+    },
+    "iron_helmet": {
+      "name": "Iron Helmet",
+      "profession": "blacksmithing",
+      "workstation": "anvil",
+      "unlockLevel": 5,
+      "materials": [
+        { "name": "Iron Ingot", "quantity": 5 }
+      ],
+      "result": { "name": "Iron Helmet", "quantity": 1 },
+      "craftTime": 2500,
+      "experience": 20,
+      "icon": "helmet_iron.png"
+    },
+    "health_potion": {
+      "name": "Health Potion",
+      "profession": "alchemy",
+      "workstation": "alchemy_table",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Red Herb", "quantity": 2 },
+        { "name": "Water", "quantity": 1 }
+      ],
+      "result": { "name": "Health Potion", "quantity": 1 },
+      "craftTime": 1500,
+      "experience": 10,
+      "icon": "potion_health.png"
+    },
+    "mana_potion": {
+      "name": "Mana Potion",
+      "profession": "alchemy",
+      "workstation": "alchemy_table",
+      "unlockLevel": 5,
+      "materials": [
+        { "name": "Blue Herb", "quantity": 2 },
+        { "name": "Water", "quantity": 1 }
+      ],
+      "result": { "name": "Mana Potion", "quantity": 1 },
+      "craftTime": 1500,
+      "experience": 12,
+      "icon": "potion_mana.png"
+    },
+    "stamina_potion": {
+      "name": "Stamina Potion",
+      "profession": "alchemy",
+      "workstation": "alchemy_table",
+      "unlockLevel": 8,
+      "materials": [
+        { "name": "Green Herb", "quantity": 2 },
+        { "name": "Honey", "quantity": 1 }
+      ],
+      "result": { "name": "Stamina Potion", "quantity": 1 },
+      "craftTime": 1800,
+      "experience": 15,
+      "icon": "potion_stamina.png"
+    },
+    "fire_enchant": {
+      "name": "Fire Enchantment",
+      "profession": "enchanting",
+      "workstation": "enchanting_table",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Fire Crystal", "quantity": 1 },
+        { "name": "Arcane Dust", "quantity": 3 }
+      ],
+      "result": { "name": "Fire Enchantment Scroll", "quantity": 1 },
+      "craftTime": 2500,
+      "experience": 20,
+      "icon": "enchant_fire.png"
+    },
+    "ice_enchant": {
+      "name": "Ice Enchantment",
+      "profession": "enchanting",
+      "workstation": "enchanting_table",
+      "unlockLevel": 10,
+      "materials": [
+        { "name": "Ice Crystal", "quantity": 1 },
+        { "name": "Arcane Dust", "quantity": 3 }
+      ],
+      "result": { "name": "Ice Enchantment Scroll", "quantity": 1 },
+      "craftTime": 2500,
+      "experience": 25,
+      "icon": "enchant_ice.png"
+    },
+    "cooked_meat": {
+      "name": "Cooked Meat",
+      "profession": "cooking",
+      "workstation": "cooking_fire",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Raw Meat", "quantity": 1 }
+      ],
+      "result": { "name": "Cooked Meat", "quantity": 1 },
+      "craftTime": 1000,
+      "experience": 5,
+      "icon": "food_meat.png"
+    },
+    "bread": {
+      "name": "Bread",
+      "profession": "cooking",
+      "workstation": "kitchen",
+      "unlockLevel": 3,
+      "materials": [
+        { "name": "Wheat", "quantity": 3 },
+        { "name": "Water", "quantity": 1 }
+      ],
+      "result": { "name": "Bread", "quantity": 2 },
+      "craftTime": 1500,
+      "experience": 8,
+      "icon": "food_bread.png"
+    },
+    "leather_armor": {
+      "name": "Leather Armor",
+      "profession": "leatherworking",
+      "workstation": "tanning_rack",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Leather", "quantity": 8 }
+      ],
+      "result": { "name": "Leather Armor", "quantity": 1 },
+      "craftTime": 2000,
+      "experience": 15,
+      "icon": "armor_leather.png"
+    },
+    "leather_boots": {
+      "name": "Leather Boots",
+      "profession": "leatherworking",
+      "workstation": "workbench",
+      "unlockLevel": 5,
+      "materials": [
+        { "name": "Leather", "quantity": 4 },
+        { "name": "Thread", "quantity": 2 }
+      ],
+      "result": { "name": "Leather Boots", "quantity": 1 },
+      "craftTime": 1500,
+      "experience": 12,
+      "icon": "boots_leather.png"
+    },
+    "ruby_ring": {
+      "name": "Ruby Ring",
+      "profession": "jewelcrafting",
+      "workstation": "jewelers_bench",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Ruby", "quantity": 1 },
+        { "name": "Gold Ingot", "quantity": 2 }
+      ],
+      "result": { "name": "Ruby Ring", "quantity": 1 },
+      "craftTime": 3000,
+      "experience": 25,
+      "icon": "ring_ruby.png"
+    },
+    "sapphire_amulet": {
+      "name": "Sapphire Amulet",
+      "profession": "jewelcrafting",
+      "workstation": "jewelers_bench",
+      "unlockLevel": 10,
+      "materials": [
+        { "name": "Sapphire", "quantity": 1 },
+        { "name": "Silver Ingot", "quantity": 3 }
+      ],
+      "result": { "name": "Sapphire Amulet", "quantity": 1 },
+      "craftTime": 3500,
+      "experience": 30,
+      "icon": "amulet_sapphire.png"
+    },
+    "iron_pickaxe": {
+      "name": "Iron Pickaxe",
+      "profession": "mining",
+      "workstation": "anvil",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Iron Ingot", "quantity": 3 },
+        { "name": "Wood", "quantity": 2 }
+      ],
+      "result": { "name": "Iron Pickaxe", "quantity": 1 },
+      "craftTime": 2000,
+      "experience": 15,
+      "icon": "tool_pickaxe_iron.png"
+    },
+    "steel_pickaxe": {
+      "name": "Steel Pickaxe",
+      "profession": "mining",
+      "workstation": "anvil",
+      "unlockLevel": 15,
+      "materials": [
+        { "name": "Steel Ingot", "quantity": 4 },
+        { "name": "Oak Wood", "quantity": 2 }
+      ],
+      "result": { "name": "Steel Pickaxe", "quantity": 1 },
+      "craftTime": 3000,
+      "experience": 35,
+      "icon": "tool_pickaxe_steel.png"
+    },
+    "wooden_bow": {
+      "name": "Wooden Bow",
+      "profession": "woodworking",
+      "workstation": "workbench",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Wood", "quantity": 5 },
+        { "name": "String", "quantity": 2 }
+      ],
+      "result": { "name": "Wooden Bow", "quantity": 1 },
+      "craftTime": 2000,
+      "experience": 12,
+      "icon": "weapon_bow_wood.png"
+    },
+    "oak_bow": {
+      "name": "Oak Bow",
+      "profession": "woodworking",
+      "workstation": "workbench",
+      "unlockLevel": 10,
+      "materials": [
+        { "name": "Oak Wood", "quantity": 6 },
+        { "name": "String", "quantity": 3 }
+      ],
+      "result": { "name": "Oak Bow", "quantity": 1 },
+      "craftTime": 2500,
+      "experience": 25,
+      "icon": "weapon_bow_oak.png"
+    },
+    "grilled_fish": {
+      "name": "Grilled Fish",
+      "profession": "fishing",
+      "workstation": "cooking_fire",
+      "unlockLevel": 1,
+      "materials": [
+        { "name": "Raw Fish", "quantity": 1 }
+      ],
+      "result": { "name": "Grilled Fish", "quantity": 1 },
+      "craftTime": 1000,
+      "experience": 8,
+      "icon": "food_fish_grilled.png"
+    },
+    "fish_stew": {
+      "name": "Fish Stew",
+      "profession": "fishing",
+      "workstation": "kitchen",
+      "unlockLevel": 15,
+      "materials": [
+        { "name": "Raw Fish", "quantity": 2 },
+        { "name": "Potato", "quantity": 2 },
+        { "name": "Water", "quantity": 1 }
+      ],
+      "result": { "name": "Fish Stew", "quantity": 1 },
+      "craftTime": 2000,
+      "experience": 20,
+      "icon": "food_stew_fish.png"
+    },
+    "iron_axe": {
+      "name": "Iron Axe",
+      "profession": "blacksmithing",
+      "workstation": "anvil",
+      "unlockLevel": 3,
+      "materials": [
+        { "name": "Iron Ingot", "quantity": 3 },
+        { "name": "Wood", "quantity": 2 }
+      ],
+      "result": { "name": "Iron Axe", "quantity": 1 },
+      "craftTime": 2000,
+      "experience": 18,
+      "icon": "tool_axe_iron.png"
+    },
+    "steel_axe": {
+      "name": "Steel Axe",
+      "profession": "blacksmithing",
+      "workstation": "anvil",
+      "unlockLevel": 12,
+      "materials": [
+        { "name": "Steel Ingot", "quantity": 4 },
+        { "name": "Oak Wood", "quantity": 2 }
+      ],
+      "result": { "name": "Steel Axe", "quantity": 1 },
+      "craftTime": 3000,
+      "experience": 32,
+      "icon": "tool_axe_steel.png"
+    },
+    "iron_chestplate": {
+      "name": "Iron Chestplate",
+      "profession": "blacksmithing",
+      "workstation": "anvil",
+      "unlockLevel": 8,
+      "materials": [
+        { "name": "Iron Ingot", "quantity": 8 }
+      ],
+      "result": { "name": "Iron Chestplate", "quantity": 1 },
+      "craftTime": 3500,
+      "experience": 28,
+      "icon": "armor_chest_iron.png"
+    },
+    "steel_chestplate": {
+      "name": "Steel Chestplate",
+      "profession": "blacksmithing",
+      "workstation": "anvil",
+      "unlockLevel": 20,
+      "materials": [
+        { "name": "Steel Ingot", "quantity": 10 }
+      ],
+      "result": { "name": "Steel Chestplate", "quantity": 1 },
+      "craftTime": 4500,
+      "experience": 45,
+      "icon": "armor_chest_steel.png"
+    }
+  },
+  "iconMappings": {
+    "Iron Sword": "examples/TheForge-main/TheForge-main/icons/sword_iron.png",
+    "Steel Sword": "examples/TheForge-main/TheForge-main/icons/sword_steel.png",
+    "Iron Helmet": "examples/TheForge-main/TheForge-main/icons/helmet_iron.png",
+    "Health Potion": "examples/TheForge-main/TheForge-main/icons/potion_health.png",
+    "Mana Potion": "examples/TheForge-main/TheForge-main/icons/potion_mana.png",
+    "Stamina Potion": "examples/TheForge-main/TheForge-main/icons/potion_stamina.png",
+    "Fire Enchantment Scroll": "examples/TheForge-main/TheForge-main/icons/enchant_fire.png",
+    "Ice Enchantment Scroll": "examples/TheForge-main/TheForge-main/icons/enchant_ice.png",
+    "Cooked Meat": "examples/TheForge-main/TheForge-main/icons/food_meat.png",
+    "Bread": "examples/TheForge-main/TheForge-main/icons/food_bread.png",
+    "Leather Armor": "examples/TheForge-main/TheForge-main/icons/armor_leather.png",
+    "Leather Boots": "examples/TheForge-main/TheForge-main/icons/boots_leather.png",
+    "Ruby Ring": "examples/TheForge-main/TheForge-main/icons/ring_ruby.png",
+    "Sapphire Amulet": "examples/TheForge-main/TheForge-main/icons/amulet_sapphire.png",
+    "Iron Ingot": "examples/TheForge-main/TheForge-main/icons/ingot_iron.png",
+    "Steel Ingot": "examples/TheForge-main/TheForge-main/icons/ingot_steel.png",
+    "Gold Ingot": "examples/TheForge-main/TheForge-main/icons/ingot_gold.png",
+    "Silver Ingot": "examples/TheForge-main/TheForge-main/icons/ingot_silver.png",
+    "Leather": "examples/TheForge-main/TheForge-main/icons/material_leather.png",
+    "Wood": "examples/TheForge-main/TheForge-main/icons/material_wood.png",
+    "Red Herb": "examples/TheForge-main/TheForge-main/icons/herb_red.png",
+    "Blue Herb": "examples/TheForge-main/TheForge-main/icons/herb_blue.png",
+    "Green Herb": "examples/TheForge-main/TheForge-main/icons/herb_green.png",
+    "Fire Crystal": "examples/TheForge-main/TheForge-main/icons/crystal_fire.png",
+    "Ice Crystal": "examples/TheForge-main/TheForge-main/icons/crystal_ice.png",
+    "Arcane Dust": "examples/TheForge-main/TheForge-main/icons/dust_arcane.png",
+    "Ruby": "examples/TheForge-main/TheForge-main/icons/gem_ruby.png",
+    "Sapphire": "examples/TheForge-main/TheForge-main/icons/gem_sapphire.png",
+    "Raw Meat": "examples/TheForge-main/TheForge-main/icons/food_raw_meat.png",
+    "Wheat": "examples/TheForge-main/TheForge-main/icons/material_wheat.png",
+    "Water": "examples/TheForge-main/TheForge-main/icons/material_water.png",
+    "Honey": "examples/TheForge-main/TheForge-main/icons/material_honey.png",
+    "Thread": "examples/TheForge-main/TheForge-main/icons/material_thread.png"
+  }
+}
+

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Character Advisor - Grudge Warlords RPG</title>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://js.puter.com/v2/"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0b1120 0%, #1a2332 100%);
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #6ee7b7;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #9ca3af;
+            margin-bottom: 30px;
+        }
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(110, 231, 183, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .panel h2 {
+            color: #6ee7b7;
+            margin-top: 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #6ee7b7;
+        }
+        .stat-label {
+            color: #9ca3af;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .stat-value {
+            color: #6ee7b7;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .ai-response {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .loading {
+            text-align: center;
+            color: #6ee7b7;
+            padding: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #6ee7b7;
+            text-decoration: none;
+        }
+        select {
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            border: 1px solid rgba(110, 231, 183, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Character Advisor</h1>
+        <p class="subtitle">Get personalized build recommendations powered by Gemini AI</p>
+
+        <div class="panel">
+            <h2>Character Setup</h2>
+            <label for="classSelect">Select Class:</label>
+            <select id="classSelect">
+                <option value="warrior">Warrior - Melee Combat Specialist</option>
+                <option value="mage">Mage - Arcane Spellcaster</option>
+                <option value="rogue">Rogue - Stealth & Critical Strikes</option>
+                <option value="ranger">Ranger - Ranged Combat Expert</option>
+                <option value="paladin">Paladin - Holy Warrior</option>
+                <option value="necromancer">Necromancer - Dark Magic Master</option>
+            </select>
+
+            <label for="levelSelect">Character Level:</label>
+            <select id="levelSelect">
+                <option value="1">Level 1 (Beginner)</option>
+                <option value="5">Level 5 (Novice)</option>
+                <option value="10" selected>Level 10 (Intermediate)</option>
+                <option value="15">Level 15 (Advanced)</option>
+                <option value="20">Level 20 (Master)</option>
+            </select>
+        </div>
+
+        <div class="panel">
+            <h2>Current Stats</h2>
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be populated here -->
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>AI Analysis</h2>
+            <button id="analyzeBtn" onclick="analyzeBuild()">🔍 Analyze My Build</button>
+            <button id="questBtn" onclick="generateQuest()" style="margin-left: 10px;">📜 Generate Quest</button>
+            <button id="npcBtn" onclick="talkToNPC()" style="margin-left: 10px;">💬 Talk to Advisor</button>
+            
+            <div id="aiResponse"></div>
+        </div>
+
+        <div class="footer">
+            Powered by <a href="https://developer.puter.com" target="_blank" rel="noopener">Puter</a> & 
+            <a href="https://ai.google.dev" target="_blank" rel="noopener">Gemini AI</a>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import AI integration
+        import { GeminiIntegration } from '../src/ai/GeminiIntegration.js';
+
+        // Sample character data
+        const classBuilds = {
+            warrior: { strength: 25, intellect: 5, vitality: 20, dexterity: 10, endurance: 15, wisdom: 5, agility: 10, tactics: 10 },
+            mage: { strength: 5, intellect: 25, vitality: 10, dexterity: 8, endurance: 10, wisdom: 20, agility: 12, tactics: 10 },
+            rogue: { strength: 12, intellect: 10, vitality: 10, dexterity: 25, endurance: 10, wisdom: 8, agility: 20, tactics: 5 },
+            ranger: { strength: 15, intellect: 10, vitality: 12, dexterity: 20, endurance: 12, wisdom: 10, agility: 15, tactics: 6 },
+            paladin: { strength: 18, intellect: 12, vitality: 18, dexterity: 8, endurance: 15, wisdom: 15, agility: 8, tactics: 6 },
+            necromancer: { strength: 6, intellect: 22, vitality: 12, dexterity: 8, endurance: 10, wisdom: 22, agility: 10, tactics: 10 }
+        };
+
+        let gemini;
+        let currentClass = 'warrior';
+        let currentLevel = 10;
+
+        // Initialize
+        async function init() {
+            // Initialize Gemini AI
+            gemini = new GeminiIntegration();
+            await gemini.initialize();
+            
+            // Setup event listeners
+            document.getElementById('classSelect').addEventListener('change', updateStats);
+            document.getElementById('levelSelect').addEventListener('change', updateStats);
+            
+            // Initial stats display
+            updateStats();
+        }
+
+        function updateStats() {
+            currentClass = document.getElementById('classSelect').value;
+            currentLevel = parseInt(document.getElementById('levelSelect').value);
+            
+            const stats = classBuilds[currentClass];
+            const statsGrid = document.getElementById('statsGrid');
+            
+            statsGrid.innerHTML = Object.entries(stats).map(([key, value]) => `
+                <div class="stat-item">
+                    <div class="stat-label">${key}</div>
+                    <div class="stat-value">${value}</div>
+                </div>
+            `).join('');
+        }
+
+        async function analyzeBuild() {
+            const btn = document.getElementById('analyzeBtn');
+            const responseDiv = document.getElementById('aiResponse');
+
+            btn.disabled = true;
+            btn.textContent = '🔄 Analyzing...';
+            responseDiv.innerHTML = '<div class="loading">🤖 AI is analyzing your build...</div>';
+
+            try {
+                const stats = classBuilds[currentClass];
+                const className = document.getElementById('classSelect').options[document.getElementById('classSelect').selectedIndex].text.split(' - ')[0];
+
+                const analysis = await gemini.analyzeBuild(stats, className);
+
+                responseDiv.innerHTML = `<div class="ai-response"><strong>📊 Build Analysis:</strong>\n\n${analysis}</div>`;
+            } catch (error) {
+                responseDiv.innerHTML = `<div class="ai-response" style="border-left-color: #ef4444;">❌ Error: ${error.message}\n\nUsing fallback analysis...</div>`;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔍 Analyze My Build';
+            }
+        }
+
+        async function generateQuest() {
+            const btn = document.getElementById('questBtn');
+            const responseDiv = document.getElementById('aiResponse');
+
+            btn.disabled = true;
+            btn.textContent = '🔄 Generating...';
+            responseDiv.innerHTML = '<div class="loading">🤖 AI is creating a quest for you...</div>';
+
+            try {
+                const quest = await gemini.generateQuestSuggestion(currentLevel, []);
+
+                const questHTML = `
+                    <div class="ai-response">
+                        <strong>📜 ${quest.title}</strong><br><br>
+                        ${quest.description}<br><br>
+                        <strong>Objectives:</strong><br>
+                        ${quest.objectives.map(obj => `• ${obj}`).join('<br>')}<br><br>
+                        <strong>Rewards:</strong><br>
+                        • XP: ${quest.rewards.xp}<br>
+                        • Gold: ${quest.rewards.gold}
+                    </div>
+                `;
+
+                responseDiv.innerHTML = questHTML;
+            } catch (error) {
+                responseDiv.innerHTML = `<div class="ai-response" style="border-left-color: #ef4444;">❌ Error: ${error.message}</div>`;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📜 Generate Quest';
+            }
+        }
+
+        async function talkToNPC() {
+            const btn = document.getElementById('npcBtn');
+            const responseDiv = document.getElementById('aiResponse');
+
+            btn.disabled = true;
+            btn.textContent = '🔄 Talking...';
+            responseDiv.innerHTML = '<div class="loading">🤖 The advisor is thinking...</div>';
+
+            try {
+                const className = document.getElementById('classSelect').options[document.getElementById('classSelect').selectedIndex].text.split(' - ')[0];
+                const context = `Player is a level ${currentLevel} ${className} seeking advice on character development`;
+
+                const dialogue = await gemini.generateNPCDialogue('Master Advisor', context);
+
+                responseDiv.innerHTML = `<div class="ai-response"><strong>💬 Master Advisor says:</strong>\n\n"${dialogue}"</div>`;
+            } catch (error) {
+                responseDiv.innerHTML = `<div class="ai-response" style="border-left-color: #ef4444;">❌ Error: ${error.message}</div>`;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '💬 Talk to Advisor';
+            }
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRUDGE NFT Island - Profession Guide</title>
+    
+    <!-- Lorecraft Fantasy Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styling - Matching The Forge */
+        body {
+            font-family: 'Cinzel', serif;
+            background: url('./icons/background.png') center center fixed;
+            background-size: cover;
+            color: #FFFFFF; /* Changed to pure white */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: url('./icons/Header.png') center center / cover no-repeat;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 40px; /* Increased from 36px to 40px (11% increase) */
+            color: #FFFFFF; /* Changed to pure white */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2); /* Increased opacity */
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Tab System */
+        .tab-container {
+            margin-bottom: 30px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            font-family: 'Uncial Antiqua', cursive;
+            background: rgba(255, 255, 255, 0.3);
+            border: 3px solid #4a90e2;
+            color: #FFFFFF; /* Changed to pure white */
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px; /* Increased from 18px to 20px (11% increase) */
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .tab-btn.active {
+            background: rgba(74, 144, 226, 0.8);
+            color: #FFFFFF; /* Changed to pure white */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 12px;
+            padding: 30px;
+            border: 3px solid transparent;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Profession-specific tab colors and backgrounds */
+        .tab-content.mining {
+            border-color: #8B4513;
+            background-image: url('https://i.imgur.com/JFn4KF4.png');
+        }
+        .tab-content.engineer {
+            border-color: #FF8C00;
+            background-image: url('https://i.imgur.com/sfLXtrw.png');
+        }
+        .tab-content.chef {
+            border-color: #32CD32;
+            background-image: url('https://i.imgur.com/7bK3KFK.png');
+        }
+        .tab-content.mystic {
+            border-color: #8A2BE2;
+            background-image: url('https://i.imgur.com/N1gbLpk.png');
+        }
+        .tab-content.forester {
+            border-color: #228B22;
+            background-image: url('https://i.imgur.com/jbIotta.png');
+        }
+
+        /* Profession Header */
+        .profession-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profession-title {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 48px; /* Increased from 40px to 48px (20% increase) */
+            color: #FFFFFF; /* Changed to pure white */
+            margin: 0 0 10px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .profession-subtitle {
+            font-size: 26px; /* Increased from 22px to 26px (18% increase) */
+            color: #D3D3D3; /* Light gray */
+            margin: 0 0 20px 0;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .profession-description {
+            font-size: 22px; /* Increased from 18px to 22px (22% increase) */
+            line-height: 1.8;
+            color: #FFFFFF; /* Changed to pure white */
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        /* Level Progression */
+        .level-progression {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .level-progression h3 {
+            font-family: 'Uncial Antiqua', cursive;
+            color: #FFFFFF; /* Changed to pure white */
+            margin: 0 0 15px 0;
+            font-size: 29px; /* Increased from 24px to 29px (20% increase) */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .level-milestone {
+            background: rgba(255, 255, 255, 0.3);
+            border-left: 4px solid #4a90e2;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 22px; /* Increased from 18px to 22px (22% increase) */
+            color: #FFFFFF; /* Changed to pure white */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .level-milestone strong {
+            color: #D3D3D3; /* Light gray */
+            font-weight: 700;
+        }
+
+        /* Items Section */
+        .items-section {
+            margin: 30px 0;
+        }
+
+        .items-section h3 {
+            font-family: 'Uncial Antiqua', cursive;
+            color: #FFFFFF; /* Changed to pure white */
+            font-size: 31px; /* Increased from 26px to 31px (19% increase) */
+            margin: 0 0 20px 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .item-card {
+            background: rgba(255, 255, 255, 0.35);
+            border: 3px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Rarity Colors */
+        .item-card.rarity-0 { border-color: #808080; }
+        .item-card.rarity-1 { border-color: #228B22; }
+        .item-card.rarity-2 { border-color: #1E90FF; }
+        .item-card.rarity-3 { border-color: #8A2BE2; }
+        .item-card.rarity-4 { border-color: #FF8C00; }
+        .item-card.rarity-5 { 
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            animation: mythicGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes mythicGlow {
+            0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+        }
+
+        .item-title {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 24px; /* Increased from 20px to 24px (20% increase) */
+            color: #FFFFFF; /* Changed to pure white */
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .item-description {
+            font-size: 19px; /* Increased from 16px to 19px (19% increase) */
+            color: #D3D3D3; /* Light gray */
+            line-height: 1.6;
+            margin: 8px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .item-level {
+            background: #4a90e2;
+            color: #FFFFFF; /* Changed to pure white */
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 17px; /* Increased from 14px to 17px (21% increase) */
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 8px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        /* Ingredients Section */
+        .ingredients-section {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .ingredients-section h3 {
+            font-family: 'Uncial Antiqua', cursive;
+            color: #FFFFFF; /* Changed to pure white */
+            font-size: 29px; /* Increased from 24px to 29px (20% increase) */
+            margin: 0 0 20px 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .ingredient-item {
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .ingredient-name {
+            font-weight: 600;
+            color: #FFFFFF; /* Changed to pure white */
+            margin-bottom: 4px;
+            font-size: 22px; /* Increased from 18px to 22px (22% increase) */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        .ingredient-source {
+            font-size: 17px; /* Increased from 14px to 17px (21% increase) */
+            color: #D3D3D3; /* Light gray */
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Darker shadow */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tab-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab-btn {
+                width: 200px;
+                text-align: center;
+                font-size: 18px; /* Increased from 16px to 18px (12.5% increase) */
+            }
+
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .profession-title {
+                font-size: 38px; /* Increased from 32px to 38px (19% increase) */
+            }
+
+            .profession-subtitle {
+                font-size: 24px; /* Increased from 20px to 24px (20% increase) */
+            }
+
+            .profession-description {
+                font-size: 19px; /* Increased from 16px to 19px (19% increase) */
+            }
+
+            .level-progression h3 {
+                font-size: 26px; /* Increased from 22px to 26px (18% increase) */
+            }
+
+            .level-milestone {
+                font-size: 19px; /* Increased from 16px to 19px (19% increase) */
+            }
+
+            .items-section h3 {
+                font-size: 29px; /* Increased from 24px to 29px (20% increase) */
+            }
+
+            .item-title {
+                font-size: 22px; /* Increased from 18px to 22px (22% increase) */
+            }
+
+            .item-description {
+                font-size: 17px; /* Increased from 14px to 17px (21% increase) */
+            }
+
+            .item-level {
+                font-size: 14px; /* Increased from 12px to 14px (17% increase) */
+            }
+
+            .ingredients-section h3 {
+                font-size: 26px; /* Increased from 22px to 26px (18% increase) */
+            }
+
+            .ingredient-name {
+                font-size: 19px; /* Increased from 16px to 19px (19% increase) */
+            }
+
+            .ingredient-source {
+                font-size: 14px; /* Increased from 12px to 14px (17% increase) */
+            }
+
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Special Effects for Mythic Items */
+        .mythic-sparkle::before {
+            content: '✨💫✨';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 14px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+            return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+
+                    // Convert sheet to JSON to filter blank rows
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                    // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                    var headerRowIndex = filteredData.findIndex((row, index) =>
+                        row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    );
+                    // Fallback
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+
+                    // Convert filtered JSON back to CSV
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error(e);
+                    return "";
+                }
+            }
+            return gk_fileData[filename] || "";
+        }
+    </script>
+
+    <div class="header">
+        <div class="header-content">
+            🏝️ GRUDGE NFT Island - Profession Guide
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="showTab('mining')">⛏️ Mining</button>
+                <button class="tab-btn" onclick="showTab('engineer')">🔧 Engineer</button>
+                <button class="tab-btn" onclick="showTab('chef')">👨‍🍳 Chef</button>
+                <button class="tab-btn" onclick="showTab('mystic')">🔮 Mystic</button>
+                <button class="tab-btn" onclick="showTab('forester')">🌲 Forester</button>
+            </div>
+
+            <!-- MINING PROFESSION -->
+            <div id="mining" class="tab-content mining active">
+                <div class="profession-header">
+                    <h1 class="profession-title">⛏️ Mining Profession</h1>
+                    <p class="profession-subtitle">Masters of Metal, Crystal, and Stone</p>
+                    <p class="profession-description">
+                        Specializes in metal crafting, blacksmithing, armor and weapon smithing, rings, and crystal mining.
+                        High-level miners gain combat bonuses including attack, critical hit, defense, and block stats from their mastery of metals and crystals.
+                    </p>
+                </div>
+
+                <div class="level-progression">
+                    <h3>🎯 Level Progression & Unlocks</h3>
+                    <div class="level-milestone">
+                        <strong>Level 1-30:</strong> Basic mining and metal working. Learn fundamental blacksmithing techniques.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 30-60:</strong> Advanced metalworking. Craft quality weapons and armor with improved stats.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 60+:</strong> Master Blacksmith - Gain combat bonuses: +2 Attack, +0.1% Critical, +3 Defense, +0.2% Block per level above 60.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 70+:</strong> Crystal Mastery - +3% harvesting yield per level above 70.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 80-100:</strong> Legendary Craftsman - Create the finest weapons and armor in the realm.
+                    </div>
+                </div>
+
+                <div class="items-section">
+                    <h3>🔨 Craftable Items</h3>
+                    <div class="items-grid">
+                        <div class="item-card rarity-1">
+                            <h4 class="item-title">Iron Sword</h4>
+                            <p class="item-description">A sturdy iron blade perfect for combat. Enhanced with mining expertise.</p>
+                            <span class="item-level">Level 10</span>
+                        </div>
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Steel Armor Set</h4>
+                            <p class="item-description">Protective steel armor crafted with precision. Provides excellent defense.</p>
+                            <span class="item-level">Level 25</span>
+                        </div>
+                        <div class="item-card rarity-3">
+                            <h4 class="item-title">Crystal-Infused Ring</h4>
+                            <p class="item-description">A magical ring embedded with rare crystals. Boosts combat abilities.</p>
+                            <span class="item-level">Level 45</span>
+                        </div>
+                        <div class="item-card rarity-4">
+                            <h4 class="item-title">Masterwork Weapon</h4>
+                            <p class="item-description">A legendary weapon forged by master miners. Unparalleled in quality.</p>
+                            <span class="item-level">Level 70</span>
+                        </div>
+                        <div class="item-card rarity-5 mythic-sparkle">
+                            <h4 class="item-title">Dragonscale Armor</h4>
+                            <p class="item-description">Mythical armor infused with dragon essence and rare crystals. Ultimate protection.</p>
+                            <span class="item-level">Level 90</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ingredients-section">
+                    <h3>🗿 Key Resources & Materials</h3>
+                    <div class="ingredients-grid">
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Iron Ore</div>
+                            <div class="ingredient-source">Mined from iron deposits</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Steel Ingots</div>
+                            <div class="ingredient-source">Smelted from iron ore + coal</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Rare Crystals</div>
+                            <div class="ingredient-source">Deep mining, crystal caves</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Precious Gems</div>
+                            <div class="ingredient-source">High-level mining nodes</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Dragon Scales</div>
+                            <div class="ingredient-source">Legendary dragon encounters</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Mithril</div>
+                            <div class="ingredient-source">Extremely rare ore deposits</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENGINEER PROFESSION -->
+            <div id="engineer" class="tab-content engineer">
+                <div class="profession-header">
+                    <h1 class="profession-title">🔧 Engineer Profession</h1>
+                    <p class="profession-subtitle">Masters of Technology and Innovation</p>
+                    <p class="profession-description">
+                        Specializes in weapons, siege equipment, crafting benches, bombs, ranged weapons, and special armor upgrades.
+                        Engineers can build advanced technology including airships and mecha items at high levels.
+                    </p>
+                </div>
+
+                <div class="level-progression">
+                    <h3>🎯 Level Progression & Unlocks</h3>
+                    <div class="level-milestone">
+                        <strong>Level 1-30:</strong> Basic engineering and weapon crafting. Learn to create simple tools and weapons.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 30+:</strong> Advanced Crafting - Gain +1% damage and +2% durability bonuses on crafted items per level.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 50+:</strong> Precision Engineering - Additional +0.5% critical bonus per level above 50.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 70:</strong> Siege Warfare - Unlock advanced siege equipment and explosive devices.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 80:</strong> Airship Technology - Can craft airship components and flying vehicles.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 90:</strong> Mecha Engineering - Unlock the ability to craft powerful mecha items and suits.
+                    </div>
+                </div>
+
+                <div class="items-section">
+                    <h3>⚙️ Craftable Items</h3>
+                    <div class="items-grid">
+                        <div class="item-card rarity-1">
+                            <h4 class="item-title">Enhanced Crossbow</h4>
+                            <p class="item-description">A precision-crafted ranged weapon with improved accuracy and damage.</p>
+                            <span class="item-level">Level 15</span>
+                        </div>
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Explosive Charges</h4>
+                            <p class="item-description">Powerful bombs for mining, combat, and siege warfare.</p>
+                            <span class="item-level">Level 30</span>
+                        </div>
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Advanced Workbench</h4>
+                            <p class="item-description">A sophisticated crafting station that enables complex item creation.</p>
+                            <span class="item-level">Level 35</span>
+                        </div>
+                        <div class="item-card rarity-3">
+                            <h4 class="item-title">Siege Catapult</h4>
+                            <p class="item-description">Massive siege weapon capable of destroying fortifications.</p>
+                            <span class="item-level">Level 60</span>
+                        </div>
+                        <div class="item-card rarity-4">
+                            <h4 class="item-title">Airship Components</h4>
+                            <p class="item-description">Advanced technology for building flying vehicles and transport.</p>
+                            <span class="item-level">Level 80</span>
+                        </div>
+                        <div class="item-card rarity-5 mythic-sparkle">
+                            <h4 class="item-title">Mecha Suit</h4>
+                            <p class="item-description">Ultimate engineering achievement - a powerful mechanical suit with incredible abilities.</p>
+                            <span class="item-level">Level 90</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ingredients-section">
+                    <h3>🔩 Key Resources & Materials</h3>
+                    <div class="ingredients-grid">
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Steel Components</div>
+                            <div class="ingredient-source">Crafted from steel ingots</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Gunpowder</div>
+                            <div class="ingredient-source">Alchemical crafting</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Precision Gears</div>
+                            <div class="ingredient-source">Advanced metalworking</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Energy Crystals</div>
+                            <div class="ingredient-source">Rare crystal mining</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Airship Fabric</div>
+                            <div class="ingredient-source">Specialized textile crafting</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Mecha Core</div>
+                            <div class="ingredient-source">Legendary engineering project</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHEF PROFESSION -->
+            <div id="chef" class="tab-content chef">
+                <div class="profession-header">
+                    <h1 class="profession-title">👨‍🍳 Chef Profession</h1>
+                    <p class="profession-subtitle">Masters of Culinary Arts and Sustenance</p>
+                    <p class="profession-description">
+                        Specializes in creating enhanced food and drink buffs. Chefs can craft advanced cooking recipes,
+                        salads that provide powerful regeneration effects, and legendary dishes with unique properties.
+                    </p>
+                </div>
+
+                <div class="level-progression">
+                    <h3>🎯 Level Progression & Unlocks</h3>
+                    <div class="level-milestone">
+                        <strong>Level 1-20:</strong> Basic cooking skills. Learn to prepare simple meals and beverages.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 20:</strong> Advanced Cooking - Unlock Cooking Recipes Book and salad crafting (no fire required).
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 30-40:</strong> Gourmet Cooking - Create enhanced versions of basic foods with improved effects.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 40+:</strong> Master Chef - +2% food effectiveness per level above 40.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 60:</strong> Legendary Recipes - Unlock Stew of Renewal (powerful regeneration buff).
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 80:</strong> Mythical Cuisine - Unlock Devil's Life Cake (prevents fatal damage once).
+                    </div>
+                </div>
+
+                <div class="items-section">
+                    <h3>🍽️ Craftable Items</h3>
+                    <div class="items-grid">
+                        <div class="item-card rarity-1">
+                            <h4 class="item-title">Basic Garden Salad</h4>
+                            <p class="item-description">Fresh vegetables providing stamina regeneration. No cooking fire required.</p>
+                            <span class="item-level">Level 20</span>
+                        </div>
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Enhanced Cooked Meat</h4>
+                            <p class="item-description">Perfectly prepared meat with improved health and stamina benefits.</p>
+                            <span class="item-level">Level 30</span>
+                        </div>
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Cooking Recipes Book</h4>
+                            <p class="item-description">A comprehensive cookbook that unlocks advanced cooking techniques.</p>
+                            <span class="item-level">Level 20</span>
+                        </div>
+                        <div class="item-card rarity-3">
+                            <h4 class="item-title">Gourmet Fish Dish</h4>
+                            <p class="item-description">Expertly prepared seafood with enhanced mana regeneration properties.</p>
+                            <span class="item-level">Level 45</span>
+                        </div>
+                        <div class="item-card rarity-4">
+                            <h4 class="item-title">Stew of Renewal</h4>
+                            <p class="item-description">Masterfully crafted stew providing incredible health, mana, and stamina regeneration.</p>
+                            <span class="item-level">Level 60</span>
+                        </div>
+                        <div class="item-card rarity-5 mythic-sparkle">
+                            <h4 class="item-title">Devil's Life Cake</h4>
+                            <p class="item-description">Legendary cake that prevents fatal damage once and grants 10% health + speed boost.</p>
+                            <span class="item-level">Level 80</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ingredients-section">
+                    <h3>🥬 Key Resources & Materials</h3>
+                    <div class="ingredients-grid">
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Fresh Vegetables</div>
+                            <div class="ingredient-source">Farming, foraging</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Hemp Seeds</div>
+                            <div class="ingredient-source">Specialized farming</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Crab Meat</div>
+                            <div class="ingredient-source">Coastal fishing</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Rare Fish</div>
+                            <div class="ingredient-source">Deep sea fishing</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Magical Flowers</div>
+                            <div class="ingredient-source">Enchanted gardens</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Essence Gems</div>
+                            <div class="ingredient-source">Rare mining, wisps</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MYSTIC PROFESSION -->
+            <div id="mystic" class="tab-content mystic">
+                <div class="profession-header">
+                    <h1 class="profession-title">🔮 Mystic Profession</h1>
+                    <p class="profession-subtitle">Masters of Magic and Arcane Arts</p>
+                    <p class="profession-description">
+                        Specializes in magical items, spell crafting, cloth armor, capes, and relics. Mystics can create custom
+                        spell books and elemental tomes with enhanced effects, manipulating the very fabric of magic itself.
+                    </p>
+                </div>
+
+                <div class="level-progression">
+                    <h3>🎯 Level Progression & Unlocks</h3>
+                    <div class="level-milestone">
+                        <strong>Level 1-20:</strong> Basic magical understanding. Learn to craft simple magical items and cloth armor.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 20:</strong> Spell Book Level 1 - Can craft spell books with 3 spell slots.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 25:</strong> Elemental Tome Level 1 - Create elemental tomes with +25% damage, -20% mana cost.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 40:</strong> Spell Book Level 2 - Can craft spell books with 4 spell slots.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 50+:</strong> Arcane Mastery - +4 mana, +0.2% mana regen, +1.5% spell damage, +1% mana cost reduction per level.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 75:</strong> Elemental Tome Level 3 - Master-level elemental tomes with maximum bonuses.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 80:</strong> Spell Book Level 3 - Can craft spell books with 5 spell slots (maximum).
+                    </div>
+                </div>
+
+                <div class="items-section">
+                    <h3>📚 Craftable Items</h3>
+                    <div class="items-grid">
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Tome Creator</h4>
+                            <p class="item-description">Mystical device for creating and binding spell books and elemental tomes.</p>
+                            <span class="item-level">Level 1</span>
+                        </div>
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Spell Book Level 1</h4>
+                            <p class="item-description">Basic spell book holding up to 3 spells. Spells become permanently bound.</p>
+                            <span class="item-level">Level 20</span>
+                        </div>
+                        <div class="item-card rarity-3">
+                            <h4 class="item-title">Fire Elemental Tome</h4>
+                            <p class="item-description">Specialized tome for fire spells with enhanced damage and reduced mana costs.</p>
+                            <span class="item-level">Level 25</span>
+                        </div>
+                        <div class="item-card rarity-3">
+                            <h4 class="item-title">Spell Book Level 2</h4>
+                            <p class="item-description">Advanced spell book holding up to 4 spells with improved mana bonuses.</p>
+                            <span class="item-level">Level 40</span>
+                        </div>
+                        <div class="item-card rarity-4">
+                            <h4 class="item-title">Storm Elemental Tome</h4>
+                            <p class="item-description">Master-level tome for storm magic with maximum elemental bonuses.</p>
+                            <span class="item-level">Level 75</span>
+                        </div>
+                        <div class="item-card rarity-5 mythic-sparkle">
+                            <h4 class="item-title">Spell Book Level 3</h4>
+                            <p class="item-description">Ultimate spell book holding 5 spells. The pinnacle of magical craftsmanship.</p>
+                            <span class="item-level">Level 80</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ingredients-section">
+                    <h3>🌟 Key Resources & Materials</h3>
+                    <div class="ingredients-grid">
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Magical Cloth</div>
+                            <div class="ingredient-source">Enchanted textile crafting</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Spell Ink</div>
+                            <div class="ingredient-source">Alchemical preparation</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Elemental Crystals</div>
+                            <div class="ingredient-source">Elemental planes, rare mining</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Arcane Parchment</div>
+                            <div class="ingredient-source">Specialized papermaking</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Binding Runes</div>
+                            <div class="ingredient-source">Ancient runic knowledge</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Essence of Magic</div>
+                            <div class="ingredient-source">Legendary magical encounters</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORESTER PROFESSION -->
+            <div id="forester" class="tab-content forester">
+                <div class="profession-header">
+                    <h1 class="profession-title">🌲 Forester Profession</h1>
+                    <p class="profession-subtitle">Masters of Nature and Wilderness</p>
+                    <p class="profession-description">
+                        Specializes in base building, resource gathering, harvesting, woodworking, leatherworking, and boat building.
+                        Foresters provide increased yields from natural resources and gain survival bonuses from living in harmony with nature.
+                    </p>
+                </div>
+
+                <div class="level-progression">
+                    <h3>🎯 Level Progression & Unlocks</h3>
+                    <div class="level-milestone">
+                        <strong>Level 1-30:</strong> Basic forestry and woodworking. Learn to harvest and work with natural materials.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 30-50:</strong> Advanced Woodworking - Create quality furniture, tools, and structures.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 50:</strong> Leatherworking Mastery - Craft superior leather armor and accessories.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 60+:</strong> Nature's Blessing - +5 health, +3 stamina, +1% speed, +0.1% stamina regen per level above 60.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 70+:</strong> Master Harvester - +3% harvesting yield per level above 70.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 80:</strong> Shipwright - Can craft boats and advanced water vessels.
+                    </div>
+                    <div class="level-milestone">
+                        <strong>Level 90:</strong> Nature's Guardian - Maximum harmony with the natural world.
+                    </div>
+                </div>
+
+                <div class="items-section">
+                    <h3>🪵 Craftable Items</h3>
+                    <div class="items-grid">
+                        <div class="item-card rarity-1">
+                            <h4 class="item-title">Wooden Tools</h4>
+                            <p class="item-description">Sturdy tools crafted from quality wood. Essential for basic survival.</p>
+                            <span class="item-level">Level 5</span>
+                        </div>
+                        <div class="item-card rarity-1">
+                            <h4 class="item-title">Leather Armor</h4>
+                            <p class="item-description">Flexible protection made from carefully treated animal hides.</p>
+                            <span class="item-level">Level 20</span>
+                        </div>
+                        <div class="item-card rarity-2">
+                            <h4 class="item-title">Wooden Structures</h4>
+                            <p class="item-description">Base building components including walls, floors, and roofing.</p>
+                            <span class="item-level">Level 35</span>
+                        </div>
+                        <div class="item-card rarity-3">
+                            <h4 class="item-title">Masterwork Furniture</h4>
+                            <p class="item-description">Beautiful and functional furniture pieces that enhance base comfort.</p>
+                            <span class="item-level">Level 55</span>
+                        </div>
+                        <div class="item-card rarity-4">
+                            <h4 class="item-title">Sailing Vessel</h4>
+                            <p class="item-description">Seaworthy boat capable of ocean exploration and transport.</p>
+                            <span class="item-level">Level 80</span>
+                        </div>
+                        <div class="item-card rarity-5 mythic-sparkle">
+                            <h4 class="item-title">Living Tree House</h4>
+                            <p class="item-description">Magical dwelling that grows from a living tree, providing ultimate harmony with nature.</p>
+                            <span class="item-level">Level 95</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ingredients-section">
+                    <h3>🌿 Key Resources & Materials</h3>
+                    <div class="ingredients-grid">
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Hardwood Logs</div>
+                            <div class="ingredient-source">Mature tree harvesting</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Animal Hides</div>
+                            <div class="ingredient-source">Hunting, animal husbandry</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Natural Fibers</div>
+                            <div class="ingredient-source">Plant processing</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Tree Sap</div>
+                            <div class="ingredient-source">Specialized tree tapping</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Rare Woods</div>
+                            <div class="ingredient-source">Ancient forest exploration</div>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-name">Living Essence</div>
+                            <div class="ingredient-source">Communion with nature spirits</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(professionName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            const selectedTab = document.getElementById(professionName);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+
+            // Add active class to clicked button
+            const clickedButton = event.target;
+            clickedButton.classList.add('active');
+
+            // Smooth scroll to top of content
+            document.querySelector('.container').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Add sparkle animation to mythic items
+        document.addEventListener('DOMContentLoaded', function() {
+            const mythicItems = document.querySelectorAll('.mythic-sparkle');
+            mythicItems.forEach(item => {
+                item.style.position = 'relative';
+                item.style.overflow = 'visible';
+            });
+        });
+
+        // Add hover effects for better interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const itemCards = document.querySelectorAll('.item-card');
+            itemCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.03)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

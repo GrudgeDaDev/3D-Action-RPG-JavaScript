@@ -1,0 +1,386 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2024-12-25",
+  "description": "Complete database of Ultimate RPG Items Bundle models with stats and AI metadata",
+  
+  "weapons": {
+    "melee": {
+      "axe_double": {
+        "model": "assets/characters/weapons/Axe Double.glb",
+        "name": "Double-Bladed Axe",
+        "type": "weapon",
+        "subtype": "two-handed-axe",
+        "rarity": "uncommon",
+        "stats": {
+          "damage": 85,
+          "attackSpeed": 0.9,
+          "critChance": 0.12,
+          "range": 2.5,
+          "weight": 18,
+          "durability": 400
+        },
+        "requirements": { "level": 12, "strength": 25 },
+        "aiTags": ["heavy", "slow", "high_damage", "cleave"]
+      },
+      "axe_small": {
+        "model": "assets/characters/weapons/Axe Small.glb",
+        "name": "Hand Axe",
+        "type": "weapon",
+        "subtype": "one-handed-axe",
+        "rarity": "common",
+        "stats": {
+          "damage": 45,
+          "attackSpeed": 1.3,
+          "critChance": 0.08,
+          "range": 1.8,
+          "weight": 8,
+          "durability": 300
+        },
+        "requirements": { "level": 5, "strength": 12 },
+        "aiTags": ["light", "fast", "dual_wield"]
+      },
+      "claymore": {
+        "model": "assets/characters/weapons/Claymore.glb",
+        "name": "Claymore",
+        "type": "weapon",
+        "subtype": "two-handed-sword",
+        "rarity": "rare",
+        "stats": {
+          "damage": 120,
+          "attackSpeed": 0.7,
+          "critChance": 0.15,
+          "range": 3.0,
+          "weight": 22,
+          "durability": 500
+        },
+        "requirements": { "level": 18, "strength": 30 },
+        "aiTags": ["heavy", "very_slow", "very_high_damage", "reach"]
+      },
+      "dagger": {
+        "model": "assets/characters/weapons/Dagger.glb",
+        "name": "Dagger",
+        "type": "weapon",
+        "subtype": "dagger",
+        "rarity": "common",
+        "stats": {
+          "damage": 25,
+          "attackSpeed": 2.0,
+          "critChance": 0.25,
+          "range": 1.2,
+          "weight": 3,
+          "durability": 200
+        },
+        "requirements": { "level": 1, "dexterity": 8 },
+        "aiTags": ["very_fast", "low_damage", "high_crit", "stealth", "backstab"]
+      },
+      "knife": {
+        "model": "assets/characters/weapons/Knife.glb",
+        "name": "Utility Knife",
+        "type": "weapon",
+        "subtype": "knife",
+        "rarity": "common",
+        "stats": {
+          "damage": 20,
+          "attackSpeed": 1.8,
+          "critChance": 0.10,
+          "range": 1.0,
+          "weight": 2,
+          "durability": 150
+        },
+        "requirements": { "level": 1 },
+        "aiTags": ["very_fast", "utility", "crafting_tool", "gathering"]
+      },
+      "scythe": {
+        "model": "assets/characters/weapons/Scythe.glb",
+        "name": "War Scythe",
+        "type": "weapon",
+        "subtype": "scythe",
+        "rarity": "rare",
+        "stats": {
+          "damage": 95,
+          "attackSpeed": 1.0,
+          "critChance": 0.18,
+          "range": 3.5,
+          "weight": 15,
+          "durability": 350,
+          "aoeRadius": 2.5
+        },
+        "requirements": { "level": 15, "strength": 20, "dexterity": 15 },
+        "aiTags": ["sweeping", "aoe", "reach", "crowd_control"]
+      },
+      "spear": {
+        "model": "assets/characters/weapons/Spear.glb",
+        "name": "Spear",
+        "type": "weapon",
+        "subtype": "spear",
+        "rarity": "common",
+        "stats": {
+          "damage": 55,
+          "attackSpeed": 1.2,
+          "critChance": 0.10,
+          "range": 4.0,
+          "weight": 10,
+          "durability": 300
+        },
+        "requirements": { "level": 8, "strength": 15 },
+        "aiTags": ["thrust", "long_reach", "defensive", "polearm"]
+      },
+      "sword": {
+        "model": "assets/characters/weapons/Sword.glb",
+        "name": "Longsword",
+        "type": "weapon",
+        "subtype": "one-handed-sword",
+        "rarity": "common",
+        "stats": {
+          "damage": 50,
+          "attackSpeed": 1.4,
+          "critChance": 0.12,
+          "range": 2.0,
+          "weight": 12,
+          "durability": 400
+        },
+        "requirements": { "level": 6, "strength": 14 },
+        "aiTags": ["balanced", "versatile", "slash"]
+      },
+      "sword_variant": {
+        "model": "assets/characters/weapons/Sword Variant.glb",
+        "name": "Broadsword",
+        "type": "weapon",
+        "subtype": "one-handed-sword",
+        "rarity": "uncommon",
+        "stats": {
+          "damage": 60,
+          "attackSpeed": 1.3,
+          "critChance": 0.14,
+          "range": 2.2,
+          "weight": 14,
+          "durability": 450
+        },
+        "requirements": { "level": 10, "strength": 18 },
+        "aiTags": ["balanced", "versatile", "slash"]
+      }
+    },
+    "ranged": {
+      "wooden_bow": {
+        "model": "assets/characters/weapons/Wooden Bow.glb",
+        "name": "Wooden Bow",
+        "type": "weapon",
+        "subtype": "bow",
+        "rarity": "common",
+        "stats": {
+          "damage": 40,
+          "attackSpeed": 1.5,
+          "critChance": 0.20,
+          "range": 25.0,
+          "weight": 5,
+          "durability": 250
+        },
+        "requirements": { "level": 5, "dexterity": 15 },
+        "ammo": "arrow",
+        "aiTags": ["ranged", "requires_ammo", "kiting", "distance"]
+      },
+      "arrow": {
+        "model": "assets/characters/weapons/Arrow.glb",
+        "name": "Arrow",
+        "type": "ammunition",
+        "subtype": "arrow",
+        "rarity": "common",
+        "stats": {
+          "damage": 10,
+          "weight": 0.1,
+          "stackSize": 100
+        },
+        "compatibleWith": ["bow"],
+        "aiTags": ["projectile", "stackable", "consumable"]
+      }
+    }
+  },
+
+  "armor": {
+    "body": {
+      "armor_golden": {
+        "model": "assets/characters/armor/Armor Golden.glb",
+        "name": "Golden Plate Armor",
+        "type": "armor",
+        "slot": "chest",
+        "rarity": "legendary",
+        "stats": {
+          "defense": 200,
+          "magicResist": 50,
+          "weight": 40,
+          "durability": 800
+        },
+        "bonuses": { "strength": 10, "charisma": 5 },
+        "requirements": { "level": 25, "strength": 35 },
+        "aiTags": ["heavy", "high_defense", "prestige"]
+      },
+      "armor_leather": {
+        "model": "assets/characters/armor/Armor Leather.glb",
+        "name": "Leather Armor",
+        "type": "armor",
+        "slot": "chest",
+        "rarity": "common",
+        "stats": {
+          "defense": 50,
+          "magicResist": 10,
+          "weight": 10,
+          "durability": 300
+        },
+        "bonuses": { "dexterity": 3 },
+        "requirements": { "level": 5 },
+        "aiTags": ["light", "mobile", "rogue", "ranger"]
+      },
+      "armor_metal": {
+        "model": "assets/characters/armor/Armor Metal.glb",
+        "name": "Steel Plate Armor",
+        "type": "armor",
+        "slot": "chest",
+        "rarity": "uncommon",
+        "stats": {
+          "defense": 120,
+          "magicResist": 25,
+          "weight": 30,
+          "durability": 600
+        },
+        "bonuses": { "strength": 5 },
+        "requirements": { "level": 15, "strength": 25 },
+        "aiTags": ["heavy", "warrior", "knight", "tank"]
+      }
+    },
+    "shields": {
+      "shield_celtic_golden": {
+        "model": "assets/characters/armor/Shield Celtic Golden.glb",
+        "name": "Celtic Golden Shield",
+        "type": "shield",
+        "slot": "offhand",
+        "rarity": "legendary",
+        "stats": {
+          "defense": 80,
+          "blockChance": 0.35,
+          "weight": 15,
+          "durability": 700
+        },
+        "bonuses": { "strength": 5, "charisma": 8 },
+        "requirements": { "level": 20, "strength": 28 },
+        "aiTags": ["legendary", "high_block", "prestige"]
+      },
+      "shield_heater": {
+        "model": "assets/characters/armor/Shield Heater.glb",
+        "name": "Heater Shield",
+        "type": "shield",
+        "slot": "offhand",
+        "rarity": "common",
+        "stats": {
+          "defense": 40,
+          "blockChance": 0.25,
+          "weight": 10,
+          "durability": 400
+        },
+        "requirements": { "level": 8, "strength": 15 },
+        "aiTags": ["knight", "defensive", "balanced"]
+      },
+      "shield_heater_variant": {
+        "model": "assets/characters/armor/Shield Heater Variant.glb",
+        "name": "Reinforced Heater Shield",
+        "type": "shield",
+        "slot": "offhand",
+        "rarity": "uncommon",
+        "stats": {
+          "defense": 55,
+          "blockChance": 0.28,
+          "weight": 12,
+          "durability": 500
+        },
+        "requirements": { "level": 12, "strength": 20 },
+        "aiTags": ["knight", "defensive", "reinforced"]
+      },
+      "shield_round": {
+        "model": "assets/characters/armor/Shield Round.glb",
+        "name": "Round Shield",
+        "type": "shield",
+        "slot": "offhand",
+        "rarity": "common",
+        "stats": {
+          "defense": 35,
+          "blockChance": 0.22,
+          "weight": 8,
+          "durability": 350,
+          "bashDamage": 30
+        },
+        "requirements": { "level": 6, "strength": 12 },
+        "aiTags": ["viking", "bash", "offensive_defense"]
+      },
+      "shield_round_variant": {
+        "model": "assets/characters/armor/Shield Round Variant.glb",
+        "name": "Spiked Round Shield",
+        "type": "shield",
+        "slot": "offhand",
+        "rarity": "uncommon",
+        "stats": {
+          "defense": 45,
+          "blockChance": 0.24,
+          "weight": 10,
+          "durability": 400,
+          "bashDamage": 45
+        },
+        "requirements": { "level": 10, "strength": 16 },
+        "aiTags": ["viking", "bash", "offensive_defense", "spiked"]
+      }
+    },
+    "accessories": {
+      "glove": {
+        "model": "assets/characters/armor/Glove.glb",
+        "name": "Leather Gloves",
+        "type": "armor",
+        "slot": "hands",
+        "rarity": "common",
+        "stats": {
+          "defense": 10,
+          "weight": 2,
+          "durability": 200
+        },
+        "bonuses": { "dexterity": 2, "craftingSpeed": 0.1 },
+        "requirements": { "level": 3 },
+        "aiTags": ["hands", "crafting", "grip"]
+      }
+    }
+  },
+
+  "consumables": {
+    "potion_bottle": {
+      "model": "assets/items/consumables/Potion Bottle.glb",
+      "name": "Health Potion",
+      "type": "consumable",
+      "subtype": "potion",
+      "rarity": "common",
+      "stats": {
+        "healAmount": 100,
+        "weight": 0.5,
+        "stackSize": 20,
+        "cooldown": 5
+      },
+      "effects": [
+        { "type": "heal", "value": 100, "duration": 0 }
+      ],
+      "aiTags": ["healing", "instant", "combat_consumable"]
+    },
+    "potion_bottle_variant": {
+      "model": "assets/items/consumables/Potion Bottle Variant.glb",
+      "name": "Mana Potion",
+      "type": "consumable",
+      "subtype": "potion",
+      "rarity": "common",
+      "stats": {
+        "manaAmount": 80,
+        "weight": 0.5,
+        "stackSize": 20,
+        "cooldown": 5
+      },
+      "effects": [
+        { "type": "restore_mana", "value": 80, "duration": 0 }
+      ],
+      "aiTags": ["mana", "instant", "magic_consumable"]
+    }
+  }
+}
+

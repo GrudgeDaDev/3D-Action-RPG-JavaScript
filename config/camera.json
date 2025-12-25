@@ -1,0 +1,20 @@
+{
+  "camera": {
+    "type": "ArcRotateCamera",
+    "initialAlpha": 4.954,
+    "initialBeta": 1.3437,
+    "initialRadius": 70,
+    "lowerRadiusLimit": 4,
+    "upperRadiusLimit": 656.8044,
+    "upperBetaLimit": 1.5708,
+    "lowerBetaLimit": 0.0157,
+    "wheelDeltaPercentage": 0.02,
+    "panningSensibility": 0,
+    "allowUpsideDown": false,
+    "collisionRadius": { "x": 0.5, "y": 0.5, "z": 0.5 },
+    "checkCollisions": true,
+    "speed": 1.0,
+    "inertia": 0.9
+  }
+}
+

@@ -1,34 +1,88 @@
+/**
+ * Warlords Scene - Main Game Scene
+ * Features: Central terrain island, 5 islands at sea, boat, swimming, haunted ghost ship, LOD culling
+ */
+
 import { loadHeroModel } from '../../character/hero.js';
 import { setupCamera } from '../../utils/camera.js';
 import { setupPhysics } from '../../utils/physics.js';
 import { setupInputHandling } from '../../movement.js';
 import { setupAnim } from '../../utils/anim.js';
 import { setupWater } from '../../utils/water.js';
-
 import { loadModels } from '../../utils/load.js';
-
 import { setupEnemies } from '../../character/enemy.js';
 import { Health } from '../../character/health.js';
 import addSword from '../../character/equips/held.js';
+import { globalUI } from '../../ui/GlobalUI.js';
+import { SwimmingController } from '../../character/SwimmingController.js';
+
+// ==================== WORLD CONFIGURATION ====================
+const WORLD_CONFIG = {
+    // Main terrain (player starts here)
+    terrain: {
+        width: 1000,
+        height: 1000,
+        subdivisions: 100,
+        minHeight: 0,
+        maxHeight: 100,
+        yOffset: -10.05
+    },
+    // Water level and world size
+    waterLevel: 12.16,
+    worldSize: 8000,
+    // Islands positioned around the main terrain (at sea)
+    islands: [
+        { name: 'Pirate Island', file: 'env/islands/pirate_island.glb', position: { x: 1200, y: -5, z: 800 }, scale: 25, lodDistance: 2000 },
+        { name: 'Fantasy Island', file: 'env/islands/fantasy_island.glb', position: { x: 1400, y: -5, z: -600 }, scale: 25, lodDistance: 2000 },
+        { name: 'Castle Island', file: 'env/islands/castle_island.glb', position: { x: -1200, y: -5, z: 900 }, scale: 25, lodDistance: 2000 },
+        { name: 'Mythical Island', file: 'env/islands/mythical_fantasy_island.glb', position: { x: -1400, y: -5, z: -700 }, scale: 25, lodDistance: 2000 },
+        { name: 'Azure Island', file: 'env/islands/sky_cloud_of_azure_lane_island.glb', position: { x: 0, y: -5, z: -1500 }, scale: 25, lodDistance: 2000 }
+    ],
+    // Boat configuration
+    boat: {
+        position: { x: 450, y: 14, z: -200 }, // Edge of main island near shore
+        scale: 8
+    },
+    // Ghost Ship configuration - positioned in ocean away from starting zone
+    ghostShip: {
+        position: { x: -2000, y: 5, z: 1800 }, // Far ocean, away from starting zone
+        scale: 15,
+        rotation: { x: 0, y: Math.PI / 3, z: 0 } // Angled for dramatic effect
+    },
+    // Player Home - Forest House (starting base and respawn point)
+    playerHome: {
+        position: { x: 400, y: 70, z: -180 }, // Near boat, on land
+        scale: 8,
+        rotation: { x: 0, y: Math.PI / 4, z: 0 }, // Face toward water
+        entranceCircle: {
+            radius: 3,
+            offset: { x: 0, y: 0, z: 5 } // In front of house
+        }
+    }
+};
 
 export async function createOutdoor(engine) {
+    console.log('⚔️ Creating Warlords Scene - Main Game World...');
     const scene = new BABYLON.Scene(engine);
 
+    // Player spawn on main terrain
     const spawnPoint = new BABYLON.Vector3(134.683, 80, -271.427);
     const { character, dummyAggregate } = await setupPhysics(scene, spawnPoint);
+
+    // Setup terrain with physics
     const terrain = setupTerrain(scene);
 
+    // Setup camera with extended range for large world
     const camera = setupCamera(scene, character, engine);
     camera.wheelDeltaPercentage = 0.0200;
-    // camera.upperBetaLimit = Math.PI / 2; // Stops at the horizon (90 degrees)
-    camera.upperBetaLimit = 3.13;
-    camera.lowerRadiusLimit = 4;  // Minimum distance to target (closest zoom)
-    camera.upperRadiusLimit = 656.8044;
-    camera.upperBetaLimit = Math.PI / 2; // Stops at the horizon (90 degrees)
+    camera.lowerRadiusLimit = 4;
+    camera.upperRadiusLimit = 800; // Extended for large world view
+    camera.upperBetaLimit = Math.PI / 2;
+    camera.maxZ = WORLD_CONFIG.worldSize * 1.5; // Extended view distance
     camera.alpha = 4.954;
     camera.beta = 1.3437;
 
-    // load all models, make sure parallel loading for speed
+    // Load models in parallel for speed
     const modelUrls = ["characters/enemy/slime/Slime1.glb", "characters/weapons/Sword2.glb", "util/HPBar.glb"];
     const heroModelPromise = loadHeroModel(scene, character);
     const [heroModel, models] = await Promise.all([
@@ -44,35 +98,462 @@ export async function createOutdoor(engine) {
     character.health.rangeCheck = character;
     PLAYER = character;
 
-    // Todo: add shadow and post toggles in settings
-    // Defer non-critical operations
+    // Environment setup
     setupEnvironment(scene);
     createSkydome(scene);
 
-    setupWater(scene, terrain, engine, hero, 12.16, 8000);
+    // Water system covering the ocean
+    setupWater(scene, terrain, engine, hero, WORLD_CONFIG.waterLevel, WORLD_CONFIG.worldSize);
 
+    // Initialize swimming controller for water interactions
+    console.log('🏊 Setting up swimming...');
+    const swimmingController = new SwimmingController(scene, character, dummyAggregate, hero, anim, WORLD_CONFIG.waterLevel);
+    window.SWIMMING = swimmingController;
+
+    // Lighting and post-processing
     const light = setupLighting(scene);
-
-
     setupShadows(light, hero);
     setupPostProcessing(scene, camera);
 
+    // Load distant islands with LOD
+    console.log('🏝️ Loading distant islands...');
+    const islands = await loadDistantIslands(scene);
+
+    // Load boat at shore
+    console.log('⛵ Loading boat...');
+    const boat = await loadBoat(scene);
+
+    // Setup boat controller if boat loaded
+    if (boat) {
+        setupBoatInteraction(scene, boat, character, hero, camera, WORLD_CONFIG.waterLevel);
+    }
+
+    // Load haunted ghost ship in the ocean
+    console.log('👻 Loading haunted ghost ship...');
+    const ghostShip = await loadGhostShip(scene);
+    if (ghostShip) {
+        console.log('  ✓ Ghost ship loaded at ocean position');
+    }
+
+    // Load player home (forest house)
+    console.log('🏠 Loading player home...');
+    const playerHome = await loadPlayerHome(scene, engine);
+    if (playerHome) {
+        console.log('  ✓ Player home loaded - your starting base!');
+        // Setup entrance portal
+        setupHomeEntrance(scene, playerHome, character, engine);
+    }
+
+    // HP bar models
     loadHPModels(scene, engine, models["HPBar"]);
 
+    // Sword with trail
     let sword = addSword(scene, models["Sword2"]);
     createTrail(scene, engine, sword, 0.2, 40, new BABYLON.Vector3(0, 0, 0.32));
 
+    // Enemies on main terrain
     const slime1 = models["Slime1"];
     setupEnemies(scene, character, terrain, 7, slime1);
 
+    // VFX
     VFX['fireBall'] = addFireball(scene, engine);
+
+    // Setup LOD culling for performance
+    setupLODCulling(scene, camera, islands);
 
     scene.executeWhenReady(() => {
         scene.render();
-        // saveDepthMap(scene, engine);
     });
 
+    // Initialize MMO-style UI
+    globalUI.initForScene(scene, character, { playerName: 'Explorer', playerLevel: 1 });
+
+    console.log('✅ Warlords Scene Created - Main Game World Ready!');
+    console.log('🎮 Controls: WASD move | Right-click boat to board | Scroll to zoom');
+    console.log('👻 Explore the haunted ghost ship in the distant ocean!');
+
     return scene;
+}
+
+// ==================== ISLAND LOADING WITH LOD ====================
+async function loadDistantIslands(scene) {
+    const islands = [];
+
+    for (const config of WORLD_CONFIG.islands) {
+        try {
+            const result = await BABYLON.SceneLoader.ImportMeshAsync("", "./assets/", config.file, scene);
+            const root = result.meshes[0];
+            root.name = config.name;
+            root.position = new BABYLON.Vector3(config.position.x, config.position.y, config.position.z);
+            root.scaling = new BABYLON.Vector3(config.scale, config.scale, config.scale);
+
+            // Enable collisions and physics on meshes
+            result.meshes.forEach(mesh => {
+                mesh.checkCollisions = true;
+                mesh.isPickable = true;
+                // Add physics for solid meshes
+                if (mesh.getTotalVertices() > 0) {
+                    try {
+                        new BABYLON.PhysicsAggregate(mesh, BABYLON.PhysicsShapeType.MESH, { mass: 0, friction: 0.8 }, scene);
+                    } catch (e) {
+                        // Some meshes may fail physics
+                    }
+                }
+            });
+
+            // Store LOD distance for culling
+            root.metadata = { lodDistance: config.lodDistance, isIsland: true };
+            islands.push({ root, meshes: result.meshes, config });
+            console.log(`  ✓ Loaded ${config.name}`);
+        } catch (e) {
+            console.warn(`  ✗ Failed to load ${config.name}:`, e.message);
+        }
+    }
+
+    return islands;
+}
+
+// ==================== BOAT LOADING ====================
+async function loadBoat(scene) {
+    const config = WORLD_CONFIG.boat;
+    try {
+        const result = await BABYLON.SceneLoader.ImportMeshAsync("", "./assets/vehicles/", "Boat.glb", scene);
+        const boat = result.meshes[0];
+        boat.name = "boat";
+        boat.position = new BABYLON.Vector3(config.position.x, config.position.y, config.position.z);
+        boat.scaling = new BABYLON.Vector3(config.scale, config.scale, config.scale);
+        boat.rotation.y = Math.PI / 4; // Face toward water
+
+        result.meshes.forEach(mesh => {
+            mesh.checkCollisions = true;
+            mesh.isPickable = true;
+            mesh.metadata = { isBoat: true };
+        });
+
+        // Boat bobbing animation
+        setupBoatBobbing(scene, boat, WORLD_CONFIG.waterLevel);
+
+        console.log('  ✓ Boat loaded at shore');
+        return boat;
+    } catch (e) {
+        console.warn('  ✗ Failed to load boat:', e.message);
+        // Create placeholder boat
+        const boat = BABYLON.MeshBuilder.CreateBox("boat", { width: 8, height: 3, depth: 16 }, scene);
+        boat.position = new BABYLON.Vector3(config.position.x, config.position.y, config.position.z);
+        const boatMat = new BABYLON.StandardMaterial("boatMat", scene);
+        boatMat.diffuseColor = new BABYLON.Color3(0.5, 0.3, 0.1);
+        boat.material = boatMat;
+        boat.metadata = { isBoat: true };
+        setupBoatBobbing(scene, boat, WORLD_CONFIG.waterLevel);
+        return boat;
+    }
+}
+
+function setupBoatBobbing(scene, boat, waterLevel) {
+    const bobAmplitude = 0.5;
+    const bobSpeed = 2;
+    const baseY = waterLevel + 2;
+
+    scene.registerBeforeRender(() => {
+        const time = performance.now() / 1000;
+        boat.position.y = baseY + Math.sin(time * bobSpeed) * bobAmplitude;
+        boat.rotation.x = Math.cos(time * bobSpeed * 0.5) * 0.02;
+        boat.rotation.z = Math.sin(time * bobSpeed * 0.7) * 0.02;
+    });
+}
+
+// ==================== GHOST SHIP LOADING ====================
+async function loadGhostShip(scene) {
+    const config = WORLD_CONFIG.ghostShip;
+    try {
+        // Load from examples folder (GLTF format)
+        const result = await BABYLON.SceneLoader.ImportMeshAsync("", "./examples/haunted_ghost_ship__pirate_vessel_3d_model/", "scene.gltf", scene);
+        const ghostShip = result.meshes[0];
+        ghostShip.name = "ghostShip";
+        ghostShip.position = new BABYLON.Vector3(config.position.x, config.position.y, config.position.z);
+        ghostShip.scaling = new BABYLON.Vector3(config.scale, config.scale, config.scale);
+        ghostShip.rotation = new BABYLON.Vector3(config.rotation.x, config.rotation.y, config.rotation.z);
+
+        // Enable collisions and make it explorable
+        result.meshes.forEach(mesh => {
+            mesh.checkCollisions = true;
+            mesh.isPickable = true;
+            mesh.metadata = { isGhostShip: true };
+        });
+
+        // Add eerie floating/bobbing animation
+        setupGhostShipAnimation(scene, ghostShip, WORLD_CONFIG.waterLevel);
+
+        console.log('  ✓ Ghost ship loaded in the ocean');
+        return ghostShip;
+    } catch (e) {
+        console.warn('  ✗ Failed to load ghost ship:', e.message);
+        return null;
+    }
+}
+
+function setupGhostShipAnimation(scene, ship, waterLevel) {
+    const bobAmplitude = 1.2; // Larger bob for eerie effect
+    const bobSpeed = 1.5; // Slower, more ominous
+    const baseY = waterLevel + 3;
+    const driftSpeed = 0.05; // Slow drift
+
+    scene.registerBeforeRender(() => {
+        const time = performance.now() / 1000;
+        // Vertical bobbing
+        ship.position.y = baseY + Math.sin(time * bobSpeed) * bobAmplitude;
+        // Gentle rocking
+        ship.rotation.x = Math.cos(time * bobSpeed * 0.3) * 0.03;
+        ship.rotation.z = Math.sin(time * bobSpeed * 0.4) * 0.04;
+        // Slow circular drift
+        ship.position.x += Math.cos(time * driftSpeed) * 0.01;
+        ship.position.z += Math.sin(time * driftSpeed) * 0.01;
+    });
+}
+
+
+// ==================== PLAYER HOME LOADING ====================
+async function loadPlayerHome(scene, engine) {
+    const config = WORLD_CONFIG.playerHome;
+    try {
+        // Load forest house model
+        const result = await BABYLON.SceneLoader.ImportMeshAsync("", "./assets/env/buildings/forest_house/", "scene.gltf", scene);
+        const house = result.meshes[0];
+        house.name = "playerHome";
+        house.position = new BABYLON.Vector3(config.position.x, config.position.y, config.position.z);
+        house.scaling = new BABYLON.Vector3(config.scale, config.scale, config.scale);
+        house.rotation = new BABYLON.Vector3(config.rotation.x, config.rotation.y, config.rotation.z);
+
+        // Enable collisions
+        result.meshes.forEach(mesh => {
+            mesh.checkCollisions = true;
+            mesh.isPickable = true;
+            mesh.metadata = { isPlayerHome: true };
+        });
+
+        // Create entrance circle marker
+        const entrancePos = house.position.clone();
+        entrancePos.x += config.entranceCircle.offset.x;
+        entrancePos.z += config.entranceCircle.offset.z;
+
+        const entranceCircle = createEntranceCircle(scene, entrancePos, config.entranceCircle.radius, engine);
+        house.metadata.entranceCircle = entranceCircle;
+        house.metadata.entrancePosition = entrancePos;
+
+        console.log('  ✓ Player home loaded at starting island');
+        return house;
+    } catch (e) {
+        console.warn('  ✗ Failed to load player home:', e.message);
+        return null;
+    }
+}
+
+function createEntranceCircle(scene, position, radius, engine) {
+    // Create a glowing circle on the ground
+    const circle = BABYLON.MeshBuilder.CreateDisc("homeEntrance", {
+        radius: radius,
+        tessellation: 64
+    }, scene);
+
+    circle.position = position.clone();
+    circle.position.y = 0.1; // Slightly above ground
+    circle.rotation.x = Math.PI / 2; // Lay flat
+
+    // Create glowing material
+    const mat = new BABYLON.StandardMaterial("entranceMat", scene);
+    mat.emissiveColor = new BABYLON.Color3(0.3, 0.6, 1.0); // Blue glow
+    mat.alpha = 0.6;
+    mat.disableLighting = true;
+    circle.material = mat;
+
+    // Add pulsing animation
+    let pulseTime = 0;
+    scene.registerBeforeRender(() => {
+        pulseTime += engine.getDeltaTime() / 1000;
+        const pulse = 0.4 + Math.sin(pulseTime * 2) * 0.2;
+        mat.alpha = pulse;
+        mat.emissiveColor = new BABYLON.Color3(0.3 * pulse, 0.6 * pulse, 1.0 * pulse);
+    });
+
+    circle.metadata = {
+        isEntrance: true,
+        targetScene: 'playerHomeInterior',
+        radius: radius
+    };
+
+    return circle;
+}
+
+function setupHomeEntrance(scene, house, character, engine) {
+    const entranceCircle = house.metadata.entranceCircle;
+    const entrancePos = house.metadata.entrancePosition;
+
+    // Check if player is in entrance circle
+    scene.registerBeforeRender(() => {
+        if (!character || !character.position) return;
+
+        const distance = BABYLON.Vector3.Distance(character.position, entrancePos);
+
+        if (distance < WORLD_CONFIG.playerHome.entranceCircle.radius) {
+            // Player is in entrance zone
+            if (!entranceCircle.metadata.playerInZone) {
+                entranceCircle.metadata.playerInZone = true;
+                console.log('💡 Right-click to enter your home');
+                // TODO: Show UI prompt
+            }
+        } else {
+            if (entranceCircle.metadata.playerInZone) {
+                entranceCircle.metadata.playerInZone = false;
+                // TODO: Hide UI prompt
+            }
+        }
+    });
+
+    // Handle right-click to enter
+    scene.onPointerDown = (evt, pickResult) => {
+        if (evt.button === 2) { // Right click
+            if (!character || !character.position) return;
+
+            const distance = BABYLON.Vector3.Distance(character.position, entrancePos);
+
+            if (distance < WORLD_CONFIG.playerHome.entranceCircle.radius) {
+                console.log('🚪 Entering player home...');
+                loadPlayerHomeInterior(scene, engine, character);
+            }
+        }
+    };
+}
+
+// ==================== BOAT INTERACTION ====================
+function setupBoatInteraction(scene, boat, player, hero, camera, waterLevel) {
+    let isInBoat = false;
+    let boatSpeed = 0;
+    const maxSpeed = 100;
+    const acceleration = 40;
+    const deceleration = 20;
+    const turnSpeed = 1.5;
+    const interactionDistance = 40;
+    const inputMap = {};
+
+    // Create UI prompt
+    const promptDiv = document.createElement('div');
+    promptDiv.id = 'boatPrompt';
+    promptDiv.innerHTML = '⛵ Right-click to board boat';
+    promptDiv.style.cssText = `
+        position: fixed; bottom: 150px; left: 50%; transform: translateX(-50%);
+        background: rgba(0,0,0,0.8); color: #fff; padding: 10px 20px;
+        border-radius: 8px; font-family: Arial; font-size: 16px;
+        display: none; z-index: 1000; border: 2px solid #4a90d9;
+    `;
+    document.body.appendChild(promptDiv);
+
+    // Input handling
+    window.addEventListener('keydown', (evt) => { inputMap[evt.key.toLowerCase()] = true; });
+    window.addEventListener('keyup', (evt) => { inputMap[evt.key.toLowerCase()] = false; });
+
+    // Right-click to enter/exit boat
+    scene.onPointerObservable.add((pointerInfo) => {
+        if (pointerInfo.type === BABYLON.PointerEventTypes.POINTERDOWN && pointerInfo.event.button === 2) {
+            if (isInBoat) {
+                exitBoat();
+            } else {
+                const distance = BABYLON.Vector3.Distance(player.position, boat.position);
+                if (distance <= interactionDistance) {
+                    enterBoat();
+                }
+            }
+        }
+    });
+
+    function enterBoat() {
+        isInBoat = true;
+        hero.setEnabled(false);
+        camera.lockedTarget = boat;
+        player.position = boat.position.clone();
+        promptDiv.innerHTML = '⛵ Right-click to exit | WASD to drive';
+        promptDiv.style.display = 'block';
+        window.dispatchEvent(new CustomEvent('boatEnter'));
+    }
+
+    function exitBoat() {
+        isInBoat = false;
+        hero.setEnabled(true);
+        const exitOffset = new BABYLON.Vector3(15, 5, 0);
+        player.position = boat.position.add(exitOffset);
+        camera.lockedTarget = player;
+        boatSpeed = 0;
+        promptDiv.style.display = 'none';
+        window.dispatchEvent(new CustomEvent('boatExit'));
+    }
+
+    // Update loop
+    scene.registerBeforeRender(() => {
+        const deltaTime = scene.getEngine().getDeltaTime() / 1000;
+
+        // Proximity prompt
+        if (!isInBoat) {
+            const distance = BABYLON.Vector3.Distance(player.position, boat.position);
+            promptDiv.style.display = distance <= interactionDistance ? 'block' : 'none';
+            if (distance <= interactionDistance) {
+                promptDiv.innerHTML = '⛵ Right-click to board boat';
+            }
+        }
+
+        // Boat movement when player is in boat
+        if (isInBoat) {
+            const forward = new BABYLON.Vector3(Math.sin(boat.rotation.y), 0, Math.cos(boat.rotation.y));
+
+            let targetSpeed = 0;
+            if (inputMap['w'] || inputMap['arrowup']) targetSpeed = maxSpeed;
+            else if (inputMap['s'] || inputMap['arrowdown']) targetSpeed = -maxSpeed * 0.5;
+
+            // Smooth acceleration
+            if (targetSpeed > boatSpeed) boatSpeed = Math.min(boatSpeed + acceleration * deltaTime, targetSpeed);
+            else if (targetSpeed < boatSpeed) boatSpeed = Math.max(boatSpeed - deceleration * deltaTime, targetSpeed);
+            else if (boatSpeed > 0) boatSpeed = Math.max(0, boatSpeed - deceleration * deltaTime);
+            else if (boatSpeed < 0) boatSpeed = Math.min(0, boatSpeed + deceleration * deltaTime);
+
+            // Turning
+            const turnMultiplier = Math.abs(boatSpeed) / maxSpeed;
+            if (inputMap['a'] || inputMap['arrowleft']) boat.rotation.y += turnSpeed * deltaTime * turnMultiplier;
+            if (inputMap['d'] || inputMap['arrowright']) boat.rotation.y -= turnSpeed * deltaTime * turnMultiplier;
+
+            // Apply movement
+            const movement = forward.scale(boatSpeed * deltaTime);
+            boat.position.addInPlace(movement);
+            player.position.x = boat.position.x;
+            player.position.z = boat.position.z;
+        }
+    });
+
+    // Expose state
+    window.BOAT_STATE = { isInBoat: () => isInBoat, boat };
+}
+
+// ==================== LOD CULLING SYSTEM ====================
+function setupLODCulling(scene, camera, islands) {
+    const LOD_CHECK_INTERVAL = 500; // Check every 500ms
+    let lastCheck = 0;
+
+    scene.registerBeforeRender(() => {
+        const now = performance.now();
+        if (now - lastCheck < LOD_CHECK_INTERVAL) return;
+        lastCheck = now;
+
+        const cameraPos = camera.position;
+        islands.forEach(island => {
+            const distance = BABYLON.Vector3.Distance(cameraPos, island.root.position);
+            const lodDistance = island.config.lodDistance || 2000;
+
+            // Simple LOD: hide meshes beyond 3x lodDistance
+            const visible = distance < lodDistance * 3;
+            island.meshes.forEach(mesh => {
+                if (mesh.isEnabled() !== visible) {
+                    mesh.setEnabled(visible);
+                }
+            });
+        });
+    });
 }
 
 function setupEnvironment(scene) {

@@ -7,6 +7,7 @@ import { setupAnim } from '../../utils/anim.js';
 import { loadModels } from '../../utils/load.js';
 
 import { Health } from '../../character/health.js';
+import { globalUI } from '../../ui/GlobalUI.js';
 
 export async function createRoomGI(engine) {
     const scene = new BABYLON.Scene(engine);
@@ -54,6 +55,9 @@ export async function createRoomGI(engine) {
     setupGI(scene, engine, lights, meshes);
 
     // setupShadows(light, hero);
+
+    // Initialize MMO-style UI
+    globalUI.initForScene(scene, character, { playerName: 'Hero', playerLevel: 1 });
 
     return scene;
 }

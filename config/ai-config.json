@@ -1,0 +1,54 @@
+{
+  "providers": {
+    "gemini": {
+      "model": "gemini-2.0-flash-exp",
+      "apiKey": "${GEMINI_API_KEY}",
+      "features": ["chat", "npc-dialogue", "quest-generation"],
+      "rateLimit": {
+        "requestsPerMinute": 60,
+        "tokensPerMinute": 100000
+      },
+      "enabled": true
+    },
+    "puter": {
+      "models": ["gpt-5-nano", "claude-sonnet-4", "gemini-2.0-flash-exp"],
+      "features": ["chat", "txt2img", "img2txt", "agents"],
+      "fallback": true,
+      "enabled": true
+    }
+  },
+  "npc": {
+    "dialogueCache": true,
+    "cacheExpiry": 3600,
+    "contextWindow": 2048,
+    "temperature": 0.7,
+    "maxTokens": 150,
+    "systemPrompt": "You are an NPC in GGE Warlords, a medieval fantasy RPG. Stay in character and provide helpful, immersive responses."
+  },
+  "quest": {
+    "generationEnabled": true,
+    "difficulty": "adaptive",
+    "contextWindow": 4096,
+    "temperature": 0.8,
+    "maxTokens": 500,
+    "systemPrompt": "Generate engaging quests for GGE Warlords that fit the medieval fantasy setting."
+  },
+  "caching": {
+    "enabled": true,
+    "ttl": 3600,
+    "maxSize": 100,
+    "strategy": "lru"
+  },
+  "errorHandling": {
+    "retryAttempts": 3,
+    "retryDelay": 1000,
+    "fallbackToCache": true,
+    "logErrors": true
+  },
+  "performance": {
+    "batchRequests": true,
+    "maxBatchSize": 5,
+    "debounceDelay": 300
+  }
+}
+

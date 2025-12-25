@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "modelPath": "./assets/characters/human_basemesh/HumanBaseMesh_WithEquips.glb",
+    "scale": 3.7,
+    "positionOffset": { "x": 0, "y": -11, "z": 0 },
+    "health": 100,
+    "maxHealth": 100,
+    "mana": 100,
+    "maxMana": 100,
+    "stamina": 100,
+    "maxStamina": 100,
+    "staminaRegen": 10,
+    "animations": {
+      "idle": "BreathingIdle",
+      "running": "RunningSprint",
+      "jump": "Jump",
+      "roll": "SprintingForwardRollInPlace",
+      "selfCast": "Standing 2H Magic Area Attack 02",
+      "attack1": "Attack1",
+      "attack2": "Attack2",
+      "attack3": "Attack3"
+    }
+  },
+  "enemies": {
+    "slime": {
+      "modelPath": "./assets/characters/enemy/slime/Slime1.glb",
+      "scale": 5.7,
+      "health": 50,
+      "maxHealth": 50,
+      "damage": 5,
+      "moveSpeed": 0.003,
+      "randomMoveInterval": 6000,
+      "aggroRange": 100,
+      "attackRange": 20
+    }
+  }
+}
+

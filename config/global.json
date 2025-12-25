@@ -1,0 +1,17 @@
+{
+  "debug": false,
+  "fastReload": false,
+  "webGPU": false,
+  "onMobile": true,
+  "dynamicCamera": false,
+  "targetBaseOnCameraView": true,
+  "version": "1.0.0",
+  "gameName": "3D Action RPG",
+  "developer": {
+    "hotReload": true,
+    "showFPS": true,
+    "showDebugInfo": false,
+    "logLevel": "info"
+  }
+}
+

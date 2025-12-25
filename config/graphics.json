@@ -1,0 +1,69 @@
+{
+  "postProcessing": {
+    "enabled": true,
+    "hdr": true,
+    "msaa": {
+      "enabled": true,
+      "samples": 4
+    },
+    "fxaa": {
+      "enabled": true
+    },
+    "bloom": {
+      "enabled": true,
+      "threshold": 1.85,
+      "weight": 0.5,
+      "kernel": 64
+    },
+    "imageProcessing": {
+      "contrast": 2.6,
+      "exposure": 2.6,
+      "toneMappingEnabled": true,
+      "toneMappingType": "ACES",
+      "vignetteEnabled": true,
+      "vignetteWeight": 2.1,
+      "vignetteColor": { "r": 0, "g": 0, "b": 0, "a": 1 },
+      "vignetteBlendMode": "MULTIPLY"
+    }
+  },
+  "fog": {
+    "enabled": true,
+    "mode": "linear",
+    "color": { "r": 0.45, "g": 0.635, "b": 0.82 },
+    "density": 0.01,
+    "start": 20.0,
+    "end": 1000.0
+  },
+  "shadows": {
+    "enabled": true,
+    "mapSize": 1024,
+    "darkness": 0.5
+  },
+  "presets": {
+    "low": {
+      "msaa": { "enabled": false, "samples": 1 },
+      "bloom": { "enabled": false },
+      "fxaa": { "enabled": false },
+      "shadows": { "enabled": false }
+    },
+    "medium": {
+      "msaa": { "enabled": true, "samples": 2 },
+      "bloom": { "enabled": true, "threshold": 2.0 },
+      "fxaa": { "enabled": true },
+      "shadows": { "enabled": true, "mapSize": 512 }
+    },
+    "high": {
+      "msaa": { "enabled": true, "samples": 4 },
+      "bloom": { "enabled": true, "threshold": 1.85 },
+      "fxaa": { "enabled": true },
+      "shadows": { "enabled": true, "mapSize": 1024 }
+    },
+    "ultra": {
+      "msaa": { "enabled": true, "samples": 8 },
+      "bloom": { "enabled": true, "threshold": 1.5 },
+      "fxaa": { "enabled": true },
+      "shadows": { "enabled": true, "mapSize": 2048 }
+    }
+  }
+}
+

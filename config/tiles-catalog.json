@@ -1,0 +1,296 @@
+{
+  "version": "1.0.0",
+  "description": "Catalog of all building tiles, parts, and textures for procedural generation",
+  
+  "buildingParts": {
+    "source": "./assets/env/builder/parts.glb",
+    "scale": 5,
+    "parts": {
+      "floors": [
+        {
+          "id": "floor_basic",
+          "name": "Floor",
+          "meshName": "Floor",
+          "category": "floor",
+          "tags": ["basic", "interior"],
+          "positionOffset": { "x": 0, "y": 0.023, "z": 0 }
+        }
+      ],
+      "walls": [
+        {
+          "id": "wall_window",
+          "name": "Wall with Window",
+          "meshName": "1_WallWindow",
+          "category": "wall",
+          "tags": ["window", "exterior"]
+        },
+        {
+          "id": "wall_wood",
+          "name": "Wooden Wall",
+          "meshName": "2_WallWood",
+          "category": "wall",
+          "tags": ["wood", "interior"]
+        }
+      ],
+      "roofs": [
+        {
+          "id": "roof_flat_flat",
+          "name": "Flat Roof (Both Sides)",
+          "meshName": "Roof_Left_Flat_Right_Flat",
+          "category": "roof",
+          "tags": ["flat"]
+        },
+        {
+          "id": "roof_flat_inset",
+          "name": "Flat-Inset Roof",
+          "meshName": "Roof_Left_Flat_Right_Inset",
+          "category": "roof",
+          "tags": ["flat", "inset"]
+        },
+        {
+          "id": "roof_flat_outset",
+          "name": "Flat-Outset Roof",
+          "meshName": "Roof_Left_Flat_Right_Outset",
+          "category": "roof",
+          "tags": ["flat", "outset"]
+        }
+      ],
+      "doors": [
+        {
+          "id": "door_basic",
+          "name": "Basic Door",
+          "meshName": "Door",
+          "category": "door",
+          "tags": ["entrance"]
+        }
+      ],
+      "foundations": [
+        {
+          "id": "stone_base",
+          "name": "Stone Foundation",
+          "meshName": "StoneBase",
+          "category": "foundation",
+          "tags": ["stone", "base"]
+        }
+      ],
+      "props": [
+        {
+          "id": "barrel",
+          "name": "Barrel",
+          "meshName": "0Barrel",
+          "category": "prop",
+          "tags": ["clutter", "storage"]
+        },
+        {
+          "id": "chair_good",
+          "name": "Good Chair",
+          "meshName": "1ChairGood",
+          "category": "prop",
+          "tags": ["furniture", "seating"],
+          "positionOffset": { "x": 5, "y": 0.023, "z": 3 },
+          "rotation": { "x": 0, "y": -1.3, "z": 0 }
+        },
+        {
+          "id": "rug",
+          "name": "Rug",
+          "meshName": "2Rug",
+          "category": "prop",
+          "tags": ["decoration", "floor"],
+          "positionOffset": { "x": 0, "y": 0.03, "z": 0 }
+        }
+      ]
+    }
+  },
+
+  "textures": {
+    "terrain": {
+      "path": "./assets/textures/terrain/",
+      "textures": [
+        {
+          "id": "grass",
+          "name": "Grass",
+          "file": "grass.png",
+          "type": "diffuse",
+          "tags": ["nature", "ground"],
+          "tiling": { "u": 15, "v": 15 }
+        },
+        {
+          "id": "rock",
+          "name": "Rock",
+          "file": "rock.png",
+          "type": "diffuse",
+          "tags": ["stone", "ground"],
+          "tiling": { "u": 8, "v": 8 }
+        },
+        {
+          "id": "floor",
+          "name": "Floor Texture",
+          "file": "floor.png",
+          "type": "diffuse",
+          "tags": ["interior", "ground"],
+          "tiling": { "u": 23, "v": 23 }
+        },
+        {
+          "id": "tile",
+          "name": "Tile",
+          "file": "tile.png",
+          "type": "diffuse",
+          "tags": ["interior", "floor"]
+        },
+        {
+          "id": "tile_dark",
+          "name": "Dark Tile",
+          "file": "tileDark.png",
+          "type": "diffuse",
+          "tags": ["interior", "floor", "dark"]
+        },
+        {
+          "id": "grass_rock",
+          "name": "Grass-Rock Mix",
+          "file": "grassRock.png",
+          "type": "diffuse",
+          "tags": ["nature", "transition"]
+        },
+        {
+          "id": "floor_rock",
+          "name": "Floor-Rock Mix",
+          "file": "floorRock.png",
+          "type": "diffuse",
+          "tags": ["transition"]
+        },
+        {
+          "id": "floor_rock2",
+          "name": "Floor-Rock Mix 2",
+          "file": "floorRock2.png",
+          "type": "diffuse",
+          "tags": ["transition"]
+        },
+        {
+          "id": "rock_dark",
+          "name": "Dark Rock",
+          "file": "rockDark.png",
+          "type": "diffuse",
+          "tags": ["stone", "dark"]
+        }
+      ],
+      "heightmaps": [
+        {
+          "id": "heightmap_basic",
+          "name": "Basic Heightmap",
+          "file": "hieghtMap.png",
+          "type": "heightmap"
+        },
+        {
+          "id": "heightmap_diamond",
+          "name": "Diamond Heightmap",
+          "file": "diamondHeight.png",
+          "type": "heightmap"
+        }
+      ],
+      "masks": [
+        {
+          "id": "terrain_mask",
+          "name": "Terrain Mask",
+          "file": "terrainMask.png",
+          "type": "mask"
+        },
+        {
+          "id": "mix_map",
+          "name": "Mix Map",
+          "file": "mixMap.png",
+          "type": "mask"
+        }
+      ]
+    },
+    "interior": {
+      "path": "./assets/textures/interior/",
+      "textures": [
+        {
+          "id": "wood",
+          "name": "Wood",
+          "file": "wood.png",
+          "type": "diffuse",
+          "tags": ["wood", "interior"]
+        }
+      ]
+    },
+    "effects": {
+      "path": "./assets/textures/effects/",
+      "textures": [
+        {
+          "id": "smoke",
+          "name": "Smoke",
+          "file": "smoke.png",
+          "type": "particle",
+          "tags": ["vfx", "particle"]
+        },
+        {
+          "id": "cloud",
+          "name": "Cloud",
+          "file": "cloud.png",
+          "type": "particle",
+          "tags": ["vfx", "weather"]
+        },
+        {
+          "id": "fog_swirl",
+          "name": "Fog Swirl",
+          "file": "fogSwirl.png",
+          "type": "particle",
+          "tags": ["vfx", "fog"]
+        },
+        {
+          "id": "fog_swirl2",
+          "name": "Fog Swirl 2",
+          "file": "fogSwirl2.png",
+          "type": "particle",
+          "tags": ["vfx", "fog"]
+        },
+        {
+          "id": "fog_swirl3",
+          "name": "Fog Swirl 3",
+          "file": "fogSwirl3.png",
+          "type": "particle",
+          "tags": ["vfx", "fog"]
+        },
+        {
+          "id": "flare",
+          "name": "Flare",
+          "file": "flare.png",
+          "type": "particle",
+          "tags": ["vfx", "light"]
+        },
+        {
+          "id": "ripple",
+          "name": "Ripple",
+          "file": "ripple.png",
+          "type": "particle",
+          "tags": ["vfx", "water"]
+        },
+        {
+          "id": "bar",
+          "name": "Bar",
+          "file": "bar.png",
+          "type": "ui",
+          "tags": ["ui", "health"]
+        }
+      ]
+    }
+  },
+
+  "categories": [
+    { "id": "floor", "name": "Floors", "icon": "🟫" },
+    { "id": "wall", "name": "Walls", "icon": "🧱" },
+    { "id": "roof", "name": "Roofs", "icon": "🏠" },
+    { "id": "door", "name": "Doors", "icon": "🚪" },
+    { "id": "foundation", "name": "Foundations", "icon": "⬛" },
+    { "id": "prop", "name": "Props", "icon": "📦" }
+  ],
+
+  "tags": [
+    "basic", "interior", "exterior", "wood", "stone", "metal",
+    "nature", "ground", "transition", "dark", "light",
+    "furniture", "decoration", "storage", "seating",
+    "vfx", "particle", "ui"
+  ]
+}
+

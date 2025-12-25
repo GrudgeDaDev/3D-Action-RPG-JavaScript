@@ -1,0 +1,196 @@
+{
+  "races": {
+    "human": {
+      "id": "human",
+      "name": "Human",
+      "icon": "👤",
+      "description": "Versatile and adaptable. Balanced stats across all attributes.",
+      "modelPath": "./assets/characters/playable/human.glb",
+      "worgesModelPath": "./assets/characters/playable/human_worges - Theron Wildkin.glb",
+      "scale": 3.7,
+      "positionOffset": { "x": 0, "y": -11, "z": 0 },
+      "bonuses": {
+        "health": 0,
+        "mana": 0,
+        "stamina": 0,
+        "strength": 0,
+        "agility": 0,
+        "wisdom": 0,
+        "endurance": 0
+      },
+      "lore": "Humans are the most adaptable race, excelling in all paths. Their versatility makes them ideal for any class.",
+      "startingLocation": "human_village",
+      "isDefault": true
+    },
+    "elf": {
+      "id": "elf",
+      "name": "Elf",
+      "icon": "🧝",
+      "description": "Graceful and magical. +20 Mana, +2 Wisdom",
+      "modelPath": "./assets/characters/playable/elf.glb",
+      "worgesModelPath": "./assets/characters/playable/elf_worges - Sylveth Moonbond.glb",
+      "scale": 3.7,
+      "positionOffset": { "x": 0, "y": -11, "z": 0 },
+      "bonuses": {
+        "health": 0,
+        "mana": 20,
+        "stamina": 0,
+        "strength": 0,
+        "agility": 0,
+        "wisdom": 2,
+        "endurance": 0
+      },
+      "lore": "Elves are ancient beings of magic and grace. Their connection to nature grants them enhanced magical abilities.",
+      "startingLocation": "elf_forest"
+    },
+    "dwarf": {
+      "id": "dwarf",
+      "name": "Dwarf",
+      "icon": "🧔",
+      "description": "Sturdy and resilient. +30 HP, +2 Endurance",
+      "modelPath": "./assets/characters/playable/dwarf.glb",
+      "worgesModelPath": "./assets/characters/playable/dwarf_worges - Drakmir Stonebond.glb",
+      "scale": 3.7,
+      "positionOffset": { "x": 0, "y": -11, "z": 0 },
+      "bonuses": {
+        "health": 30,
+        "mana": 0,
+        "stamina": 0,
+        "strength": 0,
+        "agility": 0,
+        "wisdom": 0,
+        "endurance": 2
+      },
+      "lore": "Dwarves are master craftsmen and warriors. Their stout build makes them incredibly durable in combat.",
+      "startingLocation": "dwarf_mountain"
+    },
+    "orc": {
+      "id": "orc",
+      "name": "Orc",
+      "icon": "👹",
+      "description": "Powerful and fierce. +2 Str, +20 HP",
+      "modelPath": "./assets/characters/playable/orc.glb",
+      "worgesModelPath": "./assets/characters/playable/orc_worges - Thrak Beastmaster.glb",
+      "scale": 3.7,
+      "positionOffset": { "x": 0, "y": -11, "z": 0 },
+      "bonuses": {
+        "health": 20,
+        "mana": 0,
+        "stamina": 0,
+        "strength": 2,
+        "agility": 0,
+        "wisdom": 0,
+        "endurance": 0
+      },
+      "lore": "Orcs are brutal warriors with unmatched physical strength. They dominate the battlefield with raw power.",
+      "startingLocation": "orc_stronghold"
+    },
+    "barbarian": {
+      "id": "barbarian",
+      "name": "Barbarian",
+      "icon": "⚔️",
+      "description": "Wild and untamed. +30 Stam, +2 Str",
+      "modelPath": "./assets/characters/playable/barbarian.glb",
+      "worgesModelPath": "./assets/characters/playable/barbarian_worges - Kael the Fang.glb",
+      "scale": 3.7,
+      "positionOffset": { "x": 0, "y": -11, "z": 0 },
+      "bonuses": {
+        "health": 0,
+        "mana": 0,
+        "stamina": 30,
+        "strength": 2,
+        "agility": 0,
+        "wisdom": 0,
+        "endurance": 0
+      },
+      "lore": "Barbarians are fierce warriors from the frozen north. Their rage in battle is legendary.",
+      "startingLocation": "barbarian_camp"
+    },
+    "skeleton": {
+      "id": "skeleton",
+      "name": "Undead",
+      "icon": "💀",
+      "description": "Undead warrior. +30 Mana, Poison Resistant",
+      "modelPath": "./assets/characters/playable/skeleton_worges - Vaeloth The Phantom.glb",
+      "worgesModelPath": "./assets/characters/playable/skeleton_worges - Vaeloth The Phantom.glb",
+      "scale": 3.7,
+      "positionOffset": { "x": 0, "y": -11, "z": 0 },
+      "bonuses": {
+        "health": 0,
+        "mana": 30,
+        "stamina": 0,
+        "strength": 0,
+        "agility": 0,
+        "wisdom": 0,
+        "endurance": 0
+      },
+      "specialAbilities": ["poison_resistant"],
+      "lore": "Undead warriors risen from the grave. They trade life force for powerful dark magic.",
+      "startingLocation": "undead_crypt"
+    },
+    "racalvin": {
+      "id": "racalvin",
+      "name": "Racalvin",
+      "icon": "🥋",
+      "description": "Agile martial artist. +40 Stamina, +3 Agility, Capoeira Master",
+      "modelPath": "./assets/characters/playable/racalvin/racalvin.glb",
+      "worgesModelPath": "./assets/characters/playable/racalvin/racalvin_worges.glb",
+      "scale": 3.7,
+      "positionOffset": { "x": 0, "y": -11, "z": 0 },
+      "bonuses": {
+        "health": -10,
+        "mana": 10,
+        "stamina": 40,
+        "strength": -1,
+        "agility": 3,
+        "wisdom": 1,
+        "endurance": -1
+      },
+      "specialAbilities": [
+        "capoeira_mastery",
+        "acrobatic_dodge",
+        "rhythm_of_battle"
+      ],
+      "preferredWeapons": ["unarmed", "staff", "dual_daggers"],
+      "unarmedBonus": {
+        "damage": 1.5,
+        "attackSpeed": 1.3,
+        "criticalChance": 0.15
+      },
+      "racialPassives": {
+        "capoeira_mastery": {
+          "name": "Capoeira Mastery",
+          "description": "50% increased damage with unarmed attacks. Unlock special Capoeira combos.",
+          "effects": {
+            "unarmedDamageMultiplier": 1.5,
+            "unlockCapoeiraAnimations": true
+          }
+        },
+        "acrobatic_dodge": {
+          "name": "Acrobatic Dodge",
+          "description": "+15% dodge chance. Dodging costs 30% less stamina.",
+          "effects": {
+            "dodgeChance": 0.15,
+            "dodgeStaminaCostReduction": 0.3
+          }
+        },
+        "rhythm_of_battle": {
+          "name": "Rhythm of Battle",
+          "description": "Each successful hit increases attack speed by 5% (stacks 5 times).",
+          "effects": {
+            "attackSpeedPerHit": 0.05,
+            "maxStacks": 5,
+            "stackDuration": 8
+          }
+        }
+      },
+      "lore": "The Racalvin are a mysterious race of martial artists who have perfected the ancient art of Capoeira. Their fluid, dance-like combat style makes them deadly opponents in close quarters. Born with an innate sense of rhythm and balance, they can chain devastating combos while evading attacks with acrobatic grace.",
+      "startingLocation": "racalvin_dojo",
+      "startingWeapon": "unarmed",
+      "animationSet": "capoeira"
+    }
+  },
+  "defaultRace": "human",
+  "raceOrder": ["human", "elf", "dwarf", "orc", "barbarian", "skeleton", "racalvin"]
+}
+

@@ -15,6 +15,8 @@ import { placeVeg } from "../gen/parts/veg.js";
 import { createCastle } from "../gen/LLM.js";
 import { createCastleWFC } from "../gen/WFC.js";
 
+import { globalUI } from '../../ui/GlobalUI.js';
+
 
 
 export async function createNight(engine) {
@@ -196,6 +198,10 @@ export async function createNight(engine) {
 
     // createDust(scene, engine);
     // createFogSwirl(scene, engine);
+
+    // ⚔️ CREATE MMO-STYLE UI (using GlobalUI for consistency)
+    globalUI.initForScene(scene, character, { playerName: 'Hero', playerLevel: 1 });
+    console.log('✅ MMO UI Created! Press Tab to target enemies');
 
     return scene;
 }

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grudge Warlords - Complete Profession Guide</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --text-light: #ecf0f1;
+            --bg-dark: #1a1a1a;
+            --card-bg: #2d3748;
+            --border-color: #4a5568;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--primary-color) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 15px;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: var(--accent-color);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .profession-section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .profession-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .profession-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .profession-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 12px 35px rgba(231, 76, 60, 0.2);
+        }
+        
+        .profession-name {
+            font-size: 1.8em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        .profession-description {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .profession-details {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .detail-item {
+            background: rgba(52, 73, 94, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        
+        .system-info {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 2px solid var(--border-color);
+        }
+        
+        .system-title {
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .tip-title {
+            font-size: 1.3em;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(44, 62, 80, 0.3);
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ Grudge Warlords ⚔️</h1>
+            <p>Complete Profession System Guide</p>
+            <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.7;">Based on Unity Project Analysis</p>
+        </div>
+
+        <div class="system-info">
+            <div class="system-title">🔧 Profession System Overview</div>
+            <p>The Grudge Warlords profession system is built on two main categories: <strong>Crafting Professions</strong> and <strong>Harvesting Professions</strong>. Each profession has its own experience progression system, level caps, and specialized functionality.</p>
+            
+            <div class="tip-box">
+                <div class="tip-title">📊 Experience & Progression</div>
+                <ul>
+                    <li><strong>Level Calculation:</strong> Level = 1 + (count of experience thresholds reached)</li>
+                    <li><strong>Experience Tracking:</strong> Each profession tracks long-term experience values</li>
+                    <li><strong>Percentage Progress:</strong> (current_exp - previous_threshold) / (next_threshold - previous_threshold)</li>
+                    <li><strong>Hotkey Access:</strong> Press 'H' to open the profession interface</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="profession-section">
+            <h2 class="section-title">🏭 Crafting Professions</h2>
+            
+            <div class="profession-grid">
+                <div class="profession-card">
+                    <h3 class="profession-name">⚒️ Blacksmith</h3>
+                    <p class="profession-description">Master of metalworking and weapon forging. Create powerful weapons, armor, and tools from raw materials.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Weapons, armor, and metal tools
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Ores, ingots, coal, leather
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Durability and damage enhancement
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profession-card">
+                    <h3 class="profession-name">🧪 Laboratory</h3>
+                    <p class="profession-description">Advanced alchemical research and potion brewing. Create powerful elixirs, potions, and magical compounds.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Potions, elixirs, magical compounds
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Herbs, crystals, reagents, essences
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Potion potency and effect duration
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profession-card">
+                    <h3 class="profession-name">🏗️ Arsenal</h3>
+                    <p class="profession-description">Military engineering and siege equipment construction. Build advanced war machines and tactical equipment.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Siege engines, war machines, artillery
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Steel, wood, mechanical parts
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Firepower and tactical advantages
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profession-card">
+                    <h3 class="profession-name">🧵 Loom</h3>
+                    <p class="profession-description">Textile crafting and fabric creation. Weave magical cloths, enchanted robes, and protective garments.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Cloth armor, robes, magical textiles
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Fibers, silk, magical threads
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Magical resistance and comfort
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profession-card">
+                    <h3 class="profession-name">🏰 Stronghold</h3>
+                    <p class="profession-description">Fortress construction and defensive architecture. Build and upgrade strongholds, walls, and defensive structures.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Fortifications, defensive structures
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Stone, mortar, steel reinforcements
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Structural integrity and defense
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profession-card">
+                    <h3 class="profession-name">🏭 Tannery</h3>
+                    <p class="profession-description">Leather processing and hide crafting. Transform raw hides into durable leather goods and armor.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Leather armor, bags, accessories
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Animal hides, tanning agents, dyes
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Flexibility and protection balance
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profession-card">
+                    <h3 class="profession-name">🔨 Workbench</h3>
+                    <p class="profession-description">General crafting and tool creation. Build utility items, tools, and everyday equipment for adventurers.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Tools, utility items, basic equipment
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Wood, metal parts, components
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Versatility and efficiency
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profession-card">
+                    <h3 class="profession-name">⚡ Quickcraft</h3>
+                    <p class="profession-description">Rapid crafting and field repairs. Specialized in quick creation of essential items and emergency equipment.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Field repairs, emergency items
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Materials:</div>
+                            Salvaged materials, repair kits
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Speed and resource efficiency
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profession-section">
+            <h2 class="section-title">⛏️ Harvesting Professions</h2>
+            
+            <div class="profession-grid">
+                <div class="profession-card">
+                    <h3 class="profession-name">⛏️ Miner</h3>
+                    <p class="profession-description">Resource extraction and ore processing. Extract valuable materials from the earth and process raw resources.</p>
+                    <div class="profession-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Specialization:</div>
+                            Ore extraction, gem mining, stone quarrying
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Key Activities:</div>
+                            Mining nodes, gem deposits, rare minerals
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Progression Focus:</div>
+                            Yield improvement and rare material access
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tools Required:</div>
+                            Pickaxes, mining equipment, processing tools
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="system-info">
+            <div class="system-title">🛠️ Technical Implementation Details</div>
+            
+            <div class="tip-box">
+                <div class="tip-title">🎮 UI System Structure</div>
+                <div class="code-block">
+UI_CraftingProfessions (Main Interface)
+├── Panel Toggle (Hotkey: H)
+├── Content Container (Transform)
+├── Dynamic Slot Generation (UIUtils.BalancePrefabs)
+└── UI_CraftingSlot Components
+    ├── Name Display with Level [L##/##]
+    ├── Profession Icon (Sprite)
+    ├── Experience Slider
+    ├── Tooltip System
+    └── Experience Text (Current/Next)
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-title">💾 Data Structure</div>
+                <div class="code-block">
+CraftingProfession {
+    string templateName;     // Reference to profession template
+    long experience;         // Total accumulated experience
+    
+    // Calculated Properties:
+    int level;              // 1 + count(levels <= experience)
+    int maxlevel;           // 1 + template.levels.Count()
+    float experiencePercent; // Progress to next level
+    long experienceNext;    // Experience needed for next level
+}
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-title">⚠️ Common Issues & Solutions</div>
+                <ul>
+                    <li><strong>Sprite Duplication:</strong> Check if profession templates share the same sprite reference</li>
+                    <li><strong>UI Performance:</strong> UIUtils.BalancePrefabs manages dynamic slot creation efficiently</li>
+                    <li><strong>Experience Calculation:</strong> Ensure level arrays are properly configured in profession templates</li>
+                    <li><strong>Tooltip Display:</strong> Verify tooltip text generation in UI_CraftingSlot.ToolTip() method</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="system-info">
+            <div class="system-title">🎯 Player Tips & Strategy</div>
+            
+            <div class="tip-box">
+                <div class="tip-title">🚀 Progression Strategy</div>
+                <ul>
+                    <li><strong>Diversification:</strong> Balance multiple professions for synergistic benefits</li>
+                    <li><strong>Resource Management:</strong> Mining supports all crafting professions</li>
+                    <li><strong>Efficiency Focus:</strong> Higher levels unlock better recipes and success rates</li>
+                    <li><strong>Specialization:</strong> Master key professions for your playstyle</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-title">🔄 Profession Synergies</div>
+                <ul>
+                    <li><strong>Miner → Blacksmith:</strong> Direct ore to weapon creation pipeline</li>
+                    <li><strong>Laboratory → Combat:</strong> Potions enhance all combat activities</li>
+                    <li><strong>Tannery → Arsenal:</strong> Leather components for siege engines</li>
+                    <li><strong>Quickcraft → All:</strong> Emergency repairs and field crafting</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Grudge Warlords Profession Guide</strong></p>
+            <p>Generated from Unity Project Analysis</p>
+            <p style="font-size: 0.8em; margin-top: 10px; opacity: 0.7;">
+                Press 'H' in-game to access the profession interface
+            </p>
+        </div>
+    </div>
+</body>
+</html>

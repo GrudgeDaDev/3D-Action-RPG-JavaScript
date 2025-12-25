@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Progression Demo - Grudge Warlords RPG</title>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://js.puter.com/v2/"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+        #instructions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        #instructions h3 {
+            margin: 0 0 10px 0;
+            color: #6ee7b7;
+        }
+        #instructions ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        #instructions li {
+            margin: 5px 0;
+        }
+        .key {
+            background: #2a3150;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #6ee7b7;
+        }
+        #footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        #footer a {
+            color: #6ee7b7;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+
+    <div id="instructions">
+        <h3>⚔️ Character Progression Demo</h3>
+        <ul>
+            <li>Press <span class="key">C</span> to open Character Sheet</li>
+            <li>Press <span class="key">L</span> to gain XP and level up</li>
+            <li>Press <span class="key">R</span> to reset progression</li>
+            <li>Press <span class="key">S</span> to save progress</li>
+        </ul>
+        <div id="status" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #2a3150;">
+            <div>Level: <span id="levelDisplay">0</span></div>
+            <div>XP: <span id="xpDisplay">0</span> / <span id="xpNeededDisplay">100</span></div>
+            <div>Class: <span id="classDisplay">None</span></div>
+        </div>
+    </div>
+
+    <div id="footer">
+        Powered by <a href="https://developer.puter.com" target="_blank" rel="noopener">Puter</a>
+    </div>
+
+    <script type="module">
+        // Import character progression system
+        import { CharacterProgression } from '../src/character/CharacterProgression.js';
+        import { CharacterProgressionUI } from '../src/ui/CharacterProgressionUI.js';
+        import { ClassSelectionUI } from '../src/ui/ClassSelectionUI.js';
+
+        // Create Babylon.js scene
+        const canvas = document.getElementById('renderCanvas');
+        const engine = new BABYLON.Engine(canvas, true);
+        
+        const createScene = () => {
+            const scene = new BABYLON.Scene(engine);
+            scene.clearColor = new BABYLON.Color3(0.043, 0.063, 0.125);
+
+            // Camera
+            const camera = new BABYLON.ArcRotateCamera('camera', 0, 0, 10, BABYLON.Vector3.Zero(), scene);
+            camera.setPosition(new BABYLON.Vector3(0, 5, -10));
+            camera.attachControl(canvas, true);
+
+            // Light
+            const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
+
+            return scene;
+        };
+
+        const scene = createScene();
+
+        // Initialize character progression
+        const progression = new CharacterProgression();
+        const progressionUI = new CharacterProgressionUI(scene, progression);
+        progressionUI.initialize();
+
+        // Load saved progression if exists
+        const savedData = localStorage.getItem('character_progression_demo');
+        if (savedData) {
+            try {
+                progression.fromJSON(JSON.parse(savedData));
+                console.log('✅ Loaded saved progression');
+            } catch (error) {
+                console.error('Failed to load saved data:', error);
+            }
+        }
+
+        // Update status display
+        function updateStatusDisplay() {
+            document.getElementById('levelDisplay').textContent = progression.level;
+            document.getElementById('xpDisplay').textContent = progression.experience;
+            document.getElementById('xpNeededDisplay').textContent = progression.getExperienceForNextLevel();
+            document.getElementById('classDisplay').textContent = progression.selectedClass || 'None';
+        }
+
+        updateStatusDisplay();
+
+        // Keyboard controls
+        scene.onKeyboardObservable.add((kbInfo) => {
+            if (kbInfo.type === BABYLON.KeyboardEventTypes.KEYDOWN) {
+                const key = kbInfo.event.key.toLowerCase();
+
+                // C - Open character sheet
+                if (key === 'c') {
+                    progressionUI.toggle();
+                }
+
+                // L - Level up (gain XP)
+                if (key === 'l') {
+                    const levelsGained = progression.addExperience(150);
+                    
+                    if (levelsGained.length > 0) {
+                        console.log(`🎉 Level up! New level(s): ${levelsGained.join(', ')}`);
+                        
+                        // Show class selection at level 1
+                        if (levelsGained.includes(1) && !progression.selectedClass) {
+                            const classUI = new ClassSelectionUI(scene, progression, (classKey, classData) => {
+                                console.log(`✅ Selected class: ${classData.name}`);
+                                updateStatusDisplay();
+                                progressionUI.updateUI();
+                            });
+                            classUI.show();
+                        }
+                        
+                        progressionUI.updateUI();
+                    }
+                    
+                    updateStatusDisplay();
+                }
+
+                // R - Reset progression
+                if (key === 'r') {
+                    if (confirm('Reset all progression?')) {
+                        progression.level = 0;
+                        progression.experience = 0;
+                        progression.selectedClass = null;
+                        progression.resetAllAttributes();
+                        progression.abilities = [];
+                        
+                        localStorage.removeItem('character_progression_demo');
+                        
+                        console.log('🔄 Progression reset');
+                        updateStatusDisplay();
+                        progressionUI.updateUI();
+                    }
+                }
+
+                // S - Save progression
+                if (key === 's') {
+                    const saveData = progression.toJSON();
+                    localStorage.setItem('character_progression_demo', JSON.stringify(saveData));
+                    console.log('💾 Progress saved!');
+                }
+            }
+        });
+
+        // Render loop
+        engine.runRenderLoop(() => {
+            scene.render();
+        });
+
+        // Resize
+        window.addEventListener('resize', () => {
+            engine.resize();
+        });
+
+        console.log('🎮 Character Progression Demo Ready!');
+        console.log('Press C to open character sheet');
+        console.log('Press L to gain XP and level up');
+    </script>
+</body>
+</html>
+

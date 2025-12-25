@@ -1,0 +1,38 @@
+{
+  "builder": {
+    "gridSize": 19,
+    "cellSize": 60,
+    "defaultHeight": 0,
+    "maxHeight": 100,
+    "minHeight": -50,
+    "tools": {
+      "place": {
+        "name": "Place",
+        "icon": "./assets/util/ui/icons/path.png",
+        "enabled": true,
+        "subTools": []
+      },
+      "raise": {
+        "name": "Raise",
+        "icon": "./assets/util/ui/icons/tree.png",
+        "enabled": true,
+        "subTools": ["Raise", "Lower", "Flatten", "Path"],
+        "brushSize": 50,
+        "raiseAmount": 10.1,
+        "lowerAmount": 10.1,
+        "flattenHeight": 0
+      },
+      "settings": {
+        "name": "Settings",
+        "icon": "./assets/util/ui/icons/gear.png",
+        "enabled": true,
+        "subTools": ["Save", "Load", "Load World", "Clear"]
+      }
+    },
+    "brushSizes": [10, 25, 50, 75, 100],
+    "snapToGrid": true,
+    "showGrid": true,
+    "gridColor": { "r": 0.5, "g": 0.5, "b": 0.5, "a": 0.3 }
+  }
+}
+

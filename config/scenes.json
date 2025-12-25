@@ -1,0 +1,169 @@
+{
+  "defaultScene": "lobby",
+  "scenes": {
+    "lobby": {
+      "name": "Lobby",
+      "description": "Main lobby - Select your adventure",
+      "creator": "createLobby",
+      "spawnPoint": { "x": 0, "y": 5, "z": 0 },
+      "enabled": true,
+      "showInLobby": false
+    },
+    "night": {
+      "name": "Night Scene",
+      "description": "Dark mysterious night environment with enemies",
+      "creator": "createNight",
+      "spawnPoint": { "x": 0, "y": 40, "z": -20 },
+      "levelSize": 20000,
+      "difficulty": "medium",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/night.jpg",
+      "models": [
+        "characters/enemy/slime/Slime1.glb",
+        "characters/weapons/Sword2.glb",
+        "util/HPBar.glb"
+      ]
+    },
+    "day": {
+      "name": "Day Scene",
+      "description": "Bright daylight environment for exploration",
+      "creator": "createDay",
+      "spawnPoint": { "x": 0, "y": 40, "z": -20 },
+      "levelSize": 20000,
+      "difficulty": "easy",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/day.jpg",
+      "models": []
+    },
+    "outdoor": {
+      "name": "Warlords Scene",
+      "description": "Main game scene - Island with archipelago, boat travel, swimming, and haunted ghost ship",
+      "creator": "createOutdoor",
+      "spawnPoint": { "x": 134.683, "y": 80, "z": -271.427 },
+      "levelSize": 8000,
+      "difficulty": "medium",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/outdoor.jpg",
+      "features": ["swimming", "boats", "archipelago", "terrain-physics", "lod-culling", "ghost-ship"],
+      "models": [
+        "characters/enemy/slime/Slime1.glb",
+        "characters/weapons/Sword2.glb",
+        "util/HPBar.glb",
+        "env/islands/pirate_island.glb",
+        "env/islands/fantasy_island.glb",
+        "env/islands/castle_island.glb",
+        "env/islands/mythical_fantasy_island.glb",
+        "env/islands/sky_cloud_of_azure_lane_island.glb",
+        "vehicles/Boat.glb"
+      ]
+    },
+    "room": {
+      "name": "Room Scene",
+      "description": "Indoor room environment",
+      "creator": "createRoom",
+      "spawnPoint": { "x": 0, "y": 5, "z": 0 },
+      "levelSize": 1000,
+      "difficulty": "easy",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/room.jpg",
+      "models": []
+    },
+    "underground": {
+      "name": "Underground Scene",
+      "description": "Dark underground caverns and tunnels",
+      "creator": "createUnderground",
+      "spawnPoint": { "x": 0, "y": 5, "z": 0 },
+      "levelSize": 5000,
+      "difficulty": "hard",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/underground.jpg",
+      "models": []
+    },
+    "town": {
+      "name": "Town Scene",
+      "description": "Peaceful town with NPCs and shops",
+      "creator": "createTown",
+      "spawnPoint": { "x": 0, "y": 5, "z": 0 },
+      "levelSize": 10000,
+      "difficulty": "easy",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/town.jpg",
+      "models": []
+    },
+    "inn": {
+      "name": "Inn Scene",
+      "description": "Cozy inn interior for rest and recovery",
+      "creator": "createInn",
+      "spawnPoint": { "x": 0, "y": 5, "z": 0 },
+      "levelSize": 500,
+      "difficulty": "easy",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/inn.jpg",
+      "models": []
+    },
+    "builder": {
+      "name": "Builder Mode",
+      "description": "Creative building and testing environment",
+      "creator": "createBuilder",
+      "spawnPoint": { "x": 0, "y": 40, "z": -20 },
+      "levelSize": 20000,
+      "difficulty": "creative",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/builder.jpg",
+      "models": [
+        "env/builder/parts.glb",
+        "env/exterior/grass/grass.glb"
+      ]
+    },
+    "archipelago": {
+      "name": "Archipelago",
+      "description": "Island exploration with boats and swimming",
+      "creator": "createArchipelago",
+      "spawnPoint": { "x": 0, "y": 50, "z": 0 },
+      "levelSize": 4000,
+      "difficulty": "medium",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/archipelago.jpg",
+      "features": ["swimming", "boats", "multiple-islands"],
+      "models": [
+        "env/islands/pirate_island.glb",
+        "env/islands/fantasy_island.glb",
+        "env/islands/castle_island.glb",
+        "env/islands/mythical_fantasy_island.glb",
+        "env/islands/sky_cloud_of_azure_lane_island.glb",
+        "env/islands/angel_island.glb",
+        "vehicles/Boat.glb"
+      ]
+    },
+    "archipelagoEditor": {
+      "name": "🎨 Game Editor",
+      "description": "Visual editor for Archipelago scene - Place NPCs, enemies, spawn points",
+      "creator": "createArchipelagoEditor",
+      "spawnPoint": { "x": 0, "y": 100, "z": -200 },
+      "levelSize": 4000,
+      "difficulty": "creative",
+      "enabled": true,
+      "showInLobby": true,
+      "thumbnail": "./assets/thumbnails/editor.jpg",
+      "features": ["editor", "gizmos", "hierarchy", "placement-tools", "free-camera"],
+      "models": [
+        "env/islands/pirate_island.glb",
+        "env/islands/fantasy_island.glb",
+        "env/islands/castle_island.glb",
+        "env/islands/mythical_fantasy_island.glb",
+        "env/islands/sky_cloud_of_azure_lane_island.glb",
+        "env/islands/angel_island.glb"
+      ]
+    }
+  }
+}
+

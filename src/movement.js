@@ -64,12 +64,12 @@ export function setupInputHandling(scene, character, camera, hero, anim, engine,
         var hit = scene.pickWithRay(ray, predicate);
 
         if (hit.hit) {
-            console.log("enemy was hit");
+            console.log("enemy was hit - movement.js:67");
             return true;
             // Additional logic can be added here, e.g., moving an object to the hit location
         } else {
             return false;
-            console.log("enemy was hit");
+            console.log("enemy was hit - movement.js:72");
             // console.log("No terrain was hit");
         }
         return hit;
@@ -92,7 +92,7 @@ export function setupInputHandling(scene, character, camera, hero, anim, engine,
             hero.rotationQuaternion = BABYLON.Quaternion.RotationYawPitchRoll(forwardAngle, 3.14, 0);
             var rotationQuaternion = BABYLON.Quaternion.RotationYawPitchRoll(Math.PI, 0, 0);
             hero.rotationQuaternion = rotationQuaternion.multiply(hero.rotationQuaternion);
-            console.log("hit close");
+            console.log("hit close - movement.js:95");
         }
 
     }
@@ -239,7 +239,7 @@ function rotateToTarget() {
     PLAYER.health.rotationCheck.rotationQuaternion = rotationQuaternion.multiply(PLAYER.health.rotationCheck.rotationQuaternion);
     // shouldRotateToTarget = false;
 }
-let shouldRotateToTarget = false;
+let shouldRotateToTarget = true;
 
 
 
@@ -279,7 +279,7 @@ function handleCharacterMovement(inputMap, character, camera, hero, anim, engine
 
 
     // let moveDirection = dummyAggregate.body.getLinearVelocity();
-    let moveDirection = new BABYLON.Vector3(lastMoveDirection.x, lastMoveDirection.y, lastMoveDirection.z);
+    let moveDirection = lastMoveDirection.clone();
     if (!anim.Roll.isPlaying && !anim.Attack.isPlaying) {
         moveDirection = new BABYLON.Vector3(0, dummyAggregate.body.getLinearVelocity().y, 0);
     }
@@ -319,7 +319,7 @@ function handleCharacterMovement(inputMap, character, camera, hero, anim, engine
         }
     }
     if (inputMap["q"] || inputMap["ArrowLeft"]) {
-        moveDirection.subtractInPlace(right.scaleInPlace(0.7));
+        moveDirection.subtractInPlace(right.scale(0.7));
         hero.rotationQuaternion = BABYLON.Quaternion.RotationYawPitchRoll(forwardAngle, 3.14, 0);
         var rotationQuaternion = BABYLON.Quaternion.RotationYawPitchRoll(Math.PI / 2, 0, 0);
         hero.rotationQuaternion = rotationQuaternion.multiply(hero.rotationQuaternion);
@@ -357,7 +357,7 @@ function handleCharacterMovement(inputMap, character, camera, hero, anim, engine
 
     if (SPRINTING) {
 
-        moveDirection = forward.scaleInPlace(sprintSpeed); // fix running in air when sprinting
+        moveDirection = forward.scale(sprintSpeed); // fix running in air when sprinting without mutating forward
         hero.rotationQuaternion = BABYLON.Quaternion.RotationYawPitchRoll(forwardAngle, 3.14, 0);
         var rotationQuaternion = BABYLON.Quaternion.RotationYawPitchRoll(Math.PI, 0, 0);
         hero.rotationQuaternion = rotationQuaternion.multiply(hero.rotationQuaternion);
@@ -425,10 +425,12 @@ function handleCharacterMovement(inputMap, character, camera, hero, anim, engine
 
 
 
-    let combo1length = anim.Combo.from + 60;
-    let combo2length = anim.Combo.from + 110;
+    const COMBO_1_DURATION = 60;
+    const COMBO_2_DURATION = 110;
+    let combo1length = anim.Combo.from + COMBO_1_DURATION;
+    let combo2length = anim.Combo.from + COMBO_2_DURATION;
     // combo
-    if (inputMap["4"] || mouseIsActive && !thirdAttack) {
+    if (inputMap["4"] || (mouseIsActive && !thirdAttack)) {
         anim.BreathingIdle.stop();
         anim.Running.stop();
         if (!anim.Roll.isPlaying && !anim.Running.isPlaying) {
@@ -492,7 +494,7 @@ function handleCharacterMovement(inputMap, character, camera, hero, anim, engine
         anim.Running.stop();
         anim.Roll.start(false, 2.0, anim.Roll.from, anim.Roll.to, true);
         // speed = rollSpeed;
-        // setTimeout(() => speed = normalSpeed, 800); 
+        // setTimeout(() => speed = normalSpeed, 800);
     }
 
 

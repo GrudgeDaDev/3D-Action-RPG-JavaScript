@@ -1,0 +1,2791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRUDGE NFT Island - Enhanced Item Catalog</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/bGd5QJ0.png">
+    <link rel="stylesheet" href="catalog-styles.css">
+    <style>
+        /* Override background images to use local files */
+        body {
+            background: url('./icons/background.png') center center fixed !important;
+        }
+
+        .header {
+            background: url('./icons/Header.png') center center / cover no-repeat !important;
+        }
+
+        /* Lorecraft Fantasy Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&display=swap');
+
+        body, .container, .control-panel {
+            font-family: 'Cinzel', serif !important;
+            color: #000000 !important;
+            font-size: 16px !important;
+        }
+
+        h1, h2, h3, .header-content, .category-btn, .item-title h3 {
+            font-family: 'Uncial Antiqua', cursive !important;
+            color: #000000 !important;
+            font-size: 18px !important;
+        }
+
+        /* Enhanced Item Card Styling */
+        .item-card {
+            border: 3px solid transparent !important;
+            border-radius: 12px !important;
+            padding: 16px !important;
+            text-align: center !important;
+            position: relative !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+            overflow: hidden !important;
+        }
+
+        .item-card:hover {
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Rarity Border Colors */
+        .item-card.rarity-0 { border-color: #808080 !important; } /* Gray - Common */
+        .item-card.rarity-1 { border-color: #228B22 !important; } /* Green - Uncommon */
+        .item-card.rarity-2 { border-color: #1E90FF !important; } /* Blue - Rare */
+        .item-card.rarity-3 { border-color: #8A2BE2 !important; } /* Purple - Epic */
+        .item-card.rarity-4 { border-color: #FF8C00 !important; } /* Orange - Legendary */
+        .item-card.rarity-5 { border-color: #FFD700 !important; } /* Gold - Mythic */
+
+        .item-title {
+            text-align: center !important;
+            margin: 12px 0 !important;
+        }
+
+        .item-title h3 {
+            color: #000000 !important;
+            font-size: 18px !important;
+            font-weight: 700 !important;
+            margin: 0 !important;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .item-description {
+            color: #000000 !important;
+            font-size: 14px !important;
+            text-align: center !important;
+            margin: 8px 0 !important;
+            line-height: 1.4 !important;
+        }
+
+        .item-category {
+            color: #000000 !important;
+            font-size: 13px !important;
+            text-align: center !important;
+            font-weight: 600 !important;
+            margin: 4px 0 !important;
+        }
+
+        /* Rarity Decorations */
+        .item-rarity {
+            display: inline-block !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+            font-size: 12px !important;
+            margin: 4px 0 !important;
+            position: relative !important;
+            color: #000000 !important;
+        }
+
+        /* Rare - Circle */
+        .item-rarity.rarity-2::before {
+            content: '' !important;
+            position: absolute !important;
+            top: -2px !important;
+            left: -2px !important;
+            right: -2px !important;
+            bottom: -2px !important;
+            border: 2px solid #1E90FF !important;
+            border-radius: 50% !important;
+            z-index: -1 !important;
+        }
+
+        /* Epic - Square */
+        .item-rarity.rarity-3::before {
+            content: '' !important;
+            position: absolute !important;
+            top: -2px !important;
+            left: -2px !important;
+            right: -2px !important;
+            bottom: -2px !important;
+            border: 2px solid #8A2BE2 !important;
+            border-radius: 4px !important;
+            z-index: -1 !important;
+        }
+
+        /* Mythic - Star */
+        .item-rarity.rarity-5::before {
+            content: '⭐' !important;
+            position: absolute !important;
+            top: -8px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            font-size: 16px !important;
+            z-index: -1 !important;
+        }
+
+        /* View Details Button */
+        .view-details-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+            color: white !important;
+            border: none !important;
+            padding: 6px 12px !important;
+            border-radius: 6px !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            margin-top: 8px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .view-details-btn:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3) !important;
+        }
+
+        /* View Details Button */
+        .view-details-btn {
+            background: linear-gradient(135deg, #4a90e2, #357abd) !important;
+            color: white !important;
+            border: none !important;
+            padding: 8px 16px !important;
+            border-radius: 20px !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            margin-top: 8px !important;
+            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3) !important;
+        }
+
+        .view-details-btn:hover {
+            background: linear-gradient(135deg, #357abd, #4a90e2) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.4) !important;
+        }
+
+        /* Item Card Background Opacity Effects */
+        .item-card {
+            background-color: rgba(255, 255, 255, 0.35) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .item-card:hover {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Rarity Background Colors - Original Style with Borders */
+        .rarity-0, .item-card.rarity-0 {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%) !important; /* Gray - Common */
+            border: 3px solid #808080 !important;
+        }
+        .rarity-0:hover, .item-card.rarity-0:hover {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%) !important;
+            border-color: #606060 !important;
+        }
+
+        .rarity-1, .item-card.rarity-1 {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%) !important; /* Green - Uncommon */
+            border: 3px solid #228B22 !important;
+        }
+        .rarity-1:hover, .item-card.rarity-1:hover {
+            background: linear-gradient(135deg, #f0f8f0 0%, #d8f0d8 100%) !important;
+            border-color: #1e7b1e !important;
+        }
+
+        .rarity-2, .item-card.rarity-2 {
+            background: linear-gradient(135deg, #e8f4ff 0%, #c8e4ff 100%) !important; /* Blue - Rare */
+            border: 3px solid #1E90FF !important;
+        }
+        .rarity-2:hover, .item-card.rarity-2:hover {
+            background: linear-gradient(135deg, #f0f8ff 0%, #d8f0ff 100%) !important;
+            border-color: #1a7de6 !important;
+        }
+
+        .rarity-3, .item-card.rarity-3 {
+            background: linear-gradient(135deg, #f0e8ff 0%, #e0c8ff 100%) !important; /* Purple - Epic */
+            border: 3px solid #8A2BE2 !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .rarity-3:hover, .item-card.rarity-3:hover {
+            background: linear-gradient(135deg, #f8f0ff 0%, #f0d8ff 100%) !important;
+            border-color: #7a25cc !important;
+        }
+
+        .rarity-4, .item-card.rarity-4 {
+            background: linear-gradient(135deg, #fff8e8 0%, #ffe8c8 100%) !important; /* Orange - Legendary */
+            border: 3px solid #FF8C00 !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .rarity-4:hover, .item-card.rarity-4:hover {
+            background: linear-gradient(135deg, #fffcf0 0%, #fff0d8 100%) !important;
+            border-color: #e67e00 !important;
+        }
+
+        /* Enhanced Mythic Rarity - Magical Golden Glow */
+        .rarity-5, .item-card.rarity-5 {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.35) 0%, rgba(255, 237, 78, 0.35) 25%, rgba(255, 215, 0, 0.35) 50%, rgba(255, 179, 71, 0.35) 75%, rgba(255, 215, 0, 0.35) 100%) !important;
+            border: 2px solid #ffd700 !important;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), inset 0 0 25px rgba(255, 215, 0, 0.4) !important;
+            color: #000000 !important;
+            animation: mythicGlow 2s ease-in-out infinite alternate !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rarity-5:hover, .item-card.rarity-5:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.5) 0%, rgba(255, 237, 78, 0.5) 25%, rgba(255, 215, 0, 0.5) 50%, rgba(255, 179, 71, 0.5) 75%, rgba(255, 215, 0, 0.5) 100%) !important;
+        }
+
+        /* Special Rarity Shapes */
+        .item-rarity {
+            position: relative !important;
+            display: inline-block !important;
+            padding: 4px 8px !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            color: #000000 !important;
+            text-align: center !important;
+        }
+
+        /* Circle around Rare */
+        .rarity-2 .item-rarity::before {
+            content: '' !important;
+            position: absolute !important;
+            top: -2px !important;
+            left: -2px !important;
+            right: -2px !important;
+            bottom: -2px !important;
+            border: 2px solid #1E90FF !important;
+            border-radius: 50% !important;
+            z-index: -1 !important;
+        }
+
+        /* Square around Epic */
+        .rarity-3 .item-rarity::before {
+            content: '' !important;
+            position: absolute !important;
+            top: -2px !important;
+            left: -2px !important;
+            right: -2px !important;
+            bottom: -2px !important;
+            border: 2px solid #8A2BE2 !important;
+            border-radius: 4px !important;
+            z-index: -1 !important;
+        }
+
+        /* Star around Mythic */
+        .rarity-5 .item-rarity::before {
+            content: '✦' !important;
+            position: absolute !important;
+            top: -8px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            font-size: 20px !important;
+            color: #FFD700 !important;
+            z-index: -1 !important;
+            animation: starGlow 2s ease-in-out infinite alternate !important;
+        }
+
+        @keyframes starGlow {
+            0% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+            100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+        }
+
+        .item-rarity.rarity-5 {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%) !important;
+            color: #2c1810 !important;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8) !important;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5) !important;
+        }
+
+        @keyframes mythicGlow {
+            0% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), inset 0 0 25px rgba(255, 215, 0, 0.4); }
+            100% { box-shadow: 0 0 35px rgba(255, 215, 0, 1), inset 0 0 35px rgba(255, 215, 0, 0.6); }
+        }
+
+        /* Rarity Border Colors and Background */
+        .rarity-0, .item-card.rarity-0 {
+            background-color: rgba(255, 255, 255, 0.35) !important;
+            border-color: #808080 !important; /* Gray - Common */
+        }
+        .rarity-0:hover, .item-card.rarity-0:hover {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            border-color: #606060 !important;
+        }
+
+        .rarity-1, .item-card.rarity-1 {
+            background-color: rgba(255, 255, 255, 0.35) !important;
+            border-color: #228B22 !important; /* Green - Uncommon */
+        }
+        .rarity-1:hover, .item-card.rarity-1:hover {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            border-color: #1e7e1e !important;
+        }
+
+        .rarity-2, .item-card.rarity-2 {
+            background-color: rgba(255, 255, 255, 0.35) !important;
+            border-color: #1E90FF !important; /* Blue - Rare */
+        }
+        .rarity-2:hover, .item-card.rarity-2:hover {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            border-color: #1873cc !important;
+        }
+
+        .rarity-3, .item-card.rarity-3 {
+            background-color: rgba(255, 255, 255, 0.35) !important;
+            border-color: #8A2BE2 !important; /* Purple - Epic */
+            position: relative;
+            overflow: visible;
+        }
+        .rarity-3:hover, .item-card.rarity-3:hover {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            border-color: #7025c4 !important;
+        }
+
+        .rarity-4, .item-card.rarity-4 {
+            background-color: rgba(255, 255, 255, 0.35) !important;
+            border-color: #FF8C00 !important; /* Orange - Legendary */
+            position: relative;
+            overflow: visible;
+        }
+        .rarity-4:hover, .item-card.rarity-4:hover {
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            border-color: #e67e00 !important;
+        }
+
+        /* Epic Sparkle Effects */
+        .rarity-4::before, .item-card.rarity-4::before {
+            content: '✨';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 16px;
+            animation: sparkle 1.5s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        /* Mythic Sparkle Effects */
+        .rarity-5::before, .item-card.rarity-5::before {
+            content: '✨💫✨';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 14px;
+            animation: mythicSparkle 2s ease-in-out infinite;
+            z-index: 10;
+            color: #ffd700;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes mythicSparkle {
+            0%, 100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
+            33% { opacity: 1; transform: scale(1.3) rotate(120deg); }
+            66% { opacity: 0.9; transform: scale(1.1) rotate(240deg); }
+        }
+
+        /* Steam Authentication Styles */
+        .steam-auth-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            padding: 0 20px;
+        }
+
+        .steam-login-btn {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .steam-login-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .steam-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .steam-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .steam-user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .steam-username {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .steam-logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .steam-logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Steam Notifications */
+        .steam-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 0.3s ease;
+        }
+
+        .steam-success {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+        }
+
+        .steam-error {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .steam-info {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .notification-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Steam Modal Integration Styles */
+        .steam-user-section {
+            background: linear-gradient(135deg, #1b2838, #2a475e);
+            border: 1px solid #4c6b8a;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .steam-user-section h4 {
+            color: #66c0f4;
+            margin: 0 0 12px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .steam-actions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-steam {
+            background: linear-gradient(135deg, #66c0f4, #4c9cd6);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-steam:hover {
+            background: linear-gradient(135deg, #4c9cd6, #66c0f4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(102, 192, 244, 0.3);
+        }
+
+        .btn-steam:active {
+            transform: translateY(0);
+        }
+
+        .steam-note {
+            color: #8f98a0;
+            font-size: 12px;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .steam-login-prompt {
+            background: linear-gradient(135deg, rgba(102, 192, 244, 0.1), rgba(76, 156, 214, 0.1));
+            border: 1px solid rgba(102, 192, 244, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .steam-login-prompt p {
+            color: #66c0f4;
+            margin: 0 0 12px 0;
+            font-weight: 600;
+        }
+
+        .steam-login-prompt ul {
+            color: #8f98a0;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .steam-login-prompt li {
+            margin-bottom: 4px;
+        }
+
+        /* Modal Text Styling */
+        .modal-content, .modal-body, .modal-title, .property-item, .modal-description {
+            color: #000000 !important;
+            font-size: 16px !important;
+        }
+
+        .modal-title {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+        }
+
+        .property-item label {
+            font-weight: 600 !important;
+            color: #000000 !important;
+        }
+
+        .property-item span {
+            color: #000000 !important;
+        }
+
+        /* Modal Rarity Colors */
+        .modal-content.rarity-0 { border: 3px solid #808080 !important; background: rgba(128, 128, 128, 0.1) !important; }
+        .modal-content.rarity-1 { border: 3px solid #228B22 !important; background: rgba(34, 139, 34, 0.1) !important; }
+        .modal-content.rarity-2 { border: 3px solid #1E90FF !important; background: rgba(30, 144, 255, 0.1) !important; }
+        .modal-content.rarity-3 { border: 3px solid #8A2BE2 !important; background: rgba(138, 43, 226, 0.1) !important; }
+        .modal-content.rarity-4 { border: 3px solid #FF8C00 !important; background: rgba(255, 140, 0, 0.1) !important; }
+        .modal-content.rarity-5 {
+            border: 3px solid #FFD700 !important;
+            background: rgba(255, 215, 0, 0.1) !important;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3) !important;
+        }
+
+        /* Mobile Steam Auth Styles */
+        @media (max-width: 768px) {
+            .steam-auth-container {
+                padding: 0 10px;
+            }
+
+            .steam-user-info {
+                padding: 6px 12px;
+                gap: 8px;
+            }
+
+            .steam-avatar {
+                width: 28px;
+                height: 28px;
+            }
+
+            .steam-username {
+                font-size: 12px;
+            }
+
+            .steam-logout-btn {
+                font-size: 10px;
+                padding: 3px 6px;
+            }
+
+            .steam-notification {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+
+            .steam-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn-steam {
+                justify-content: center;
+                padding: 10px 16px;
+            }
+        }
+
+        /* Item image styles */
+        .item-image, .modal-item-image {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .modal-item-image {
+            width: 48px;
+            height: 48px;
+        }
+
+        .item-fallback-icon, .modal-fallback-icon {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+        }
+
+        .modal-item-icon .modal-fallback-icon {
+            width: 48px;
+            height: 48px;
+            font-size: 32px;
+        }
+
+        /* Recipe styling */
+        .recipe-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .recipe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .recipe-header h5 {
+            margin: 0;
+            color: var(--accent-color);
+            font-family: 'Uncial Antiqua', cursive;
+        }
+
+        .recipe-amount {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .ingredient-tag {
+            display: inline-block;
+            background: rgba(79, 195, 247, 0.2);
+            border: 1px solid rgba(79, 195, 247, 0.4);
+            color: #4fc3f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 4px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <!-- Empty space for balance -->
+            </div>
+            <div class="header-center">
+                <button id="backToTop" class="back-to-top-btn" title="Back to Top">⬆️ Back to Top</button>
+                <button class="btn-ai-chat" onclick="catalog.openAIChat()" title="Chat with AI Assistant">
+                    🤖 AI Chat
+                </button>
+            </div>
+            <div class="header-right">
+                <div class="header-stats">
+                    <div class="stat-pill">
+                        <span class="stat-number" id="totalItems">0</span>
+                        <span class="stat-label">Total Items</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-number" id="filteredItems">0</span>
+                        <span class="stat-label">Filtered</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Unified Control Panel -->
+        <div class="control-panel">
+            <!-- Search Section -->
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="🔍 Search items, descriptions, stats..." class="search-input">
+                    <button id="clearSearch" class="clear-btn">✕</button>
+                </div>
+            </div>
+
+            <!-- Category Selection -->
+            <div class="category-section">
+                <div class="category-grid" id="categoryGrid">
+                    <!-- Categories will be rendered here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <div class="content-header">
+                <h2 id="categoryTitle">All Items</h2>
+                <div class="view-controls">
+                    <button id="gridView" class="view-btn active">⊞ Grid</button>
+                    <button id="listView" class="view-btn">☰ List</button>
+                    <button id="exportData" class="export-btn">📤 Export</button>
+                </div>
+            </div>
+            
+            <!-- Items Container -->
+            <div id="itemsContainer" class="items-container">
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <h3>Loading GRUDGE NFT Island Catalog...</h3>
+                    <p>Preparing your adventure inventory</p>
+                </div>
+            </div>
+
+            <!-- No Results State -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No items found</h3>
+                <p>Try adjusting your search criteria or filters</p>
+            </div>
+        </div>
+
+        <!-- Crafting View Container -->
+        <div id="craftingContainer" class="crafting-container" style="display: none;">
+            <div class="crafting-header">
+                <h2>🔨 Crafting Workstations</h2>
+                <button id="backToCatalog" class="btn-secondary">← Back to Catalog</button>
+            </div>
+            <div id="workstationGrid" class="workstation-grid">
+                <!-- Workstations will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Item Detail Modal -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Item Details</h3>
+                <button class="modal-close" onclick="catalog.closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Item details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Workstation Detail Modal -->
+    <div id="workstationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="workstationModalTitle">Workstation Details</h3>
+                <button class="modal-close" onclick="catalog.closeWorkstationModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="workstationModalBody">
+                <!-- Workstation details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // GRUDGE NFT Island - Complete Catalog Application
+        let itemsData = [];
+        let craftingData = null;
+        let filteredItems = [];
+        let currentCategory = 'all';
+        let currentView = 'grid';
+        let searchTerm = '';
+        let craftingMode = false;
+
+        // Category definitions based on your requirements
+        const categories = [
+            { id: 'all', name: 'All Items', icon: '📋', count: 0 },
+            { id: 'weapons', name: 'Weapons', icon: '⚔️', count: 0 },
+            { id: 'equipment', name: 'Equipment', icon: '🛡️', count: 0 },
+            { id: 'consumables', name: 'Consumables', icon: '🧪', count: 0 },
+            { id: 'misc', name: 'Tools & Misc', icon: '⛏️', count: 0 },
+            { id: 'resources', name: 'Resources', icon: '📦', count: 0 },
+            { id: 'base_building', name: 'Base Building', icon: '🏗️', count: 0 },
+            { id: 'mounts', name: 'Mounts', icon: '🐎', count: 0 },
+            { id: 'pets', name: 'Pets', icon: '🐾', count: 0 },
+            { id: 'allies', name: 'Allies', icon: '👥', count: 0 },
+            { id: 'deployables', name: 'Deployables', icon: '🛡️', count: 0 },
+            { id: 'packs', name: 'Packs', icon: '📦', count: 0 }
+        ];
+
+        class ItemCatalog {
+            constructor() {
+                this.init();
+            }
+
+            async init() {
+                try {
+                    await this.loadData();
+                    this.categorizeItems();
+                    this.updateCategoryCounts();
+                    this.renderCategories();
+                    this.setupEventListeners();
+                    this.filterAndRender();
+                    this.updateStats();
+                } catch (error) {
+                    console.error('Failed to initialize catalog:', error);
+                    this.showError('Failed to load catalog data');
+                }
+            }
+
+            async loadData() {
+                try {
+                    // Check if we're running from file:// protocol
+                    const isFileProtocol = window.location.protocol === 'file:';
+
+                    if (isFileProtocol) {
+                        // Show helpful message for file:// access
+                        this.showError(
+                            'Server Required',
+                            'Please run the catalog through a local server (http://localhost:5500) for full functionality. The catalog needs HTTP access to load data files properly. Use Live Server extension in VS Code or run: python -m http.server 5500'
+                        );
+                        return;
+                    }
+
+                    const [itemsResponse, craftingResponse] = await Promise.all([
+                        fetch('./items_data.json'),
+                        fetch('./crafting_data.json')
+                    ]);
+
+                    if (!itemsResponse.ok || !craftingResponse.ok) {
+                        throw new Error('Failed to fetch data files');
+                    }
+
+                    itemsData = await itemsResponse.json();
+                    craftingData = await craftingResponse.json();
+
+                    console.log(`Loaded ${itemsData.length} items and ${craftingData.recipes?.length || 0} recipes`);
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                    throw error;
+                }
+            }
+
+            categorizeItems() {
+                itemsData.forEach(item => {
+                    const name = item.name.toLowerCase();
+                    const subcategory = (item.subcategory || '').toLowerCase();
+
+                    // Handle special cases based on your requirements
+
+                    // Move potion ingredients from consumables to resources
+                    if (item.category === 'consumables' && subcategory === 'potions' && !name.includes('potion')) {
+                        item.category = 'resources';
+                    }
+
+                    // If item has "potion" in name, it should be in consumables
+                    if (name.includes('potion')) {
+                        item.category = 'consumables';
+                    }
+
+                    // Move all structures to base_building (structures category removed)
+                    if (item.category === 'structures') {
+                        item.category = 'base_building';
+                    }
+
+                    // Create packs category for item packs
+                    if (subcategory.includes('pack') || name.includes('pack')) {
+                        item.category = 'packs';
+                    }
+
+                    // Update rarity based on item names
+                    if (name.includes('medium')) {
+                        item.rarity = 2; // Rare
+                    } else if (name.includes('large')) {
+                        item.rarity = 3; // Epic
+                    }
+
+                    // Set allies rarities based on type
+                    if (item.category === 'allies') {
+                        if (name.includes('worker')) {
+                            item.rarity = 0; // Common
+                        } else if (name.includes('warrior')) {
+                            item.rarity = 2; // Rare
+                        } else if (name.includes('paladin')) {
+                            item.rarity = 3; // Epic
+                        } else if (name.includes('mage')) {
+                            item.rarity = 5; // Mythic
+                        }
+                    }
+
+                    // Default fallback
+                    if (!item.category) {
+                        item.category = 'misc';
+                    }
+                });
+            }
+
+            updateCategoryCounts() {
+                categories.forEach(cat => {
+                    if (cat.id === 'all') {
+                        cat.count = itemsData.length;
+                    } else {
+                        cat.count = itemsData.filter(item => item.category === cat.id).length;
+                    }
+                });
+            }
+
+            renderCategories() {
+                const container = document.getElementById('categoryGrid');
+                
+                const categoriesHTML = categories.map(cat => `
+                    <button class="category-btn ${cat.id === currentCategory ? 'active' : ''}" 
+                            data-category="${cat.id}" onclick="catalog.setCategory('${cat.id}')">
+                        <span class="btn-icon">${cat.icon}</span>
+                        <span class="btn-text">${cat.name} <span class="btn-count">${cat.count}</span></span>
+                    </button>
+                `).join('');
+
+                // Add crafting button
+                const craftingRecipeCount = craftingData?.recipes?.length || 0;
+                const craftingHTML = `
+                    <button class="category-btn crafting-btn" onclick="catalog.showCraftingView()">
+                        <span class="btn-icon">🔨</span>
+                        <span class="btn-text">Crafting <span class="btn-count">${craftingRecipeCount}</span></span>
+                    </button>
+                `;
+
+                container.innerHTML = categoriesHTML + craftingHTML;
+            }
+
+            setCategory(categoryId) {
+                currentCategory = categoryId;
+
+                // Auto-return to catalog view when selecting a category
+                if (craftingMode) {
+                    this.showCatalogView();
+                    return;
+                }
+
+                this.renderCategories();
+                this.filterAndRender();
+
+                const cat = categories.find(c => c.id === categoryId);
+                document.getElementById('categoryTitle').textContent = cat ? cat.name : 'Items';
+            }
+
+            setupEventListeners() {
+                // Search functionality
+                const searchInput = document.getElementById('searchInput');
+                const clearSearch = document.getElementById('clearSearch');
+                
+                searchInput.addEventListener('input', (e) => {
+                    searchTerm = e.target.value.toLowerCase();
+                    this.filterAndRender();
+                });
+
+                clearSearch.addEventListener('click', () => {
+                    searchInput.value = '';
+                    searchTerm = '';
+                    this.filterAndRender();
+                });
+
+                // View controls
+                document.getElementById('gridView').addEventListener('click', () => this.setView('grid'));
+                document.getElementById('listView').addEventListener('click', () => this.setView('list'));
+                document.getElementById('exportData').addEventListener('click', () => this.exportData());
+                
+                // Back to catalog
+                document.getElementById('backToCatalog').addEventListener('click', () => this.showCatalogView());
+                
+                // Back to top
+                document.getElementById('backToTop').addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            setView(view) {
+                currentView = view;
+                document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById(view + 'View').classList.add('active');
+                this.filterAndRender();
+            }
+
+            filterAndRender() {
+                // Filter items
+                filteredItems = itemsData.filter(item => {
+                    const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+                    const matchesSearch = !searchTerm || 
+                        item.name.toLowerCase().includes(searchTerm) ||
+                        (item.description && item.description.toLowerCase().includes(searchTerm)) ||
+                        (item.subcategory && item.subcategory.toLowerCase().includes(searchTerm));
+                    
+                    return matchesCategory && matchesSearch;
+                });
+
+                this.updateStats();
+                this.renderItems();
+            }
+
+            renderItems() {
+                const container = document.getElementById('itemsContainer');
+                
+                if (filteredItems.length === 0) {
+                    this.showNoResults();
+                    return;
+                }
+
+                const itemsHTML = filteredItems.map(item => this.createItemCard(item)).join('');
+                const containerClass = currentView === 'list' ? 'items-list' : 'items-grid';
+                
+                container.innerHTML = `<div class="${containerClass}">${itemsHTML}</div>`;
+            }
+
+            createItemCard(item) {
+                const rarityNames = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'];
+                const rarity = rarityNames[item.rarity || 0] || 'Common';
+                const iconPath = this.getItemIconPath(item);
+
+                let description = item.description || 'No description available';
+                // Remove markdown formatting and clean up all newline variations
+                description = description.replace(/\*\*/g, '').replace(/\\n\\n/g, ' ').replace(/\\n/g, ' ').replace(/\n\n/g, ' ').replace(/\n/g, ' ').trim();
+                if (description.length > 120) {
+                    description = description.substring(0, 120) + '...';
+                }
+
+                const categoryName = item.subcategory || this.getCategoryName(item.category);
+                const itemNameEscaped = item.name.replace(/'/g, "\\'");
+
+                return `
+                    <div class="item-card rarity-${item.rarity || 0}">
+                        <div class="item-header">
+                            <div class="item-icon">
+                                <img src="${iconPath}" alt="${item.name}" class="item-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="item-fallback-icon" style="display:none;">📦</div>
+                            </div>
+                            <div class="item-title">
+                                <h3>${item.name}</h3>
+                                <div class="item-category">${categoryName}</div>
+                            </div>
+                            <div class="item-rarity rarity-${item.rarity || 0}">${rarity}</div>
+                        </div>
+                        <div class="item-description">${description}</div>
+                        <button class="view-details-btn" onclick="catalog.showItemDetails('${itemNameEscaped}')">
+                            View Details
+                        </button>
+                    </div>
+                `;
+            }
+
+            getItemIconPath(item) {
+                const name = item.name.toLowerCase();
+                const category = item.category;
+                const subcategory = (item.subcategory || '').toLowerCase();
+
+                // SPECIFIC ITEM MAPPINGS - Exact matches first
+
+                // Specific resource mappings
+                if (name.includes('crab')) return './icons/resources/Res_142.png';
+                if (name.includes('meat')) return './icons/resources/Res_149.png';
+                if (name.includes('dynamite')) return './icons/resources/Quest_119.png';
+                if (name.includes('saddle')) {
+                    return Math.random() > 0.5 ? './icons/resources/Quest_26.png' : './icons/resources/Quest_27.png';
+                }
+                if (name.includes('bandage')) return './icons/resources/Loot_157.png';
+                if (name.includes('hatchet')) return './icons/resources/Loot_14.png';
+                if (name.includes('pickaxe')) return './icons/resources/Loot_13.png';
+                if (name.includes('homing crystal')) return './icons/resources/Res_78.png';
+                if (name.includes('arachnid')) return './icons/resources/Res_82.png';
+
+                // BOOKS/TOMES - Specific mappings (7, 8, 22, 23, 24)
+                if (name.includes('book') || name.includes('tome') || name.includes('manual') || name.includes('guide') || name.includes('scroll')) {
+                    const bookImages = ['Loot_07.png', 'Loot_08.png', 'Loot_22.png', 'Loot_23.png', 'Loot_24.png'];
+                    const bookIndex = Math.abs(name.split('').reduce((a, b) => a + b.charCodeAt(0), 0)) % bookImages.length;
+                    return `./icons/resources/${bookImages[bookIndex]}`;
+                }
+
+                // EQUIPMENT - Precise matching to actual PNG files
+                // GLOVES
+                if (name.includes('glove') || name.includes('gauntlet') || name.includes('mitt')) {
+                    const gloveNum = Math.floor(Math.random() * 28) + 1;
+                    return `./icons/armor/Gloves_${gloveNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // HELMETS
+                if (name.includes('helm') || name.includes('helmet') || name.includes('crown') || name.includes('cap') || name.includes('hat')) {
+                    const helmNum = Math.floor(Math.random() * 72) + 1;
+                    return `./icons/armor/Helm_${helmNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // LEG ARMOR = PANTS
+                if (name.includes('leg') || name.includes('pant') || name.includes('trouser') || name.includes('greave')) {
+                    const pantsNum = Math.floor(Math.random() * 42) + 1;
+                    return `./icons/armor/Pants_${pantsNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // BOOTS
+                if (name.includes('boot') || name.includes('shoe') || name.includes('sandal')) {
+                    const bootsNum = Math.floor(Math.random() * 56) + 1;
+                    return `./icons/armor/Boots_${bootsNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // CHEST ARMOR = TOP
+                if (name.includes('chest') || name.includes('chestplate') || name.includes('tunic') || name.includes('robe') || name.includes('shirt') || name.includes('armor')) {
+                    const chestNum = Math.floor(Math.random() * 83) + 1;
+                    return `./icons/armor/Chest_${chestNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // RINGS
+                if (name.includes('ring')) {
+                    const ringNum = Math.floor(Math.random() * 57) + 1;
+                    return `./icons/armor/Ring_${ringNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // NECKLACES
+                if (name.includes('necklace') || name.includes('amulet') || name.includes('pendant')) {
+                    const necklaceNum = Math.floor(Math.random() * 36) + 1;
+                    return `./icons/armor/necklace_${necklaceNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // BELTS
+                if (name.includes('belt') || name.includes('sash')) {
+                    const beltNum = Math.floor(Math.random() * 36) + 1;
+                    return `./icons/armor/Belt_${beltNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // SHOULDERS
+                if (name.includes('shoulder') || name.includes('pauldron')) {
+                    const shoulderNum = Math.floor(Math.random() * 71) + 1;
+                    return `./icons/armor/Shoulder_${shoulderNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // BRACERS
+                if (name.includes('bracer') || name.includes('wristguard')) {
+                    const bracerNum = Math.floor(Math.random() * 7) + 1;
+                    return `./icons/armor/Bracer_${bracerNum.toString().padStart(2, '0')}.png`;
+                }
+
+                // POTION MAPPINGS - Use potions folder
+                if (name.includes('potion') || name.includes('elixir') || name.includes('brew')) {
+                    if (name.includes('health') || name.includes('healing') || name.includes('life') || name.includes('red')) {
+                        return './icons/potions/P_Red05.png'; // Red for health
+                    } else if (name.includes('combo') || name.includes('combination') || name.includes('green')) {
+                        return './icons/potions/P_Green05.png'; // Green for combo
+                    } else if (name.includes('mana') || name.includes('magic') || name.includes('mp') || name.includes('blue')) {
+                        return './icons/potions/P_Blue05.png'; // Blue for mana
+                    } else if (name.includes('air') || name.includes('wind')) {
+                        return './icons/potions/air_potion.png'; // Air element
+                    } else if (name.includes('earth') || name.includes('stone') || name.includes('ground')) {
+                        return './icons/potions/earth_potion.png'; // Earth element
+                    } else if (name.includes('fire') || name.includes('flame') || name.includes('burn')) {
+                        return './icons/potions/fire_potion.png'; // Fire element
+                    } else if (name.includes('water') || name.includes('ice') || name.includes('frost')) {
+                        return './icons/potions/P_Blue03.png'; // Water/ice
+                    } else if (name.includes('poison') || name.includes('toxic')) {
+                        return './icons/potions/P_Green03.png'; // Poison
+                    } else if (name.includes('speed') || name.includes('swift')) {
+                        return './icons/potions/P_Yellow01.png'; // Speed
+                    } else if (name.includes('strength') || name.includes('power')) {
+                        return './icons/potions/P_Red07.png'; // Strength
+                    } else if (name.includes('medicine') || name.includes('cure')) {
+                        return './icons/potions/P_Medicine06.png'; // Medicine
+                    } else if (name.includes('white') || name.includes('pure')) {
+                        return './icons/potions/P_White05.png'; // White/pure
+                    }
+                    return './icons/potions/P_Red05.png'; // Default health potion
+                }
+
+                // ANIMAL NAMES - Use entity PNG files or fallback
+                if (name.includes('wolf') || name.includes('dire wolf')) return './icons/entities/Wolf.png';
+                if (name.includes('bear') || name.includes('grizzly') || name.includes('worge bear')) return '🐻';
+                if (name.includes('spider') || name.includes('arachnid')) return './icons/entities/Spider.png';
+                if (name.includes('snake') || name.includes('serpent')) return './icons/entities/Snake.png';
+                if (name.includes('eagle') || name.includes('hawk')) return './icons/entities/Eagle.png';
+                if (name.includes('horse') || name.includes('stallion')) return './icons/entities/Horse.png';
+                if (name.includes('boar') || name.includes('pig')) return './icons/entities/Boar.png';
+                if (name.includes('deer') || name.includes('stag')) return './icons/entities/Deer.png';
+                if (name.includes('rabbit') || name.includes('bunny')) return './icons/entities/Rabbit.png';
+                if (name.includes('fox')) return './icons/entities/Fox.png';
+                if (name.includes('owl')) return './icons/entities/Owl.png';
+                if (name.includes('bat')) return './icons/entities/Bat.png';
+                if (name.includes('rat') || name.includes('mouse')) return './icons/entities/Rat.png';
+                if (name.includes('cat') || name.includes('feline')) return './icons/entities/Cat.png';
+                if (name.includes('dog') || name.includes('hound')) return './icons/entities/Dog.png';
+                if (name.includes('lion')) return './icons/entities/Lion.png';
+                if (name.includes('tiger')) return './icons/entities/Tiger.png';
+                if (name.includes('elephant')) return './icons/entities/Elephant.png';
+                if (name.includes('rhino')) return './icons/entities/Rhino.png';
+                if (name.includes('turtle')) return './icons/entities/Turtle.png';
+                if (name.includes('frog')) return '🐸';
+                if (name.includes('fish')) return '🐟';
+                if (name.includes('shark')) return '🦈';
+                if (name.includes('octopus')) return '🐙';
+                if (name.includes('crab')) return '🦀';
+                if (name.includes('lobster')) return '🦞';
+
+                // DRAKE/DRAGON COLOR MATCHING - Use dragon emoji
+                if (name.includes('drake') || name.includes('dragon')) {
+                    return '🐉'; // Dragon emoji for all drakes and dragons
+                }
+
+                // SPECIFIC ITEM MAPPINGS
+                // Totems - use specific totem files
+                if (name.includes('totem')) {
+                    const totemFiles = ['totem1.PNG', 'totem 2.PNG', 'totem 3.PNG', 'totem 4.PNG'];
+                    const hash = this.hashCode(name);
+                    const index = Math.abs(hash) % totemFiles.length;
+                    return `./icons/entities/${totemFiles[index]}`;
+                }
+
+                // Relics - use runic tablet files
+                if (name.includes('relic') || name.includes('artifact') || name.includes('runic')) {
+                    const relicFiles = ['runic_tablet_04.png', 'runic_tablet_05.png', 'runic_tablet_06.png', 'runic_tablet_07.png', 'runic_tablet_08.png', 'runic_tablet_09.png', 'runic_tablet_10.png', 'runic_tablet_11.png', 'runic_tablet_12.png'];
+                    const hash = this.hashCode(name);
+                    const index = Math.abs(hash) % relicFiles.length;
+                    return `./icons/misc/${relicFiles[index]}`;
+                }
+
+                // Net - use spider web emoji
+                if (name.includes('net')) {
+                    return '🕸️';
+                }
+
+                // Stone - use stone resource
+                if (name.includes('stone') && !name.includes('gem')) {
+                    return './icons/resources/Res_18.png';
+                }
+
+                // Undead horse
+                if (name.includes('undead horse') || name.includes('skeletal horse')) {
+                    return './icons/misc/und horse.PNG';
+                }
+
+                // WORKBENCHES - Use actual file names from misc folder
+                if (name.includes('workbench') || name.includes('crafting table')) {
+                    return './icons/misc/Workbench.PNG';
+                }
+                if (name.includes('forge') || name.includes('anvil')) {
+                    return './icons/misc/Blacksmith Icon.png';
+                }
+                if (name.includes('alchemy') || name.includes('brewing')) {
+                    return './icons/misc/Legion Alch.png';
+                }
+                if (name.includes('loom') || name.includes('weaving')) {
+                    return './icons/misc/Loom.PNG';
+                }
+                if (name.includes('furnace') || name.includes('smelter')) {
+                    return './icons/misc/Large Furnace Icon.png';
+                }
+                if (name.includes('tannery') || name.includes('leather')) {
+                    return './icons/misc/Tannery.PNG';
+                }
+                if (name.includes('sawmill') || name.includes('lumber')) {
+                    return './icons/misc/Sawmill Icon.png';
+                }
+
+                // COMMANDERS - Use actual file names (fallback to generic)
+                if (name.includes('commander') || name.includes('leader')) {
+                    return './icons/misc/Human Warrior.png'; // Use existing warrior icon as commander fallback
+                }
+
+                // ORDERS/UNITS - Use actual file names from misc folder
+                if (name.includes('order') || name.includes('unit')) {
+                    const race = this.getRaceFromName(name).toLowerCase();
+                    const unitType = this.getUnitTypeFromName(name).toLowerCase();
+
+                    // Map to actual file names in misc folder
+                    if (race === 'human' && unitType === 'archer') return './icons/misc/human archer.png';
+                    if (race === 'human' && unitType === 'mage') return './icons/misc/human mage.png';
+                    if (race === 'human' && unitType === 'paladin') return './icons/misc/human paladin.png';
+                    if (race === 'human' && unitType === 'merc') return './icons/misc/Human Merc.PNG';
+                    if (race === 'human' && unitType === 'warrior') return './icons/misc/Human Warrior.png';
+
+                    if (race === 'elf' && unitType === 'archer') return './icons/misc/elf archer.png';
+                    if (race === 'elf' && unitType === 'mage') return './icons/misc/elf mage.png';
+                    if (race === 'elf' && unitType === 'paladin') return './icons/misc/elf paladin.png';
+                    if (race === 'elf' && unitType === 'merc') return './icons/misc/Elf Merc.PNG';
+                    if (race === 'elf' && unitType === 'warrior') return './icons/misc/elf warrior.png';
+
+                    if (race === 'dwarf' && unitType === 'archer') return './icons/misc/dwarf archer.png';
+                    if (race === 'dwarf' && unitType === 'mage') return './icons/misc/dwarf mage.png';
+                    if (race === 'dwarf' && unitType === 'paladin') return './icons/misc/dwarf paladin.png';
+                    if (race === 'dwarf' && unitType === 'merc') return './icons/misc/Dwarve merc.PNG';
+                    if (race === 'dwarf' && unitType === 'warrior') return './icons/misc/dwarf warrior.png';
+
+                    if (race === 'orc' && unitType === 'archer') return './icons/misc/orc archer.png';
+                    if (race === 'orc' && unitType === 'mage') return './icons/misc/orc mage.png';
+                    if (race === 'orc' && unitType === 'paladin') return './icons/misc/orc paladin.png';
+                    if (race === 'orc' && unitType === 'merc') return './icons/misc/Orc Merc.PNG';
+                    if (race === 'orc' && unitType === 'warrior') return './icons/misc/orc warrior.png';
+
+                    if (race === 'undead' && unitType === 'archer') return './icons/misc/undead archer.png';
+                    if (race === 'undead' && unitType === 'mage') return './icons/misc/undead mage.png';
+                    if (race === 'undead' && unitType === 'paladin') return './icons/misc/undead paladin.png';
+                    if (race === 'undead' && unitType === 'merc') return './icons/misc/Undead Merc.PNG';
+                    if (race === 'undead' && unitType === 'warrior') return './icons/misc/undead warrior.png';
+
+                    if (race === 'barbarian' && unitType === 'archer') return './icons/misc/barb archer.png';
+                    if (race === 'barbarian' && unitType === 'mage') return './icons/misc/barbarian Mage.png';
+                    if (race === 'barbarian' && unitType === 'paladin') return './icons/misc/barb paladin.png';
+                    if (race === 'barbarian' && unitType === 'merc') return './icons/misc/Barb merc.PNG';
+                    if (race === 'barbarian' && unitType === 'warrior') return './icons/misc/barb warrior.png';
+
+                    return './icons/misc/Human Merc.PNG'; // Default fallback
+                }
+
+                // WEAPONS - Match to weapons folder
+                if (category === 'weapons') {
+                    // Specific weapon mappings first
+                    if (name.includes('bone dagger')) {
+                        return './icons/weapons/Dagger_01.png';
+                    } else if (name.includes('tome of magi')) {
+                        return './icons/weapons/Book_25.png';
+                    } else if (name.includes('club') && !name.includes('mace')) {
+                        return './icons/resources/Loot_17.png';
+                    } else if (name.includes('hammer') && !name.includes('war') && !name.includes('maul')) {
+                        return './icons/resources/Loot_11.png';
+                    }
+                    // Staff mappings - use specific staff files
+                    else if (name.includes('staff') || name.includes('wand')) {
+                        const staffFiles = ['staff_7.png', 'staff_21.png', 'staff_25.png', 'staff_29.png', 'staff_37.png'];
+                        const hash = this.hashCode(name);
+                        const index = Math.abs(hash) % staffFiles.length;
+                        return `./icons/weapons/${staffFiles[index]}`;
+                    }
+                    // Shield mappings - use specific shield files
+                    else if (name.includes('shield')) {
+                        const shieldFiles = ['shield_02.png', 'shield_12.png', 'shield_17.png', 'shield_21.png', 'shield_24.png', 'shield_38.png'];
+                        const hash = this.hashCode(name);
+                        const index = Math.abs(hash) % shieldFiles.length;
+                        return `./icons/weapons/${shieldFiles[index]}`;
+                    }
+                    // Book/Tome mappings - use specific book files
+                    else if (name.includes('tome') || name.includes('book') || name.includes('grimoire') || name.includes('manual')) {
+                        const bookFiles = ['Book_7.png', 'Book_8.png', 'Book_11.png', 'Book_12.png', 'Book_18.png', 'Book_19.png', 'Book_20.png', 'Book_22.png', 'Book_23.png', 'Book_24.png'];
+                        const hash = this.hashCode(name);
+                        const index = Math.abs(hash) % bookFiles.length;
+                        return `./icons/weapons/${bookFiles[index]}`;
+                    }
+                    // General weapon categories
+                    else if (name.includes('sword') || name.includes('blade')) {
+                        return './icons/weapons/Sword_01.png';
+                    } else if (name.includes('bow')) {
+                        return './icons/weapons/Bow_01.png';
+                    } else if (name.includes('axe')) {
+                        return './icons/weapons/Axe_01.png';
+                    } else if (name.includes('spear') || name.includes('lance') || name.includes('pike')) {
+                        return './icons/weapons/Spear_01.png';
+                    } else if (name.includes('hammer') || name.includes('maul')) {
+                        return './icons/weapons/Hammer_01.png';
+                    } else if (name.includes('arrow')) {
+                        return './icons/weapons/Arrow_01.png';
+                    }
+                    return './icons/weapons/Sword_01.png'; // Default weapon
+                }
+
+                // EQUIPMENT - Precise armor matching
+                else if (category === 'equipment') {
+                    // Helmets/Helms
+                    if (name.includes('helmet') || name.includes('helm') || name.includes('hood') || name.includes('hat') || name.includes('crown')) {
+                        return this.findBestArmorMatch(name, 'Helmet');
+                    }
+                    // Chest armor/Tops
+                    else if (name.includes('armor') || name.includes('robe') || name.includes('chest') || name.includes('top') || name.includes('tunic') || name.includes('vest')) {
+                        return this.findBestArmorMatch(name, 'Armor');
+                    }
+                    // Leg armor/Pants
+                    else if (name.includes('leg') || name.includes('pants') || name.includes('trousers') || name.includes('greaves') || name.includes('leggings')) {
+                        return this.findBestArmorMatch(name, 'Pants');
+                    }
+                    // Boots/Shoes
+                    else if (name.includes('boots') || name.includes('shoes') || name.includes('sandals') || name.includes('slippers')) {
+                        return this.findBestArmorMatch(name, 'Boots');
+                    }
+                    // Gloves/Gauntlets
+                    else if (name.includes('gloves') || name.includes('gauntlets') || name.includes('mittens') || name.includes('hands')) {
+                        return this.findBestArmorMatch(name, 'Gloves');
+                    }
+                    // Belts
+                    else if (name.includes('belt') || name.includes('sash') || name.includes('girdle')) {
+                        return this.findBestArmorMatch(name, 'Belt');
+                    }
+                    // Shoulders
+                    else if (name.includes('shoulder') || name.includes('pauldron') || name.includes('mantle')) {
+                        return this.findBestArmorMatch(name, 'Shoulders');
+                    }
+                    // Shields
+                    else if (name.includes('shield') || name.includes('buckler')) {
+                        return this.findBestArmorMatch(name, 'Shield');
+                    }
+                    // Rings
+                    else if (name.includes('ring') || name.includes('band')) {
+                        return this.findBestArmorMatch(name, 'Ring');
+                    }
+                    // Capes/Cloaks
+                    else if (name.includes('cape') || name.includes('cloak') || name.includes('back')) {
+                        return this.findBestArmorMatch(name, 'Back');
+                    }
+                    // Wings - Use specific wing PNG files
+                    else if (name.includes('wing') || name.includes('wings')) {
+                        // Use the specific wing files provided
+                        const wingFiles = ['199b121e92477.jpg', '199b121e24672.jpg'];
+                        const hash = this.hashCode(name);
+                        const index = Math.abs(hash) % wingFiles.length;
+                        return `./icons/resources/${wingFiles[index]}`;
+                    }
+                    // Default to chest armor
+                    return this.findBestArmorMatch(name, 'Armor');
+                }
+
+                // CONSUMABLES - Match to resources folder (potions, etc.)
+                else if (category === 'consumables') {
+                    if (name.includes('potion')) {
+                        if (name.includes('health') || name.includes('combo')) {
+                            return './icons/resources/Loot_01.png'; // Red potion
+                        } else if (name.includes('mana')) {
+                            return './icons/resources/Loot_02.png'; // Blue potion
+                        } else if (name.includes('stamina')) {
+                            return './icons/resources/Loot_03.png'; // Green potion
+                        }
+                        return './icons/resources/Loot_01.png'; // Default potion
+                    } else if (name.includes('scroll')) {
+                        return './icons/resources/Loot_10.png'; // Scroll
+                    } else if (name.includes('crystal')) {
+                        return './icons/resources/Loot_20.png'; // Crystal
+                    } else if (name.includes('net') || name.includes('dynamite')) {
+                        return './icons/resources/Loot_30.png'; // Tools
+                    }
+                    return './icons/resources/Loot_01.png'; // Default consumable
+                }
+
+                // RESOURCES - Match to resources folder
+                else if (category === 'resources') {
+                    if (name.includes('wood') || name.includes('plank')) {
+                        return './icons/resources/Loot_40.png';
+                    } else if (name.includes('stone') || name.includes('rock')) {
+                        return './icons/resources/Loot_41.png';
+                    } else if (name.includes('metal') || name.includes('ingot') || name.includes('ore')) {
+                        return './icons/resources/Loot_42.png';
+                    } else if (name.includes('gem') || name.includes('crystal')) {
+                        return './icons/resources/Loot_43.png';
+                    } else if (name.includes('leather') || name.includes('hide') || name.includes('fur')) {
+                        return './icons/resources/Loot_44.png';
+                    } else if (name.includes('cloth') || name.includes('silk') || name.includes('thread')) {
+                        return './icons/resources/Loot_45.png';
+                    } else if (name.includes('key')) {
+                        return './icons/resources/Loot_50.png';
+                    } else if (name.includes('egg')) {
+                        return './icons/resources/Loot_60.png';
+                    }
+                    return './icons/resources/Loot_40.png'; // Default resource
+                }
+
+                // MOUNTS - Match to entities folder
+                else if (category === 'mounts') {
+                    if (name.includes('horse')) {
+                        return './icons/entities/Dark Horse.PNG';
+                    } else if (name.includes('drake') || name.includes('dragon')) {
+                        // Use dragon emoji for drakes instead of boxes
+                        return '🐉';
+                    } else if (name.includes('ram')) {
+                        return './icons/entities/Ram mount.PNG';
+                    } else if (name.includes('ship') || name.includes('boat')) {
+                        if (name.includes('air')) {
+                            return './icons/entities/Air Ship.png';
+                        }
+                        return './icons/entities/Battle Ship.PNG';
+                    } else if (name.includes('glider') || name.includes('copter')) {
+                        return './icons/entities/Dragon Glider Icon.png';
+                    } else if (name.includes('catapult')) {
+                        return './icons/entities/Heavy Catapult.png';
+                    } else if (name.includes('bolt') || name.includes('thrower') || name.includes('siege')) {
+                        return './icons/entities/Bolt Thrower.png';
+                    }
+                    return './icons/entities/Dark Horse.PNG'; // Default mount
+                }
+
+                // PETS - Use animal emojis or paw prints fallback
+                else if (category === 'pets') {
+                    if (name.includes('spider') || name.includes('arachnid')) {
+                        return '🕷️';
+                    } else if (name.includes('drake') || name.includes('dragon')) {
+                        return '🐉';
+                    } else if (name.includes('wolf') || name.includes('dire wolf')) {
+                        return '🐺';
+                    } else if (name.includes('bear') || name.includes('worge bear')) {
+                        return '🐻';
+                    } else if (name.includes('cat') || name.includes('feline')) {
+                        return '🐱';
+                    } else if (name.includes('dog') || name.includes('hound')) {
+                        return '🐕';
+                    } else if (name.includes('horse') || name.includes('stallion')) {
+                        return '🐎';
+                    } else if (name.includes('bird') || name.includes('eagle') || name.includes('hawk')) {
+                        return '🦅';
+                    } else if (name.includes('snake') || name.includes('serpent')) {
+                        return '🐍';
+                    } else if (name.includes('turtle')) {
+                        return '🐢';
+                    } else if (name.includes('rabbit') || name.includes('bunny')) {
+                        return '🐰';
+                    } else if (name.includes('fox')) {
+                        return '🦊';
+                    } else if (name.includes('owl')) {
+                        return '🦉';
+                    } else if (name.includes('bat')) {
+                        return '🦇';
+                    } else if (name.includes('rat') || name.includes('mouse')) {
+                        return '🐭';
+                    } else if (name.includes('lion')) {
+                        return '🦁';
+                    } else if (name.includes('tiger')) {
+                        return '🐅';
+                    } else if (name.includes('golem')) {
+                        return '🗿'; // Stone face for golems
+                    }
+                    return '🐾'; // Paw prints fallback for all other pets
+                }
+
+                // ALLIES - Match to entities folder
+                else if (category === 'allies') {
+                    if (name.includes('barbarian')) {
+                        return './icons/entities/Barb merc.PNG';
+                    } else if (name.includes('dwarve') || name.includes('dwarf')) {
+                        return './icons/entities/Dwarve merc.PNG';
+                    } else if (name.includes('elf')) {
+                        return './icons/entities/Elf Merc.PNG';
+                    } else if (name.includes('human')) {
+                        return './icons/entities/Human Merc.PNG';
+                    } else if (name.includes('orc')) {
+                        return './icons/entities/Orc Merc.PNG';
+                    } else if (name.includes('undead')) {
+                        return './icons/entities/Undead Merc.PNG';
+                    }
+                    return './icons/entities/Human Merc.PNG'; // Default ally
+                }
+
+                // BASE_BUILDING - Match to entities folder
+                else if (category === 'base_building') {
+                    if (name.includes('cabin') || name.includes('house') || name.includes('hut') || name.includes('crypt')) {
+                        return './icons/entities/Human Cabin.PNG';
+                    } else if (name.includes('wall')) {
+                        return './icons/entities/Castle Wall Icon.png';
+                    } else if (name.includes('gate')) {
+                        return './icons/entities/Castle Gate Icon.png';
+                    } else if (name.includes('stairs')) {
+                        return './icons/entities/Castle Stairs Icon.png';
+                    } else if (name.includes('tent')) {
+                        return './icons/misc/Tent Legion Icon.png';
+                    } else if (name.includes('campfire')) {
+                        return './icons/misc/Campfire.PNG';
+                    } else if (name.includes('furnace')) {
+                        return './icons/entities/Large Furnace Icon.png';
+                    } else if (name.includes('workbench') || name.includes('bench')) {
+                        return './icons/entities/Legion Workbench.PNG';
+                    } else if (name.includes('stable')) {
+                        return './icons/entities/Legion Stable.PNG';
+                    } else if (name.includes('loom')) {
+                        return './icons/entities/Loom.PNG';
+                    }
+                    return './icons/entities/House Icon.png'; // Default structure
+                }
+
+                // DEPLOYABLES - Match to entities folder
+                else if (category === 'deployables') {
+                    if (name.includes('tower')) {
+                        return './icons/entities/Tower.PNG';
+                    } else if (name.includes('defender') || name.includes('guard')) {
+                        return './icons/entities/Human Warrior.png';
+                    }
+                    return './icons/entities/Tower.PNG'; // Default deployable
+                }
+
+                // PACKS - Match to misc folder
+                else if (category === 'packs') {
+                    return './icons/misc/Pack.PNG';
+                }
+
+                // MISC/TOOLS - Use existing files or fallback to resources
+                else if (category === 'misc') {
+                    if (name.includes('pickaxe')) {
+                        return './icons/resources/Loot_13.png'; // Pickaxe from resources
+                    } else if (name.includes('hammer')) {
+                        return './icons/resources/Loot_14.png'; // Hammer from resources
+                    } else if (name.includes('fishing')) {
+                        return './icons/resources/Loot_15.png'; // Fishing rod from resources
+                    } else if (name.includes('hatchet')) {
+                        return './icons/resources/Loot_14.png'; // Hatchet from resources
+                    } else if (name.includes('staff')) {
+                        return './icons/weapons/Staff_01.png'; // Staff from weapons
+                    } else if (name.includes('shield')) {
+                        return './icons/weapons/Shield_01.png'; // Shield from weapons
+                    } else if (name.includes('ring')) {
+                        return './icons/armor/Ring_01.png'; // Ring from armor
+                    } else if (name.includes('relic')) {
+                        return './icons/resources/Quest_01.png'; // Relic from resources
+                    }
+                    return './icons/resources/Loot_01.png'; // Default misc fallback
+                }
+
+                // Fallback to generic icon based on category
+                return './icons/resources/Loot_01.png';
+            }
+
+            getRaceFromName(name) {
+                if (name.includes('human')) return 'Human';
+                if (name.includes('elf')) return 'Elf';
+                if (name.includes('dwarf') || name.includes('dwarve')) return 'Dwarf';
+                if (name.includes('orc')) return 'Orc';
+                if (name.includes('undead')) return 'Undead';
+                if (name.includes('barbarian')) return 'Barbarian';
+                return 'Human'; // Default race
+            }
+
+            getUnitTypeFromName(name) {
+                if (name.includes('archer')) return 'Archer';
+                if (name.includes('merc') || name.includes('mercenary')) return 'Merc';
+                if (name.includes('worker') || name.includes('peasant')) return 'Worker';
+                if (name.includes('mage') || name.includes('wizard')) return 'Mage';
+                if (name.includes('paladin') || name.includes('knight')) return 'Paladin';
+                if (name.includes('warrior') || name.includes('soldier')) return 'Warrior';
+                return 'Merc'; // Default unit type
+            }
+
+            findBestArmorMatch(itemName, armorType) {
+                const name = itemName.toLowerCase();
+
+                // Define armor type mappings with actual PNG files
+                const armorMappings = {
+                    'Helmet': { folder: 'armor', prefix: 'Helm_', count: 72 },
+                    'Armor': { folder: 'armor', prefix: 'Chest_', count: 83 },
+                    'Pants': { folder: 'armor', prefix: 'Pants_', count: 42 },
+                    'Boots': { folder: 'armor', prefix: 'Boots_', count: 56 },
+                    'Gloves': { folder: 'armor', prefix: 'Gloves_', count: 28 },
+                    'Belt': { folder: 'armor', prefix: 'Belt_', count: 36 },
+                    'Shoulders': { folder: 'armor', prefix: 'Shoulder_', count: 71 },
+                    'Shield': { folder: 'weapons', prefix: 'Shield_', count: 20 },
+                    'Ring': { folder: 'armor', prefix: 'Ring_', count: 57 },
+                    'Back': { folder: 'armor', prefix: 'Back_', count: 16 }
+                };
+
+                const mapping = armorMappings[armorType];
+                if (!mapping) {
+                    return './icons/resources/Loot_01.png'; // Fallback
+                }
+
+                // Generate a consistent random number based on item name
+                const hash = name.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+                const randomNum = (hash % mapping.count) + 1;
+
+                return `./icons/${mapping.folder}/${mapping.prefix}${randomNum.toString().padStart(2, '0')}.png`;
+            }
+
+            getCategoryName(categoryId) {
+                const cat = categories.find(c => c.id === categoryId);
+                return cat ? cat.name : 'Unknown';
+            }
+
+            showCraftingView() {
+                craftingMode = true;
+                document.getElementById('itemsContainer').style.display = 'none';
+                document.getElementById('craftingContainer').style.display = 'block';
+                document.getElementById('categoryTitle').textContent = 'Crafting System';
+                
+                this.renderCraftingOverview();
+            }
+
+            showCatalogView() {
+                craftingMode = false;
+                document.getElementById('itemsContainer').style.display = 'block';
+                document.getElementById('craftingContainer').style.display = 'none';
+                
+                const cat = categories.find(c => c.id === currentCategory);
+                document.getElementById('categoryTitle').textContent = cat ? cat.name : 'Items';
+                
+                this.filterAndRender();
+            }
+
+            renderCraftingOverview() {
+                const container = document.getElementById('workstationGrid');
+                if (!container) return;
+
+                if (!craftingData || !craftingData.recipes) {
+                    container.innerHTML = `
+                        <div class="error-state">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">🔧</div>
+                            <h3>No crafting data available</h3>
+                            <p>Crafting recipes could not be loaded.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const recipes = craftingData.recipes || [];
+                const totalRecipes = recipes.length;
+
+                if (totalRecipes === 0) {
+                    container.innerHTML = `
+                        <div class="no-results">
+                            <div class="no-results-icon">🔨</div>
+                            <h3>No recipes found</h3>
+                            <p>No crafting recipes are available.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Group recipes by workstation
+                const recipesByWorkstation = {};
+                recipes.forEach(recipe => {
+                    const workstation = recipe.workstation || 'Unknown';
+                    if (!recipesByWorkstation[workstation]) {
+                        recipesByWorkstation[workstation] = [];
+                    }
+                    recipesByWorkstation[workstation].push(recipe);
+                });
+
+                // Create overview card
+                const overviewHTML = `
+                    <div class="workstation-card" style="background: linear-gradient(135deg, var(--accent-color) 0%, #0099cc 100%); color: var(--primary-bg);">
+                        <div class="workstation-header">
+                            <div class="workstation-emoji">📊</div>
+                            <div class="workstation-info">
+                                <h3>Crafting Overview</h3>
+                                <div class="workstation-count">${Object.keys(recipesByWorkstation).length} workstations • ${totalRecipes} recipes</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Create workstation cards
+                const workstationsHTML = Object.entries(recipesByWorkstation).map(([workstation, workstationRecipes]) => {
+                    const workstationNameEscaped = workstation.replace(/'/g, "\\'");
+                    const recipeCount = workstationRecipes.length;
+
+                    return `
+                        <div class="workstation-card" onclick="catalog.showWorkstationRecipes('${workstationNameEscaped}')">
+                            <div class="workstation-header">
+                                <div class="workstation-emoji">🔧</div>
+                                <div class="workstation-info">
+                                    <h3>${workstation}</h3>
+                                    <div class="workstation-count">${recipeCount} recipes available</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: var(--secondary-text);">
+                                Click to view all recipes for this workstation
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                container.innerHTML = overviewHTML + workstationsHTML;
+            }
+
+            showWorkstationRecipes(workstationName) {
+                if (!craftingData || !craftingData.recipes) return;
+
+                const recipes = craftingData.recipes.filter(recipe => recipe.workstation === workstationName);
+
+                // Create modal content
+                const modal = document.getElementById('workstationModal');
+                const modalTitle = document.getElementById('workstationModalTitle');
+                const modalBody = document.getElementById('workstationModalBody');
+
+                modalTitle.textContent = `${workstationName} Recipes`;
+
+                let recipesList = '';
+                if (recipes.length > 0) {
+                    recipesList = recipes.map((recipe, index) => {
+                        const ingredientsList = recipe.ingredients ? recipe.ingredients.map(ing =>
+                            `<span class="ingredient-tag">${ing.amount || 1}x ${ing.name}</span>`
+                        ).join('') : '';
+
+                        // Add rarity-based background colors to recipe items
+                        const rarityClass = `rarity-${(index % 6)}`;
+
+                        return `
+                            <div class="recipe-item ${rarityClass}">
+                                <div class="recipe-header">
+                                    <h5>${recipe.name || 'Unknown Recipe'}</h5>
+                                    <span class="recipe-amount">${recipe.result?.amount || 1}x</span>
+                                </div>
+                                <div class="recipe-ingredients">
+                                    <strong>Ingredients:</strong> ${ingredientsList || 'None listed'}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    recipesList = '<div class="no-recipes">No recipes available for this workstation</div>';
+                }
+
+                modalBody.innerHTML = `
+                    <div class="modal-item-header">
+                        <div class="modal-item-icon">🔧</div>
+                        <div class="modal-item-info">
+                            <h4>${workstationName}</h4>
+                            <div class="modal-subcategory">Crafting Workstation</div>
+                        </div>
+                    </div>
+                    <div class="modal-description">
+                        This workstation can craft ${recipes.length} different items.
+                    </div>
+                    <div class="modal-properties">
+                        <h4>Available Recipes (${recipes.length})</h4>
+                        <div class="recipes-list">
+                            ${recipesList}
+                        </div>
+                    </div>
+                `;
+
+                modal.style.display = 'block';
+            }
+
+            showWorkstationDetails(workstationName) {
+                // Legacy function - redirect to new function
+                this.showWorkstationRecipes(workstationName);
+            }
+
+            closeWorkstationModal() {
+                document.getElementById('workstationModal').style.display = 'none';
+            }
+
+            showItemDetails(itemName) {
+                const item = itemsData.find(i => i.name === itemName);
+                if (!item) return;
+
+                const modal = document.getElementById('itemModal');
+                const modalContent = modal.querySelector('.modal-content');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalBody = document.getElementById('modalBody');
+
+                // Apply rarity class to modal
+                modalContent.className = `modal-content rarity-${item.rarity || 0}`;
+
+                modalTitle.textContent = item.name;
+
+                const rarityNames = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'];
+                const rarity = rarityNames[item.rarity || 0] || 'Common';
+                const iconPath = this.getItemIconPath(item);
+
+                // Enhanced modal content for Steam users
+                const steamUserSection = this.isSteamAuthenticated() ? `
+                    <div class="steam-user-section">
+                        <h4>🎮 Steam Integration</h4>
+                        <div class="steam-actions">
+                            <button class="btn-steam" onclick="catalog.addToSteamWishlist('${itemName.replace(/'/g, "\\'")}')">
+                                ⭐ Add to Wishlist
+                            </button>
+                            <button class="btn-steam" onclick="catalog.shareToSteam('${itemName.replace(/'/g, "\\'")}')">
+                                📤 Share Item
+                            </button>
+                            <button class="btn-ai" onclick="catalog.askAIAboutItem('${itemName.replace(/'/g, "\\'")}')">
+                                🤖 Ask AI About This Item
+                            </button>
+                        </div>
+                        <p class="steam-note">Logged in as: ${steamAuth.getUser().personaname}</p>
+                    </div>
+                ` : `
+                    <div class="steam-login-prompt">
+                        <p>🎮 <strong>Login with Steam</strong> to unlock additional features:</p>
+                        <ul>
+                            <li>Add items to your Steam wishlist</li>
+                            <li>Share items with friends</li>
+                            <li>Sync with your Steam profile</li>
+                        </ul>
+                    </div>
+                `;
+
+                let propertiesHTML = '';
+                if (item.maxStack) {
+                    propertiesHTML += `<div class="property-item"><label>Max Stack:</label><span>${item.maxStack}</span></div>`;
+                }
+                if (item.rarity !== undefined) {
+                    propertiesHTML += `<div class="property-item"><label>Rarity:</label><span>${rarity}</span></div>`;
+                }
+                if (item.category) {
+                    propertiesHTML += `<div class="property-item"><label>Category:</label><span>${this.getCategoryName(item.category)}</span></div>`;
+                }
+                if (item.subcategory) {
+                    propertiesHTML += `<div class="property-item"><label>Subcategory:</label><span>${item.subcategory}</span></div>`;
+                }
+                
+                modalBody.innerHTML = `
+                    <div class="modal-item-header">
+                        <div class="modal-item-icon">
+                            <img src="${iconPath}" alt="${item.name}" class="modal-item-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div class="modal-fallback-icon" style="display:none;">📦</div>
+                        </div>
+                        <div class="modal-item-info">
+                            <h4>${item.name}</h4>
+                            <div class="modal-subcategory">${item.subcategory || this.getCategoryName(item.category)}</div>
+                        </div>
+                    </div>
+                    <div class="modal-description">
+                        ${item.description || 'No description available'}
+                    </div>
+                    <div class="modal-properties">
+                        <div class="property-grid">
+                            ${propertiesHTML}
+                        </div>
+                    </div>
+                    ${steamUserSection}
+                `;
+                
+                modal.style.display = 'block';
+            }
+
+            closeModal() {
+                document.getElementById('itemModal').style.display = 'none';
+            }
+
+            showNoResults() {
+                const container = document.getElementById('itemsContainer');
+                container.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <h3>No items found</h3>
+                        <p>Try adjusting your search criteria or category filter</p>
+                    </div>
+                `;
+            }
+
+            showError(message) {
+                const container = document.getElementById('itemsContainer');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">⚠️</div>
+                        <h3>Error Loading Catalog</h3>
+                        <p>${message}</p>
+                    </div>
+                `;
+            }
+
+            updateStats() {
+                document.getElementById('totalItems').textContent = itemsData.length;
+                document.getElementById('filteredItems').textContent = filteredItems.length;
+            }
+
+            exportData() {
+                const dataToExport = {
+                    timestamp: new Date().toISOString(),
+                    totalItems: itemsData.length,
+                    filteredItems: filteredItems.length,
+                    currentCategory: currentCategory,
+                    searchTerm: searchTerm,
+                    items: filteredItems,
+                    steamUser: steamAuth && steamAuth.isLoggedIn() ? {
+                        steamId: steamAuth.getSteamId(),
+                        username: steamAuth.getUser().personaname,
+                        profileUrl: steamAuth.getUser().profileurl
+                    } : null
+                };
+
+                const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `grudge-catalog-export-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                // Log Steam user activity if authenticated
+                if (steamAuth && steamAuth.isLoggedIn()) {
+                    console.log(`📊 Export by Steam user: ${steamAuth.getUser().personaname} (${steamAuth.getSteamId()})`);
+                    steamAuth.showSuccess('Catalog data exported successfully!');
+                }
+            }
+
+            // Steam integration methods
+            getSteamUserData() {
+                return steamAuth && steamAuth.isLoggedIn() ? steamAuth.getUser() : null;
+            }
+
+            isSteamAuthenticated() {
+                return steamAuth && steamAuth.isLoggedIn();
+            }
+
+            // Enhanced item interaction for Steam users
+            addToSteamWishlist(itemName) {
+                if (!this.isSteamAuthenticated()) {
+                    steamAuth.showError('Please log in with Steam to use this feature.');
+                    return;
+                }
+
+                // Simulate adding to wishlist (would require server-side implementation)
+                steamAuth.showSuccess(`Added "${itemName}" to your Steam wishlist!`);
+                console.log(`🎮 Steam user ${steamAuth.getUser().personaname} added ${itemName} to wishlist`);
+            }
+
+            shareToSteam(itemName) {
+                if (!this.isSteamAuthenticated()) {
+                    steamAuth.showError('Please log in with Steam to use this feature.');
+                    return;
+                }
+
+                // Create shareable URL
+                const shareUrl = `${window.location.origin}${window.location.pathname}?item=${encodeURIComponent(itemName)}`;
+
+                // Copy to clipboard
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    steamAuth.showSuccess(`Share link for "${itemName}" copied to clipboard!`);
+                }).catch(() => {
+                    steamAuth.showError('Failed to copy share link.');
+                });
+
+                console.log(`🎮 Steam user ${steamAuth.getUser().personaname} shared ${itemName}`);
+            }
+
+            // AI Integration Methods
+            async askAIAboutItem(itemName) {
+                try {
+                    // Show loading state
+                    const loadingModal = this.showAILoadingModal(itemName);
+
+                    // Find item data
+                    const item = this.items.find(i => i.name === itemName);
+
+                    // Get AI analysis
+                    const analysis = await aiWorker.analyzeItem(itemName, item);
+
+                    // Close loading modal and show results
+                    loadingModal.remove();
+                    this.showAIAnalysisModal(itemName, analysis);
+
+                } catch (error) {
+                    console.error('❌ AI Analysis Error:', error);
+                    this.showAIErrorModal(error.message);
+                }
+            }
+
+            showAILoadingModal(itemName) {
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal-content ai-loading-modal">
+                        <div class="modal-header">
+                            <h3>🤖 AI Analysis</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="ai-loading">
+                                <div class="loading-spinner"></div>
+                                <p>Analyzing "${itemName}" with AI...</p>
+                                <p class="loading-subtitle">Getting strategic insights and recommendations</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                return modal;
+            }
+
+            showAIAnalysisModal(itemName, analysis) {
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal-content ai-analysis-modal">
+                        <div class="modal-header">
+                            <h3>🤖 AI Analysis: ${itemName}</h3>
+                            <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="ai-analysis-content">
+                                ${analysis.analysis || 'AI analysis not available'}
+                            </div>
+                            ${analysis.recommendations ? `
+                                <div class="ai-recommendations">
+                                    <h4>💡 Recommendations:</h4>
+                                    <div class="recommendations-list">
+                                        ${analysis.recommendations}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            ${analysis.crafting_info ? `
+                                <div class="ai-crafting-info">
+                                    <h4>🔨 Crafting Information:</h4>
+                                    <div class="crafting-details">
+                                        ${analysis.crafting_info}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-primary" onclick="this.closest('.modal-overlay').remove()">Close</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+
+            showAIErrorModal(errorMessage) {
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal-content ai-error-modal">
+                        <div class="modal-header">
+                            <h3>⚠️ AI Service Unavailable</h3>
+                            <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>The AI analysis service is currently unavailable.</p>
+                            <p class="error-details">${errorMessage}</p>
+                            <p>Please try again later or check that the AI worker is deployed and running.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-primary" onclick="this.closest('.modal-overlay').remove()">Close</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+
+            // Hash function for consistent random selection
+            hashCode(str) {
+                let hash = 0;
+                if (str.length === 0) return hash;
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash; // Convert to 32bit integer
+                }
+                return hash;
+            }
+
+            // AI Chat Interface
+            openAIChat() {
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay ai-chat-modal';
+                modal.innerHTML = `
+                    <div class="modal-content ai-chat-content">
+                        <div class="modal-header">
+                            <h3>🤖 GRUDGE AI Assistant</h3>
+                            <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">&times;</button>
+                        </div>
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="ai-message">
+                                    <div class="message-avatar">🤖</div>
+                                    <div class="message-content">
+                                        <p>Hello! I'm your GRUDGE NFT Island AI assistant. I can help you with:</p>
+                                        <ul>
+                                            <li>🔍 Item analysis and recommendations</li>
+                                            <li>🔨 Crafting strategies and recipes</li>
+                                            <li>⚔️ Combat builds and equipment advice</li>
+                                            <li>📊 Game mechanics and statistics</li>
+                                            <li>🏝️ General gameplay questions</li>
+                                        </ul>
+                                        <p>What would you like to know about?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-input-container">
+                                <input type="text" id="chatInput" class="chat-input" placeholder="Ask me anything about GRUDGE NFT Island..." onkeypress="if(event.key==='Enter') catalog.sendChatMessage()">
+                                <button class="chat-send-btn" onclick="catalog.sendChatMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // Focus on input
+                setTimeout(() => {
+                    document.getElementById('chatInput').focus();
+                }, 100);
+            }
+
+            async sendChatMessage() {
+                const input = document.getElementById('chatInput');
+                const message = input.value.trim();
+
+                if (!message) return;
+
+                const messagesContainer = document.getElementById('chatMessages');
+
+                // Add user message
+                this.addChatMessage(messagesContainer, message, 'user');
+                input.value = '';
+
+                // Add loading message
+                const loadingMsg = this.addChatMessage(messagesContainer, 'Thinking...', 'ai', true);
+
+                try {
+                    // Get AI response
+                    const response = await aiWorker.chatWithAI(message, {
+                        current_items: this.items?.length || 0,
+                        current_category: this.currentCategory || 'all'
+                    });
+
+                    // Remove loading message and add AI response
+                    loadingMsg.remove();
+                    this.addChatMessage(messagesContainer, response.response || 'Sorry, I could not process your request.', 'ai');
+
+                } catch (error) {
+                    console.error('❌ AI Chat Error:', error);
+                    loadingMsg.remove();
+                    this.addChatMessage(messagesContainer, 'Sorry, the AI service is currently unavailable. Please make sure the AI worker is deployed and try again.', 'ai');
+                }
+            }
+
+            addChatMessage(container, message, sender, isLoading = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `${sender}-message ${isLoading ? 'loading' : ''}`;
+
+                const avatar = sender === 'user' ? '👤' : '🤖';
+                const messageClass = sender === 'user' ? 'user-message' : 'ai-message';
+
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">${avatar}</div>
+                    <div class="message-content">
+                        ${isLoading ? '<div class="typing-indicator">...</div>' : `<p>${message}</p>`}
+                    </div>
+                `;
+
+                container.appendChild(messageDiv);
+                container.scrollTop = container.scrollHeight;
+
+                return messageDiv;
+            }
+        }
+
+        // Steam API Configuration
+        const STEAM_CONFIG = {
+            API_KEY: '78CEC4C6783546D7E2C08C63D2799775',
+            API_BASE: 'https://api.steampowered.com',
+            OPENID_URL: 'https://steamcommunity.com/openid',
+            RETURN_URL: window.location.origin + window.location.pathname + '?auth=steam'
+        };
+
+        // AI Worker Configuration
+        const AI_WORKER_CONFIG = {
+            // TODO: Update this URL when you deploy your grudgeworker.js to Puter
+            // Example: 'https://grudge-ai-worker-abc123.puter.site'
+            WORKER_URL: 'https://grudge-ai-worker-1759614665233.puter.site', // Your deployed Puter worker
+            ENDPOINTS: {
+                HEALTH: '/health',
+                CHAT: '/api/chat',
+                STREAM_CHAT: '/api/stream-chat',
+                ITEM_ANALYSIS: '/api/analyze-item',
+                CRAFTING_ADVICE: '/api/crafting-advice',
+                CATALOG_SEARCH: '/api/search-catalog',
+                USER_PREFERENCES: '/api/user-preferences'
+            }
+        };
+
+        // AI Worker Integration System
+        class AIWorker {
+            constructor() {
+                this.workerUrl = AI_WORKER_CONFIG.WORKER_URL;
+                this.isHealthy = false;
+
+                if (this.workerUrl) {
+                    this.checkHealth();
+                } else {
+                    console.log('🤖 AI Worker URL not configured. AI features will be disabled.');
+                }
+            }
+
+            async checkHealth() {
+                if (!this.workerUrl) {
+                    this.isHealthy = false;
+                    return false;
+                }
+
+                try {
+                    const response = await fetch(`${this.workerUrl}${AI_WORKER_CONFIG.ENDPOINTS.HEALTH}`);
+                    const health = await response.json();
+                    this.isHealthy = health.status === 'healthy';
+                    console.log('🤖 AI Worker Health:', health);
+                    return this.isHealthy;
+                } catch (error) {
+                    console.warn('⚠️ AI Worker not available:', error.message);
+                    this.isHealthy = false;
+                    return false;
+                }
+            }
+
+            async chatWithAI(message, context = {}) {
+                if (!this.isHealthy) {
+                    throw new Error('AI Worker is not available');
+                }
+
+                try {
+                    const response = await fetch(`${this.workerUrl}${AI_WORKER_CONFIG.ENDPOINTS.CHAT}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message,
+                            context: {
+                                ...context,
+                                catalog_items: catalog.items?.length || 0,
+                                crafting_recipes: catalog.craftingData?.recipes?.length || 0,
+                                current_category: catalog.currentCategory || 'all',
+                                user: steamAuth.isAuthenticated ? steamAuth.getUser() : null
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`AI Worker error: ${response.status}`);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('❌ AI Chat Error:', error);
+                    throw error;
+                }
+            }
+
+            async analyzeItem(itemName, itemData = {}) {
+                if (!this.isHealthy) {
+                    throw new Error('AI Worker is not available');
+                }
+
+                try {
+                    const response = await fetch(`${this.workerUrl}${AI_WORKER_CONFIG.ENDPOINTS.ITEM_ANALYSIS}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            item_name: itemName,
+                            item_data: itemData,
+                            context: {
+                                user: steamAuth.isAuthenticated ? steamAuth.getUser() : null
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`AI Worker error: ${response.status}`);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('❌ AI Item Analysis Error:', error);
+                    throw error;
+                }
+            }
+
+            async getCraftingAdvice(itemName, availableResources = []) {
+                if (!this.isHealthy) {
+                    throw new Error('AI Worker is not available');
+                }
+
+                try {
+                    const response = await fetch(`${this.workerUrl}${AI_WORKER_CONFIG.ENDPOINTS.CRAFTING_ADVICE}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            target_item: itemName,
+                            available_resources: availableResources,
+                            context: {
+                                user: steamAuth.isAuthenticated ? steamAuth.getUser() : null
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`AI Worker error: ${response.status}`);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('❌ AI Crafting Advice Error:', error);
+                    throw error;
+                }
+            }
+
+            async searchCatalog(query, filters = {}) {
+                if (!this.isHealthy) {
+                    throw new Error('AI Worker is not available');
+                }
+
+                try {
+                    const response = await fetch(`${this.workerUrl}${AI_WORKER_CONFIG.ENDPOINTS.CATALOG_SEARCH}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            query,
+                            filters,
+                            context: {
+                                user: steamAuth.isAuthenticated ? steamAuth.getUser() : null
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`AI Worker error: ${response.status}`);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('❌ AI Catalog Search Error:', error);
+                    throw error;
+                }
+            }
+        }
+
+        // Steam Authentication System
+        class SteamAuth {
+            constructor() {
+                this.user = null;
+                this.isAuthenticated = false;
+                this.init();
+            }
+
+            async init() {
+                // Check if returning from Steam auth
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('auth') === 'steam') {
+                    await this.handleSteamReturn(urlParams);
+                }
+
+                // Check for stored session
+                const storedUser = localStorage.getItem('steam_user');
+                if (storedUser) {
+                    try {
+                        this.user = JSON.parse(storedUser);
+                        this.isAuthenticated = true;
+                        this.updateUI();
+                    } catch (error) {
+                        console.warn('Invalid stored Steam user data');
+                        localStorage.removeItem('steam_user');
+                    }
+                }
+
+                this.setupUI();
+            }
+
+            setupUI() {
+                // Add Steam login button to header
+                const headerContent = document.querySelector('.header-content');
+                if (headerContent) {
+                    const steamAuthContainer = document.createElement('div');
+                    steamAuthContainer.className = 'steam-auth-container';
+                    steamAuthContainer.innerHTML = `
+                        <div id="steamLoginBtn" class="steam-login-btn" style="display: ${this.isAuthenticated ? 'none' : 'flex'};">
+                            <img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"
+                                 alt="Sign in through Steam" style="cursor: pointer; height: 35px;">
+                        </div>
+                        <div id="steamUserInfo" class="steam-user-info" style="display: ${this.isAuthenticated ? 'flex' : 'none'};">
+                            <img id="steamAvatar" src="" alt="Steam Avatar" class="steam-avatar"
+                                 onerror="this.src='./favicon.ico'; this.onerror=null;">
+                            <div class="steam-user-details">
+                                <span id="steamUsername" class="steam-username"></span>
+                                <button id="steamLogout" class="steam-logout-btn">Logout</button>
+                            </div>
+                        </div>
+                    `;
+                    headerContent.appendChild(steamAuthContainer);
+
+                    // Add event listeners
+                    document.getElementById('steamLoginBtn').addEventListener('click', () => this.login());
+                    document.getElementById('steamLogout').addEventListener('click', () => this.logout());
+                }
+            }
+
+            login() {
+                // Construct OpenID authentication URL
+                const params = new URLSearchParams({
+                    'openid.ns': 'http://specs.openid.net/auth/2.0',
+                    'openid.mode': 'checkid_setup',
+                    'openid.return_to': STEAM_CONFIG.RETURN_URL,
+                    'openid.realm': window.location.origin,
+                    'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
+                    'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select'
+                });
+
+                const authUrl = `${STEAM_CONFIG.OPENID_URL}/login?${params.toString()}`;
+                window.location.href = authUrl;
+            }
+
+            async handleSteamReturn(urlParams) {
+                try {
+                    // Extract Steam ID from claimed_id
+                    const claimedId = urlParams.get('openid.claimed_id');
+                    if (claimedId && claimedId.includes('steamcommunity.com/openid/id/')) {
+                        const steamId = claimedId.split('/').pop();
+
+                        // Fetch user info from Steam API
+                        await this.fetchUserInfo(steamId);
+
+                        // Clean URL
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    }
+                } catch (error) {
+                    console.error('Steam authentication error:', error);
+                    this.showError('Steam authentication failed. Please try again.');
+                }
+            }
+
+            async fetchUserInfo(steamId) {
+                try {
+                    // Note: Due to CORS, this would typically need to be done server-side
+                    // For demo purposes, we'll simulate the user data
+                    const userData = {
+                        steamid: steamId,
+                        personaname: 'Steam User',
+                        avatar: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_medium.jpg',
+                        profileurl: `https://steamcommunity.com/profiles/${steamId}`,
+                        lastlogoff: Date.now()
+                    };
+
+                    this.user = userData;
+                    this.isAuthenticated = true;
+
+                    // Store in localStorage
+                    localStorage.setItem('steam_user', JSON.stringify(userData));
+
+                    this.updateUI();
+                    this.showSuccess(`Welcome, ${userData.personaname}!`);
+
+                } catch (error) {
+                    console.error('Failed to fetch Steam user info:', error);
+                    this.showError('Failed to load Steam profile information.');
+                }
+            }
+
+            logout() {
+                this.user = null;
+                this.isAuthenticated = false;
+                localStorage.removeItem('steam_user');
+                this.updateUI();
+                this.showSuccess('Logged out successfully.');
+            }
+
+            updateUI() {
+                const loginBtn = document.getElementById('steamLoginBtn');
+                const userInfo = document.getElementById('steamUserInfo');
+                const avatar = document.getElementById('steamAvatar');
+                const username = document.getElementById('steamUsername');
+
+                if (loginBtn && userInfo) {
+                    if (this.isAuthenticated && this.user) {
+                        loginBtn.style.display = 'none';
+                        userInfo.style.display = 'flex';
+
+                        if (avatar) avatar.src = this.user.avatar;
+                        if (username) username.textContent = this.user.personaname;
+                    } else {
+                        loginBtn.style.display = 'flex';
+                        userInfo.style.display = 'none';
+                    }
+                }
+            }
+
+            showSuccess(message) {
+                this.showNotification(message, 'success');
+            }
+
+            showError(message) {
+                this.showNotification(message, 'error');
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `steam-notification steam-${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <span>${message}</span>
+                        <button class="notification-close">&times;</button>
+                    </div>
+                `;
+
+                document.body.appendChild(notification);
+
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 5000);
+
+                // Manual close
+                notification.querySelector('.notification-close').addEventListener('click', () => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                });
+            }
+
+            // Public API for other parts of the app
+            getUser() {
+                return this.user;
+            }
+
+            isLoggedIn() {
+                return this.isAuthenticated;
+            }
+
+            getSteamId() {
+                return this.user ? this.user.steamid : null;
+            }
+        }
+
+        // Error handling and logging
+        window.addEventListener('error', function(event) {
+            console.error('Global error caught:', event.error);
+            // Don't show error to user unless it's critical
+            return true; // Prevent default browser error handling
+        });
+
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            event.preventDefault(); // Prevent default browser handling
+        });
+
+        // Initialize the catalog
+        let catalog;
+        let steamAuth;
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log('🎮 GRUDGE NFT Island Catalog - Initializing...');
+
+                // Initialize Steam Authentication
+                steamAuth = new SteamAuth();
+
+                // Initialize AI Worker
+                aiWorker = new AIWorker();
+
+                catalog = new ItemCatalog();
+
+                // Close modals when clicking outside
+                window.addEventListener('click', function(event) {
+                    try {
+                        const itemModal = document.getElementById('itemModal');
+                        const workstationModal = document.getElementById('workstationModal');
+
+                        if (event.target === itemModal) {
+                            catalog.closeModal();
+                        }
+                        if (event.target === workstationModal) {
+                            catalog.closeWorkstationModal();
+                        }
+                    } catch (error) {
+                        console.warn('Modal click handler error:', error);
+                    }
+                });
+
+                // Close modals with Escape key
+                document.addEventListener('keydown', function(event) {
+                    try {
+                        if (event.key === 'Escape') {
+                            catalog.closeModal();
+                            catalog.closeWorkstationModal();
+                        }
+                    } catch (error) {
+                        console.warn('Escape key handler error:', error);
+                    }
+                });
+
+                console.log('✅ GRUDGE NFT Island Catalog - Ready for deployment!');
+            } catch (error) {
+                console.error('❌ Failed to initialize catalog:', error);
+                document.body.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #0a0e1a; color: white; font-family: Arial, sans-serif;">
+                        <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 12px;">
+                            <h2>⚠️ Initialization Error</h2>
+                            <p>Failed to load the GRUDGE NFT Island Catalog.</p>
+                            <p>Please refresh the page or check the console for details.</p>
+                            <button onclick="location.reload()" style="padding: 10px 20px; background: #4fc3f7; color: white; border: none; border-radius: 6px; cursor: pointer;">Reload Page</button>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
