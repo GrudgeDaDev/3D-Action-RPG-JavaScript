@@ -1,13 +1,21 @@
-     precision highp float;
+// HLSL Vertex Shader - Orb Effect
 
-        attribute vec3 position;
-        attribute vec2 uv;
+struct VS_INPUT
+{
+    float3 position : POSITION;
+    float2 uv : TEXCOORD0;
+};
 
-        uniform mat4 worldViewProjection;
+struct VS_OUTPUT {
+  float4 position : SV_POSITION;
+  float2 vUV : TEXCOORD0;
+};
 
-        varying vec2 vUV;
+float4x4 worldViewProjection;
 
-        void main(void) {
-            gl_Position = worldViewProjection * vec4(position, 1.0);
-            vUV = uv;
-        }
+VS_OUTPUT main(VS_INPUT input) {
+  VS_OUTPUT output;
+  output.position = mul(worldViewProjection, float4(input.position, 1.0));
+  output.vUV = input.uv;
+  return output;
+}

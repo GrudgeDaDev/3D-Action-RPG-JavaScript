@@ -1,16 +1,19 @@
-precision highp float;
-
 // Attributes
-attribute vec3 position;
-attribute vec2 uv;
+float3 position : POSITION;
+float2 uv : TEXCOORD0;
 
 // Uniforms
-uniform mat4 worldViewProjection;
+float4x4 worldViewProjection;
 
-// Varying
-varying vec2 vUV;
+// Output structure
+struct VS_OUTPUT {
+  float4 Position : SV_POSITION;
+  float2 UV : TEXCOORD0;
+};
 
-void main(void) {
-    gl_Position = worldViewProjection * vec4(position, 1.0);
-    vUV = uv;
+VS_OUTPUT main() {
+  VS_OUTPUT output;
+  output.Position = mul(worldViewProjection, float4(position, 1.0));
+  output.UV = uv;
+  return output;
 }
